@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>creative aging</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mirza:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <!-- HEADER START -->
+
+    <header>
+        <div class="flx row space-between">
+
+            <h1>the creative aging project</h1>
+            <div class="right">
+                <img class="logo" src="/static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
+                <h2>Welcome, {{ session["first_name"] }}!</h2>
+                <nav class="flx row gap-2 upper">
+                    <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
+                    <!-- <a href="/course/new">create a course</a> -->
+                    <a href="/dashboard">view courses</a>
+                    <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+                    <a href="/logout">logout</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER END -->
+
+
+
+    <main>
+
+        <div class="flx row gap-1">
+
+
+
+            <!-- FORM START -->
+
+            <form action="/course/update" method="post" id="edit">
+
+                <h2 class="mt mb">edit your course:</h2>
+
+                <!-- FLASH VALIDATION MESSAGES-->
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="flx col alert gap-2">
+                            <p class="alert">{{ message }}</p>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <input type="hidden" name="id" value="{{ course.id }}">
+
+                <div class="border_bottom_white mb">
+                    <label for="title">title: </label>
+                    <input type="text" name="title" value="{{ course.title }}">
+                </div>
+    
+                <div class="border_bottom_white mb">
+                    <label for="description">description: </label>
+                    <textarea class="mb mt" type="text" name="description" rows="4" value="{{ course.description }}">{{ course.description }}</textarea>
+                </div>
+    
+                <div class="border_bottom_white mb">
+                    <label for="price">price: </label>
+                    $<input type="number" name="price" value="{{ course.price }}">
+                </div>
+    
+                <div class="border_bottom_white mb">
+                    <label for="requirements">requirements:</label>
+                    <select name="requirements" id="requirements">
+                        <option value="no experience">no experience necessary</option>
+                        <option value="basic understanding of the subject">basic understanding of the subject</option>
+                        <option value="bring your own supplies">bring your own supplies</option>
+                    </select>
+                </div>
+    
+                <div class="border_bottom_white mb">
+                    <label for="img_url">upload a different image for your course page:</label>
+                    <input type="file" name="img_url" value="{{ course.img_url }}">
+                </div>
+    
+                <div class="flx row mt">
+                    <label class="flx-2" for="start_date">starts: </label>
+                    <input class="flx-4" type="date" name="start_date"  value="{{ course.start_date }}">
+                </div>
+    
+                <div class="flx row mt">
+                    <label class="flx-2" for="end_date">ends: </label>
+                    <input class="flx-4" type="date" name="end_date" value="{{ course.end_date }}">
+                </div>
+    
+                <div class="flx row mt">
+                    <label class="flx-2" for="start_time">starts: </label>
+                    <input class="flx-4" type="time" name="start_time" value="{{ course.start_time }}">
+                </div>
+    
+                <div class="flx row mt">
+                    <label class="flx-2" for="end_time">ends: </label>
+                    <input class="flx-4" type="time" name="end_time" value="{{ course.end_time }}">
+                </div>
+
+                <div>
+                    <button type="submit" class="mt">update course info</button>
+                </div>  
+            </form>
+            <!-- FORM END -->
+
+
+
+
+
+        </div>    
+    </main>
+
+</body>
+</html>

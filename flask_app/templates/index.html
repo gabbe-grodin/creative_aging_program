@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>the creative aging project</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mirza:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+    <!-- !  to dos: -->
+    <!-- !  create readme -->
+    <!-- !  create git ignore and .env to hide API keys -->
+    <!-- !  format dates and times in view of course -->
+    <!-- !  add attributes to class of Course: location, max number of registrants -->
+    <!-- !  add attributes to class of User: birthday (compare age to course requirements after adding age minimum) -->
+    <!-- !  add condition so if class is at max capacity, learner may add their name to the waiting list (sorted in by created_at/ first-come-first-serve) -->
+    <!-- !  attribute user_type or different logins to have teachers, admin, student distinction with differing privileges -->
+    <!-- !  may need to change requirements input type in add course form to checkboxes so multiple can be selected -->
+    <!-- !  add view of one class by id with all registrants (roster) and attendance tracker for teachers -->
+    <!-- !  if results: statement in model after get_all_courses query to prevent crash when no courses yet created -->
+    <!-- !  login-registration with form validations and flash messages -->
+    <!-- !  full crud with restful routing -->
+    <!-- !  logged in user can only edit and delete their own creations (using session) -->
+    <!-- !  check code comments and readability -->
+    <!-- !  sync styles across templates -->
+    <!-- !  all forms include validations -->
+    <!-- !  each student starts with 3 tokens for the year and they may spend them on any three classes, not repeating the same course more than twice -->
+    <!-- !  html validator -->
+    <!-- !  apis to implement: geolocation to determine where the closest courses are taught; speech-to-text and text-to-speech apis for accessibility; translation api (spanish; chinese; cantonese); bob ross api? -->
+    <!-- !  save erd as .mbw -->
+
+    <!-- README: Connecting Senior Citizens in the region to resources which are proven to aid in preventing dementias, depression, and general cognitive decline. The philosophies shaping this application are a commitment to accessibility (zoomability, font readability, accessible color contrast and simplicity), esp with older learners in mind and international diversity (connect to translation API, text-to-speech API and speech-to-text APIs). Fosters fairness in a system where every learner is valued equally and given equal opportunities (as many members as possible have access to the resource). -->
+
+<body>
+
+
+
+    <!-- HEADER START -->
+
+    <header>
+        <div class="flx row space-between">
+
+            <h1>the creative aging project</h1>
+            <div class="right">
+                <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
+                <!-- <h2>Welcome, {#{{ session["first_name"] }}#}!</h2> -->
+                <nav class="flx row gap-2 upper">
+                    <!-- <a href="/tree/new">plant a tree</a> -->
+                    <!-- <a href="/dashboard">my trees</a> -->
+                    <!-- <a href="/user/{#{{ session['logged_in_user_id'] }}#}">my trees</a>
+                    <a href="/logout">logout</a> -->
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER END -->
+
+
+
+
+    <!-- FLASH VALIDATION MESSAGES-->
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="flx col alert gap-1">
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+
+    <main>
+        <div class="flx row space-between gap-1">
+
+
+
+        <!-- REGISTRATION FORM -->
+
+
+
+        <form action="/user/create" method="post" class="flx col" id="reg">
+            <h2 class="upper mb">become a member!</h2>
+            <div>
+                <label for="first_name">First Name: </label>
+                <input class="border_bottom_white" type="text" name="first_name">
+            </div>
+
+            <div>
+                <label for="last_name">Last Name: </label>
+                <input class="border_bottom_white" type="text" name="last_name">
+            </div>
+
+            <div>
+                <label for="user_type">are you a student, teacher or admin? Please select one: </label>
+                <select name="user_type" id="user_type">
+                    <option value="student">student</option>
+                    <option value="teacher">teacher</option>
+                    <option value="admin">admin</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="email">Email: </label>
+                <input class="border_bottom_white" type="text" name="email">
+            </div>
+
+
+            <div>
+                <label for="password">Create password: </label>
+                <input class="border_bottom_white" type="text" name="password">
+            </div>
+
+            <div>
+                <label for="confirm_password">Confirm password: </label>
+                <input class="border_bottom_white" type="text" name="confirm_password">
+            </div>
+
+            <div>
+                <button type="submit">
+                    create account
+                </button>
+            </div>        
+        </form>
+        <!-- FORM END REGISTRATION-->
+
+
+
+        <!-- LOGIN FORM -->
+
+        <form action="/login" method="post" class="flx col" id="login">
+            <h2 class="upper mb">sign-in</h2>
+            <div class="border_bottom_white">
+                <label for="email">Email: </label>
+                <input type="text" name="email">
+            </div>
+
+            <div class="border_bottom_white">
+                <label for="password">Password: </label>
+                <input type="text" name="password">
+            </div>
+
+            <div>
+                <button type="submit">login</button>
+            </div>
+        </form>
+        <!-- FORM LOGIN END -->
+
+        </div>    
+    </main>
+
+</body>
+</html>
