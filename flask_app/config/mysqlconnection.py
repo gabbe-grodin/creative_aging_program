@@ -1,16 +1,17 @@
 import pymysql.cursors
 import os
 
+
+MYSQL_HOST=os.environ.get("MYSQL_HOST")
 MYSQL_USER=os.environ.get("MYSQL_USER")
 MYSQL_PASSWORD=os.environ.get("MYSQL_PASSWORD")
-MYSQL_DB=os.environ.get("MYSQL_DB")
-MYSQL_HOST=os.environ.get("MYSQL_HOST")
+# MYSQL_DB=os.environ.get("MYSQL_DB")
 
 class MySQLConnection:
     def __init__(self, db):
-        connection = pymysql.connect(host = 'MYSQL_HOST',
-                                    user = 'MYSQL_USER',
-                                    password = 'MYSQL_PASSWORD', 
+        connection = pymysql.connect(host = MYSQL_HOST,
+                                    user = MYSQL_USER,
+                                    password = MYSQL_PASSWORD, 
                                     db = db,
                                     charset = 'utf8mb4',
                                     cursorclass = pymysql.cursors.DictCursor,
