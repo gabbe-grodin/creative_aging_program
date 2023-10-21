@@ -18,22 +18,24 @@
 
     <!-- HEADER START -->
 
-    <header>
-        <div class="flx row space-between">
 
-            <h1>the creative aging project</h1>
-            <div class="right">
-                <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
-                <h2>Welcome, {{ session["first_name"] }}!</h2>
-                <nav class="flx row gap-2 upper">
-                    <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                    <a href="/course/new">create a course</a>
-                    <a href="/dashboard">view courses</a>
-                    <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
-                    <a href="/logout">logout</a>
-                </nav>
-            </div>
+    <header class="flx row space-between">
+        <div class="flx col space-between">
+            <h1 class="width-40-percent">the creative aging project</h1>
+
+            <nav class="upper flx gap-2 mb">
+                <!-- condition to determine if user_type is teacher or admin, thus showing ability to add course: -->
+                <a href="/course/new">add a course</a>
+                <!-- <a href="/dashboard">view courses</a> -->
+                <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+                <a href="/logout">logout</a>
+            </nav>
+
+            <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
         </div>
+
+        <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
+
     </header>
     <!-- HEADER END -->
 
@@ -42,59 +44,29 @@
 
 
     <main>
-
-        <div class="flx col card space-around" id="dash">
-            <h3 class="mt mb"upcoming courses:</h3>
-
-
-            <!-- <ul class="mt">
-            {% for tree in all_trees %}
-                <li class="italic"><a href="/tree/{{ tree.id }}">"{{ tree.species }}"</a>
-                    added by {{ tree.creator.first_name }} {{ tree.creator.last_name }}
-                </li>
+        <h3 class="mt mb">Here are some of the upcoming courses being offered:</h3>
+        <div class="flx wrap gap-3">
+            {% for course in all_courses %}
+                <div class="flx col card card-300 gap-2">
+                    <h2 class="italic">
+                        <a href="/course/{{ course.id }}">{{ course.title }}"</a>
+                    </h2>
+                    with {{ course.creator.first_name }} {{ course.creator.last_name }}
+                    <a href="/course/{{ course.id }}">details</a>
+                    <a href="/course/{{ course.id }}">
+                        <img class="img-card-300" src="{{ course.img_url }}" alt="photo or graphic representing this course">
+                    </a>
+                </div>
             {% endfor %}
-            </ul> -->
 
+        </div>
+    
 
-            <!-- COURSE TABLE -->
-            <table>
-                <thead class="hidden">
-                    <tr>
-                        <th>
-                            <!-- <span class="left">title</span> -->
-                        </th>
-                        <th>
-                            <!-- <span class="left">taught by</span> -->
-                        </th>
-                        <th>
-                            <!-- <span class="left">details</span> -->
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for course in all_courses %}
-                    <tr>
-                        <td>
-                            {{ course.title }}
-                        </td>
-                        <td>
-                            {{ course.creator.first_name }} {{ course.creator.last_name }}
-                        </td>
-                        <td>
-                            <a href="/course/{{ course.id }}">details</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-            <!-- TABLE END-->
+        
 
 
 
 
-
-        </div>    
     </main>
 
 </body>

@@ -2,6 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import render_template, redirect, request, session, flash
 from flask_app import app
 from flask_app.models import user
+import mysql.connector
 
 class Course:
     db = 'creative_aging'
@@ -129,3 +130,9 @@ class Course:
             is_valid = False
         return is_valid
 
+# for converting images and files into binary (datatype BLOB), install connector by running this in mac terminal: pipenv install mysql-connector-python for the following function to work (also add 'import mysql.connector' up top)...or is all of that redundant because mysql-connector-python is the same as MYSQLConnection? do I add this func to mysqlconnection.py  in config?:
+    @staticmethod
+    def convert_to_binary_data(filename):
+        with open(filename, 'rb') as file:
+            binary_data = file.read()
+        return binary_data

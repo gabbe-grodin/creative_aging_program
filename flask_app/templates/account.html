@@ -20,52 +20,42 @@
 
     <!-- HEADER START -->
 
-    <header>
-        <div class="flx row space-between">
-
-            <h1>the creative aging project</h1>
-            <div class="right">
-                <img class="logo" src="/static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
-                <h2>Welcome, {{ session["first_name"] }}!</h2>
-                <nav class="flx row gap-2 upper">
-                    <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                    <a href="/course/new">create a course</a>
-                    <a href="/dashboard">view courses</a>
-                    <!-- <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a> -->
-                    <a href="/logout">logout</a>
-                </nav>
-            </div>
+    <header class="flx row space-between">
+        <div class="flx col space-between">
+            <h1 class="width-40-percent">the creative aging project</h1>
+            <nav class="upper flx gap-2 mb">
+                <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
+                <a href="/course/new">add a course</a>
+                <a href="/dashboard">view courses</a>
+                <!-- <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a> -->
+                <a href="/logout">logout</a>
+            </nav>
+            <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
         </div>
+        <img class="logo" src="/static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
     </header>
     <!-- HEADER END -->
 
 
 
     <main>
-        <!-- <h2 class="mt mb">Logged in as: {{ session['first_name'] }}!</h2> -->
-        <div class="flx row gap-1">
-
-
-
-
-            <!-- USERS TREE LIST -->
-
-            <div class="card">
-                <h3 class="mt mb">courses you've created:</h3>
-                <ul>
-                    {% for course in creator.courses %}
-                    <li class="flx row gap-3">
+        <h3 class="mt mb">Courses created by you:</h3>
+        <div class="flx wrap gap-3">
+            {% for course in creator.courses %}
+                <div class="flx col card card-300 gap-2">
                         <span>{{ course.title }}</span>
                         <span><a href="/delete/{{ course.id }}">delete</a></span>
                         <span><a href="/course/edit/{{ course.id }}">edit</a></span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- LIST END-->
+                </div>
+            {% endfor %}
 
-
-        </div>    
+            {% if not creator.courses %}
+                <p>You have not yet created any courses.</p>
+            {% endif %}
+            <span class="upper">
+                <a href="/course/new">add a course</a>
+            </span>
+        </div>
     </main>
 
 </body>

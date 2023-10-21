@@ -18,23 +18,19 @@
 
     <!-- HEADER START -->
 
-    <header>
-        <div class="flx row space-between">
-
-            <h1>the creative aging project</h1>
-            <div class="right">
-                <img class="logo" src="/static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
-                <h2>Welcome, {{ session["first_name"] }}!</h2>
-                <nav class="flx row gap-2 upper">
-                    <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                    <a href="/course/new">create a course</a>
-                    <a href="/dashboard">view courses</a>
-                    <a href="/course/edit/{{ course.id }}">edit this course</a>
-                    <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
-                    <a href="/logout">logout</a>
-                </nav>
-            </div>
+    <header class="flx row space-between">
+        <div class="flx col space-between">
+            <h1 class="width-40-percent">the creative aging project</h1>
+            <nav class="upper flx gap-2 mb">
+                <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
+                <a href="/course/new">add a course</a>
+                <a href="/dashboard">view courses</a>
+                <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+                <a href="/logout">logout</a>
+            </nav>
+            <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
         </div>
+        <img class="logo" src="/static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
     </header>
     <!-- HEADER END -->
 
@@ -45,41 +41,63 @@
     <main>
 
         <div class="card" id="view_one">
-            <h2 class="mt mb italic">{{ course.title }}</h2>
-            <div class="flx row">
-                <h3>taught by:  </h3>
+
+            <div class="flx row space-between">
+
+                <h2 class="mt mb italic">{{ course.title }}</h2>
+                <!-- check if this is the creator of this course. if so show: -->
+                <a href="/course/edit/{{ course.id }}" class="mt upper">edit this course</a>
+            
+            </div>
+            
+            <span class="flx row">
+
+                <h3>with</h3>
                 <p class="ml">{{ course.creator.first_name }} {{ course.creator.last_name }}</p>
+
+            </span>
+
+            <div class="flx row mt mb gap-3">
+
+                <section class="flx col flx-1 gap-1">
+
+                    <div>
+                        <!-- <h3 class="flx-1">dates: </h3> -->
+                        <p>{{ course.start_date }} - {{ course.end_date }}</p>
+                    </div>
+
+                    <div>
+                        <!-- <h3 class="flx-1">times: </h3> -->
+                        <p>{{ course.start_time }} - {{ course.end_time }}</p>
+                    </div>
+
+                    <div>
+                        <!-- <h3 class="flx-1">requirements: </h3> -->
+                        <p>{{ course.requirements }}</p>
+                    </div>
+
+                    <div>
+                        <!-- <h3 class="flx-1">description: </h3> -->
+                        <p class="justify line-height-less">{{ course.description }}</p>
+                    </div>
+    
+                    <div>
+                        <!-- <h3 class="flx-1">price: </h3> -->
+                        <p>${{ course.price }}</p>
+                    </div>
+        
+                </section>
+    
+                <section class="flx-1 class-pic">
+
+                    <h3 class="hidden"></h3>
+                    <p>{{ course.img_url }}</p>
+
+                </section>
+
             </div>
 
-            <div class="flx">
-                <h3>requirements: </h3>
-                <p class="ml">{{ course.requirements }}</p>
-            </div>
-
-            <div class="flx">
-                <h3>description: </h3>
-                <p class="ml">{{ course.description }}</p>
-            </div>
-
-            <div class="flx">
-                <h3>price: </h3>
-                <p class="ml">${{ course.price }}</p>
-            </div>
-
-            <div class="flx">
-                <h3>dates: </h3>
-                <p class="ml">{{ course.start_date }} - {{ course.end_date }}</p>
-            </div>
-
-            <div class="flx">
-                <h3 class="hidden"></h3>
-                <p class="ml">{{ course.img_url }}</p>
-            </div>
-
-            <div class="flx">
-                <h3>times: </h3>
-                <p class="ml">{{ course.start_time }} - {{ course.end_time }}</p>
-            </div>
+            
         </div>
         
 

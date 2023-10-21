@@ -15,8 +15,10 @@
 
     <!-- !  to dos: -->
     <!-- !  create readme -->
-    <!-- !  create git ignore and .env to hide API keys -->
+    <!-- !  hide API keys -->
     <!-- !  format dates and times in view of course -->
+    <!-- !  insert binary data into a MySQL table and also read it -->
+    <!-- *  installed mysql-connector-python for blob -->
     <!-- !  add attributes to class of Course: location, max number of registrants -->
     <!-- !  add attributes to class of User: birthday (compare age to course requirements after adding age minimum) -->
     <!-- !  add condition so if class is at max capacity, learner may add their name to the waiting list (sorted in by created_at/ first-come-first-serve) -->
@@ -35,7 +37,7 @@
     <!-- !  apis to implement: geolocation to determine where the closest courses are taught; speech-to-text and text-to-speech apis for accessibility; translation api (spanish; chinese; cantonese); bob ross api? -->
     <!-- !  save erd as .mbw -->
 
-    <!-- README: Connecting Senior Citizens in the region to resources which are proven to aid in preventing dementias, depression, and general cognitive decline. The philosophies shaping this application are a commitment to accessibility (zoomability, font readability, accessible color contrast and simplicity), esp with older learners in mind and international diversity (connect to translation API, text-to-speech API and speech-to-text APIs). Fosters fairness in a system where every learner is valued equally and given equal opportunities (as many members as possible have access to the resource). -->
+    <!-- README: Connecting Senior Citizens in the region to resources which are proven to aid in preventing dementias, depression, and general cognitive decline. The philosophies shaping this application are a commitment to accessibility (zoomability, font readability, accessible color contrast and simplicity), esp with older learners in mind and international diversity (connect to translation API, text-to-speech API and speech-to-text APIs); progressive enhancement for quick loading, and with lowest-bandwidth users in mind. Fosters fairness in a system where every learner is valued equally and given equal opportunities (as many members as possible have access to the resource). -->
 
 <body>
 
@@ -43,21 +45,18 @@
 
     <!-- HEADER START -->
 
-    <header>
-        <div class="flx row space-between">
-
-            <h1>the creative aging project</h1>
-            <div class="right">
-                <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
-                <!-- <h2>Welcome, {#{{ session["first_name"] }}#}!</h2> -->
-                <nav class="flx row gap-2 upper">
-                    <!-- <a href="/tree/new">plant a tree</a> -->
-                    <!-- <a href="/dashboard">my trees</a> -->
-                    <!-- <a href="/user/{#{{ session['logged_in_user_id'] }}#}">my trees</a>
-                    <a href="/logout">logout</a> -->
-                </nav>
-            </div>
+    <header class="flx row space-between">
+        <div class="flx col space-between">
+            <h1 class="width-40-percent">the creative aging project</h1>
+            <nav class="flx row gap-2 upper">
+                <!-- <a href="/tree/new">plant a tree</a> -->
+                <!-- <a href="/dashboard">my trees</a> -->
+                <!-- <a href="/user/{#{{ session['logged_in_user_id'] }}#}">my trees</a>
+                <a href="/logout">logout</a> -->
+            </nav>
+            <!-- <h2>Welcome, {#{{ session["first_name"] }}#}!</h2> -->
         </div>
+        <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
     </header>
     <!-- HEADER END -->
 
