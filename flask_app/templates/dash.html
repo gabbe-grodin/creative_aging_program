@@ -25,7 +25,9 @@
 
             <nav class="upper flx gap-2 mb">
                 <!-- condition to determine if user_type is teacher or admin, thus showing ability to add course: -->
-                <a href="/course/new">add a course</a>
+                {% if session["user_type"] == teacher or admin %}
+                    <a href="/course/new">add a course</a>
+                {% endif %}
                 <!-- <a href="/dashboard">view courses</a> -->
                 <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
                 <a href="/logout">logout</a>

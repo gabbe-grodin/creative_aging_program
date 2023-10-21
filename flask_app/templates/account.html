@@ -25,7 +25,9 @@
             <h1 class="width-40-percent">the creative aging project</h1>
             <nav class="upper flx gap-2 mb">
                 <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                <a href="/course/new">add a course</a>
+                {% if session["user_type"] == teacher or admin %}
+                    <a href="/course/new">add a course</a>
+                {% endif %}
                 <a href="/dashboard">view courses</a>
                 <!-- <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a> -->
                 <a href="/logout">logout</a>
@@ -39,23 +41,50 @@
 
 
     <main>
-        <h3 class="mt mb">Courses created by you:</h3>
-        <div class="flx wrap gap-3">
-            {% for course in creator.courses %}
-                <div class="flx col card card-300 gap-2">
-                        <span>{{ course.title }}</span>
-                        <span><a href="/delete/{{ course.id }}">delete</a></span>
-                        <span><a href="/course/edit/{{ course.id }}">edit</a></span>
-                </div>
-            {% endfor %}
 
-            {% if not creator.courses %}
-                <p>You have not yet created any courses.</p>
-            {% endif %}
-            <span class="upper">
-                <a href="/course/new">add a course</a>
-            </span>
-        </div>
+        <!-- IF TEACHER OR ADMIN... -->
+
+        {% if session["user_type"] == teacher or admin %}
+            <h3 class="mt mb">Courses created by you:</h3>
+            <div class="flx wrap gap-3">
+                {% for course in creator.courses %}
+                    <div class="flx col card card-300 gap-2">
+                            <span>{{ course.title }}</span>
+                            <span><a href="/delete/{{ course.id }}">delete</a></span>
+                            <span><a href="/course/edit/{{ course.id }}">edit</a></span>
+                    </div>
+                {% endfor %}
+
+                {% if not creator.courses %}
+                    <p>You have not yet created any courses.</p>
+                {% endif %}
+                <span class="upper">
+                    <a href="/course/new">add a course</a>
+                </span>
+            </div>
+
+        <!-- IF STUDENT... -->
+
+        {% else %}
+            <h3 class="mt mb">Completed Courses:</h3>
+            <div class="flx wrap gap-3">
+                {#{% for course in registrant.courses %}#}
+                    <!-- <div class="flx col card card-300 gap-2"> -->
+                            <span>{#{{ course.title }}#}</span>
+                            <span>{#{{ course.start_date }} - {{ course.end_date }}#}</span>
+                    <!-- </div> -->
+                {#{% endfor %}#}
+
+                {#{% if not registrant.courses %}#}
+                    <p>You have not yet registered for any courses.</p>
+                {#{% endif %}#}
+                <span class="upper">
+                    <a href="/dashboard">register for a course</a>
+                </span>
+            </div>
+        {% endif %}
+
+
     </main>
 
 </body>
