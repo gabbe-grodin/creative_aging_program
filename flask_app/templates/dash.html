@@ -24,24 +24,21 @@
             <h1 class="width-40-percent">the creative aging project</h1>
 
             <nav class="upper flx gap-2 mb">
-                <!-- condition to determine if user_type is teacher or admin, thus showing ability to add course: -->
-                {% if session["user_type"] == teacher or admin %}
+                <!-- conditional rendering: -->
+                {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
                     <a href="/course/new">add a course</a>
                 {% endif %}
-                <!-- <a href="/dashboard">view courses</a> -->
                 <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
                 <a href="/logout">logout</a>
             </nav>
 
-            <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
+            <h2 class="mt">Welcome, {{ session['first_name'] }}!</h2>
         </div>
 
         <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
 
     </header>
     <!-- HEADER END -->
-
-
 
 
 
@@ -62,9 +59,7 @@
             {% endfor %}
 
         </div>
-    
 
-        
 
 
 

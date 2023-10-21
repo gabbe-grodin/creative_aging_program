@@ -25,7 +25,7 @@
             <h1 class="width-40-percent">the creative aging project</h1>
             <nav class="upper flx gap-2 mb">
                 <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                {% if session["user_type"] == teacher or admin %}
+                {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
                     <a href="/course/new">add a course</a>
                 {% endif %}
                 <a href="/dashboard">view courses</a>
@@ -44,7 +44,7 @@
 
         <!-- IF TEACHER OR ADMIN... -->
 
-        {% if session["user_type"] == teacher or admin %}
+        {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
             <h3 class="mt mb">Courses created by you:</h3>
             <div class="flx wrap gap-3">
                 {% for course in creator.courses %}

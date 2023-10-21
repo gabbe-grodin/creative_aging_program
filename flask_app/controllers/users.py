@@ -29,7 +29,6 @@ def register_new_user():
     session['last_name'] = request.form['last_name']
     session['user_type'] = request.form['user_type']
     session['email'] = request.form['email']
-    print("-------", session)
     return redirect('/dashboard')
 
 #! login
@@ -44,6 +43,7 @@ def login():
         flash("Invalid email/password.")
         return redirect('/')
     session['logged_in_user_id'] = logged_in_user_id.id
+    session['user_type'] = logged_in_user_id.user_type
     session['first_name'] = logged_in_user_id.first_name
     session['last_name'] = logged_in_user_id.last_name
     session['email'] = logged_in_user_id.email
