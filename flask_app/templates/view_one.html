@@ -23,13 +23,11 @@
             <h1 class="width-40-percent">the creative aging project</h1>
             <nav class="upper flx gap-2 mb">
                 <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                {% if session["logged_in_user_id.user_type"] == teacher or admin %}
+                {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
                 <a href="/course/new">add a course</a>
                 {% endif %}
                 <a href="/dashboard">view courses</a>
-                {% if session["user_type"] == teacher or admin %}
                 <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
-                {% endif %}
                 <a href="/logout">logout</a>
             </nav>
             <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
@@ -50,11 +48,10 @@
 
                 <h2 class="mt mb italic">{{ course.title }}</h2>
                 <!-- check if this is the creator of this course. if so show: -->
-                {% if session["logged_in_user_id.user_type"] == admin or course.creator.user_id %}
+                {% if session["logged_in_user_id.user_type"] != 'student' or course.creator.user_id != 'student' %}
                     <a href="/course/edit/{{ course.id }}" class="mt upper">edit this course</a>
                 {% endif %}
             </div>
-            
             <span class="flx row">
 
                 <h3>with</h3>
@@ -66,14 +63,15 @@
 
                 <section class="flx col flx-1 gap-1">
 
-                    <div>
-                        <!-- <h3 class="flx-1">dates: </h3> -->
-                        <p>{{ course.start_date }} - {{ course.end_date }}</p>
-                    </div>
 
                     <div>
                         <!-- <h3 class="flx-1">times: </h3> -->
-                        <p>{{ course.start_time }} - {{ course.end_time }}</p>
+                        <p>on {{ course.start_date.strftime("%A") }}s, from {#{{ course.start_time.strftime("%-I:%M.S%p") }}#} to {#{{ course.end_time.strftime("%-I:%M.S%p") }}#}</p>
+                    </div>
+
+                    <div>
+                        <!-- <h3 class="flx-1">dates: </h3> -->
+                        <p>{{ course.start_date.strftime("%B %d, %Y") }} - {{ course.end_date.strftime("%B %d, %Y") }}</p>
                     </div>
 
                     <div>

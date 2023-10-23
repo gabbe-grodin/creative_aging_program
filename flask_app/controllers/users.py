@@ -4,6 +4,9 @@ from flask_app.models.course import Course
 from flask_app import app
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
+from datetime import time, tzinfo, timedelta
+
+
 
 #! login-registration forms
 @app.route('/')
@@ -23,7 +26,6 @@ def register_new_user():
         "email": request.form['email'],
         "password": pw_hash}
     logged_in_user_id = User.create_user(data)
-    # stores user in session:
     session['logged_in_user_id'] = logged_in_user_id
     session['first_name'] = request.form['first_name']
     session['last_name'] = request.form['last_name']
@@ -34,7 +36,6 @@ def register_new_user():
 #! login
 @app.route('/login', methods=['POST'])
 def login():
-    print(request.form)
     logged_in_user_id = User.get_one_user_by_email(request.form)
     if not logged_in_user_id:
         flash("Invalid email/password.")
@@ -69,7 +70,6 @@ def user_account(logged_in_user_id):
         return redirect('/')
     # user = User.get_one_user_by_id(data)
     creator = User.get_one_user_by_id_with_courses(data)
-    print("CREATOR-------", creator)
     return render_template("account.html", creator=creator)
 
 #! logout
@@ -78,9 +78,14 @@ def logout():
     session.clear()
     return redirect('/')
 
+#! edit account form
+#! call validation method
+def account_edit(id):
+    data = {"id":id}
+    account = User.get_one_user_by_id(data)
+    return render_template('edit_account.html', account = account)
 
-
-# #! update post
+# #! update account post
 # @app.route('/user/update', methods=['POST'])
 # def user_update():
 #     if not User.validate_user_update_form(request.form):

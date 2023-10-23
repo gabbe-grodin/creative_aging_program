@@ -2,19 +2,15 @@ from flask import render_template, redirect, request, session, flash
 from flask_app.models.course import Course
 from flask_app.models.user import User
 from flask_app import app
+from datetime import datetime
+import time
+
+
 
 #! add form
 @app.route('/course/new')
 def add_course_form():
     return render_template('add_one.html')
-    # data = {"id": session["logged_in_user_id"],
-    #         "first_name": session["first_name"],
-    #         "last_name": session["last_name"]}
-    # if session['logged_in_user_id']:
-    #     user = User.get_one_user_by_id(data)
-    #     return render_template('add_one.html', user = user)
-    # else:
-    #     return redirect('/')
 
 
 #! create course
@@ -35,7 +31,6 @@ def create_course():
             "user_id": session['logged_in_user_id']}
     print ("* * *    printing ****** : ", session)
     Course.create_course(data)
-    print("Ready to reroute!!!!!!!!!!")
     return redirect(f"/user/{session['logged_in_user_id']}")
 
 #! view one
@@ -43,32 +38,24 @@ def create_course():
 def view_one_course_w_creator(id):
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
-    user_data = {"logged_in_user_id":session['logged_in_user_id']}
-    # logged_in_user = User.get_one_user_by_id(user_data)
-    # return render_template('view_one.html', course = course, logged_in_user = logged_in_user)
     return render_template('view_one.html', course = course)
 
 #! edit course form
-#! call validation method
 @app.route('/course/edit/<int:id>')
 def course_edit(id):
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
     return render_template('edit_one.html', course = course)
 
+#! update course post
 @app.route('/course/update', methods=['POST'])
 def course_update():
     print("PPPPRRRRRRIIIINNNNTTTT-----", request.form)
     data = {"id":id}
     if not Course.validate_edit_course_form(request.form):
         return redirect(f'/course/edit/{request.form["id"]}')
-    # data = {"species": request.form['species'],
-    #         "location": request.form['location'],
-    #         "date_planted": request.form['date_planted'],
-    #         "reason": request.form['reason']}
     Course.update_course_by_id(request.form)
     return redirect(f'/course/{request.form["id"]}')
-
 
 
 #! delete

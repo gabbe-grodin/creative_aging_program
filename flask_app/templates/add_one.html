@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mirza:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
@@ -90,23 +92,24 @@
             </div>
 
             <div class="flx row mt">
-                <label class="flx-2" for="start_date">starts: </label>
+                <label class="flx-2" for="start_date">dates: </label>
                 <input class="flx-4" type="date" name="start_date">
-            </div>
 
-            <div class="flx row mt">
-                <label class="flx-2" for="end_date">ends: </label>
+                <!-- <label class="flx-2" for="end_date">ends: </label> -->
                 <input class="flx-4" type="date" name="end_date">
             </div>
 
             <div class="flx row mt">
-                <label class="flx-2" for="start_time">starts: </label>
+                <label class="flx-2" for="start_time">hours: </label>
                 <input class="flx-4" type="time" name="start_time">
-            </div>
-
-            <div class="flx row mt">
-                <label class="flx-2" for="end_time">ends: </label>
+                <span class="material-symbols-outlined">
+                    nest_clock_farsight_analog
+                </span>
+                <!-- <label class="flx-2" for="end_time">ends: </label> -->
                 <input class="flx-4" type="time" name="end_time">
+                <span class="material-symbols-outlined">
+                    nest_clock_farsight_analog
+                </span>
             </div>
 
 
