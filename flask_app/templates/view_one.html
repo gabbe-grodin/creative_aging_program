@@ -48,7 +48,7 @@
 
                 <h2 class="mt mb italic">{{ course.title }}</h2>
                 <!-- check if this is the creator of this course. if so show: -->
-                {% if session["logged_in_user_id.user_type"] != 'student' or course.creator.user_id != 'student' %}
+                {% if session["user_type"] != 'student' %}
                     <a href="/course/edit/{{ course.id }}" class="mt upper">edit this course</a>
                 {% endif %}
             </div>
