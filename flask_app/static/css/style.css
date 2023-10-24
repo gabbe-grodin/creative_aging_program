@@ -24,6 +24,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -83,16 +84,25 @@ label{
 
 }
 input{
-
+    font-size: 1.8rem;
 }
 textarea{
-    /* font-size: 1.5rem; */
+    font-size: 1.8rem;
+}
+select{
+    font-size: 2rem;
+}
+span{
+    font-size: 3rem;
 }
 button{
     font-size: 2rem;
 }
 .hidden {
     font-size: 1px;
+}
+.time_picker select{
+    font-size: 3rem;
 }
 
 /*******************************************/
@@ -153,6 +163,9 @@ h2{
 h3{
     font-weight: 600;
 }
+span{
+    font-weight: 600;
+}
 button,
 .btn{
     font-weight: 600;
@@ -162,6 +175,15 @@ label{
 }
 input{
     font-weight: 600;
+}
+textarea{
+    font-weight: 600;
+}
+select{
+    font-weight: 700;
+}
+.time_picker select{
+    font-weight: 700;
 }
 
 /*******************************************/
@@ -318,6 +340,9 @@ button:hover,
     border: 1px solid ##c4303;
     border-radius: 2em;
 }
+select{
+    border: 2px solid #0c4303;
+}
 /*******************************************/
 /*! LAYOUT
 /*******************************************/
@@ -352,16 +377,22 @@ main {
 }
 form{
     /* width: auto; */
-    gap:2em;
+    /* gap:2em; */
     /* padding: 55px; */
 }
 #reg {
-    width: 350px;
+    width: 48%;
+}
+#login{
+    width: 48%;
 }
 textarea{
     height: inherit;
     width: 640px;
-    padding: 25px;
+    /* padding: 25px; */
+}
+select{
+    padding: 10px;
 }
 .card{
     /* width: 800px; */
@@ -385,6 +416,9 @@ textarea{
 }
 .flx-end{
     justify-content: flex-end;
+}
+.justify-center{
+    justify-content: center;
 }
 .flx-start{
     justify-content: flex-start;
@@ -510,6 +544,10 @@ button,
 #dash{
     /* width: 690px; */
 }
+.time_picker select{
+    /* margin: 20px; */
+    padding: 10px;
+}
 /*******************************************/
 /*! CARD
 /*******************************************/
@@ -523,6 +561,9 @@ button,
 
 .justify{
     text-align: justify;
+}
+.text-center{
+    text-align: center;
 }
 
 /*******************************************/
@@ -575,6 +616,10 @@ td {
 }
 tr:hover {
   background: #054b36;
+}
+.time_picker select{
+    border-radius: 5px;
+    border: 2px solid #054b36;
 }
 
 /*******************************************/

@@ -71,7 +71,7 @@
 
 
     <main>
-        <div class="flx row gap-1">
+        <div class="flx row space-between">
 
 
 
@@ -79,8 +79,8 @@
 
 
 
-        <form action="/user/create" method="post" class="card flx col" id="reg">
-            <h2 class="upper mb">become a member!</h2>
+        <form action="/user/create" method="post" class="card flx col gap-1" id="reg">
+            <h2 class="upper mb text-center italic">become a member!</h2>
             <div>
                 <label for="first_name">First Name: </label>
                 <input class="border_bottom_white" type="text" name="first_name">
@@ -120,7 +120,7 @@
                 <button type="submit">
                     create account
                 </button>
-            </div>        
+            </div>
         </form>
         <!-- FORM END REGISTRATION-->
 
@@ -128,8 +128,9 @@
 
         <!-- LOGIN FORM -->
 
-        <form action="/login" method="post" class="card flx col" id="login">
-            <h2 class="upper mb">sign-in</h2>
+        <form action="/login" method="post" class="card flx col gap-1 justify-center" id="login">
+            <span class="text-center mb">or</span>
+            <h2 class="upper mb text-center italic">sign-in</h2>
             <div class="border_bottom_white">
                 <label for="email">Email: </label>
                 <input type="text" name="email">

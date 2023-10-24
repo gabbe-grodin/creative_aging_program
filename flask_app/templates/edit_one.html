@@ -87,18 +87,18 @@
                     <label for="img_url">upload a different image for your course page:</label>
                     <input type="file" name="img_url" value="{{ course.img_url }}">
                 </div>
-    
+
                 <div class="flx row mt">
                     <label class="flx-2" for="start_date">starts: </label>
                     <input class="flx-4" type="date" name="start_date"  value="{{ course.start_date }}">
                 </div>
-    
+
                 <div class="flx row mt">
                     <label class="flx-2" for="end_date">ends: </label>
                     <input class="flx-4" type="date" name="end_date" value="{{ course.end_date }}">
                 </div>
-    
-                <div class="flx row mt">
+
+                <div class="flx row mt mb">
                     <div class="flx row">
                         <label class="flx-2" for="start_time">hours: </label>
                         <select name="start_time_hour" id="start_time_hour">
@@ -115,6 +115,7 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                         </select>
+                        :
                         <select name="start_time_min" id="start_time_min">
                             <option value="00">00</option>
                             <option value="15">15</option>
@@ -125,12 +126,9 @@
                             <option value="AM">AM</option>
                             <option value="PM">PM</option>
                         </select>
-                        <span class="material-symbols-outlined">
-                            nest_clock_farsight_analog
-                        </span>
                     </div>
                     <div class="flx row">
-                        <label class="flx-2" for="end_time">hours: </label>
+                        <label class="flx-2" for="end_time"></label>
                         <select name="end_time_hour" id="end_time_hour">
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -145,6 +143,7 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                         </select>
+                        :
                         <select name="end_time_min" id="end_time_min">
                             <option value="00">00</option>
                             <option value="15">15</option>
@@ -155,9 +154,6 @@
                             <option value="AM">AM</option>
                             <option value="PM">PM</option>
                         </select>
-                        <span class="material-symbols-outlined">
-                            nest_clock_farsight_analog
-                        </span>
                     </div>
                 </div>
 

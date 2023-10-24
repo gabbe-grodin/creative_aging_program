@@ -57,9 +57,9 @@
                 {% if not creator.courses %}
                     <p>You have not yet created any courses.</p>
                 {% endif %}
-                <span class="upper">
+                <button>
                     <a href="/course/new">add a course</a>
-                </span>
+                </button>
             </div>
 
         <!-- IF STUDENT... -->
@@ -78,9 +78,9 @@
                 {#{% if not registrant.courses %}#}
                     <p>You have not yet registered for any courses.</p>
                 {#{% endif %}#}
-                <span class="upper">
+                <button>
                     <a href="/dashboard">register for a course</a>
-                </span>
+                </button>
             </div>
         {% endif %}
 

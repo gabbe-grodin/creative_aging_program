@@ -95,66 +95,71 @@
                 <input class="flx-4" type="date" name="end_date">
             </div>
 
-            <div class="flx row mt">
+            <div class="flx row mt mb">
                 <div class="flx row">
                     <label class="flx-2" for="start_time">hours: </label>
-                    <select name="start_time_hour" id="start_time_hour">
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                    <select name="start_time_min" id="start_time_min">
-                        <option value="00">00</option>
-                        <option value="15">15</option>
-                        <option value="30">30</option>
-                        <option value="45">45</option>
-                    </select>
-                    <select name="start_time_ampm" id="start_time_ampm">
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select>
-                    <span class="material-symbols-outlined">
-                        nest_clock_farsight_analog
-                    </span>
+                    <span>from</span>
+                    <div class="time_picker">
+                        <select name="start_time_hour" id="start_time_hour">
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        :
+                        <select name="start_time_min" id="start_time_min">
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                        <select name="start_time_ampm" id="start_time_ampm">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
                 </div>
+                <span>
+                    to
+                </span>
                 <div class="flx row">
-                    <label class="flx-2" for="end_time">hours: </label>
-                    <select name="end_time_hour" id="end_time_hour">
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                    <select name="end_time_min" id="end_time_min">
-                        <option value="00">00</option>
-                        <option value="15">15</option>
-                        <option value="30">30</option>
-                        <option value="45">45</option>
-                    </select>
-                    <select name="end_time_ampm" id="end_time_ampm">
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select>
-                    <span class="material-symbols-outlined">
-                        nest_clock_farsight_analog
-                    </span>
+                    <label class="flx-2" for="end_time"></label>
+                    <div class="time_picker">
+                        <select name="end_time_hour" id="end_time_hour">
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        :
+                        <select name="end_time_min" id="end_time_min">
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                        <select name="end_time_ampm" id="end_time_ampm">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+
                 </div>
             </div>
 
