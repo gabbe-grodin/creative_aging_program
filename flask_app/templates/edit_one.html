@@ -18,19 +18,17 @@
 
     <!-- HEADER START -->
 
-    <header class="flx row space-between">
-        <div class="flx col space-between">
-            <h1 class="width-40-percent">the creative aging project</h1>
-            <nav class="upper flx gap-2 mb">
-                <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                <a href="/course/new">add a course</a>
-                <a href="/dashboard">view courses</a>
-                <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
-                <a href="/logout">logout</a>
-            </nav>
-            <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
-        </div>
-        <img class="logo" src="/static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
+    <header>
+        <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
+        <h1 class="mb">the creative aging project</h1>
+        <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
+        <nav class="upper flx gap-2 mb">
+            <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
+            <a href="/course/new">add a course</a>
+            <a href="/dashboard">view courses</a>
+            <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+            <a href="/logout">logout</a>
+        </nav>
     </header>
     <!-- HEADER END -->
 
@@ -38,13 +36,12 @@
 
     <main>
 
-        <div class="flx row gap-1">
 
 
 
             <!-- FORM START -->
 
-            <form action="/course/update" method="post" id="edit">
+            <form action="/course/update" method="post" class="card" id="edit">
 
                 <h2 class="mt mb">edit your course:</h2>
 
@@ -102,13 +99,66 @@
                 </div>
     
                 <div class="flx row mt">
-                    <label class="flx-2" for="start_time">starts: </label>
-                    <input class="flx-4" type="time" name="start_time" value="{{ course.start_time }}">
-                </div>
-    
-                <div class="flx row mt">
-                    <label class="flx-2" for="end_time">ends: </label>
-                    <input class="flx-4" type="time" name="end_time" value="{{ course.end_time }}">
+                    <div class="flx row">
+                        <label class="flx-2" for="start_time">hours: </label>
+                        <select name="start_time_hour" id="start_time_hour">
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select name="start_time_min" id="start_time_min">
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                        <select name="start_time_ampm" id="start_time_ampm">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        <span class="material-symbols-outlined">
+                            nest_clock_farsight_analog
+                        </span>
+                    </div>
+                    <div class="flx row">
+                        <label class="flx-2" for="end_time">hours: </label>
+                        <select name="end_time_hour" id="end_time_hour">
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select name="end_time_min" id="end_time_min">
+                            <option value="00">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                        <select name="end_time_ampm" id="end_time_ampm">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                        <span class="material-symbols-outlined">
+                            nest_clock_farsight_analog
+                        </span>
+                    </div>
                 </div>
 
                 <div>
@@ -119,9 +169,6 @@
 
 
 
-
-
-        </div>    
     </main>
 
 </body>

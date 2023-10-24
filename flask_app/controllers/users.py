@@ -4,7 +4,6 @@ from flask_app.models.course import Course
 from flask_app import app
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
-from datetime import time, tzinfo, timedelta
 
 
 

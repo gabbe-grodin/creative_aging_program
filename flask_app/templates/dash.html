@@ -19,24 +19,18 @@
     <!-- HEADER START -->
 
 
-    <header class="flx row space-between">
-        <div class="flx col space-between">
-            <h1 class="width-40-percent">the creative aging project</h1>
-
-            <nav class="upper flx gap-2 mb">
-                <!-- conditional rendering: -->
-                {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
-                    <a href="/course/new">add a course</a>
-                {% endif %}
-                <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
-                <a href="/logout">logout</a>
-            </nav>
-
-            <h2 class="mt">Welcome, {{ session['first_name'] }}!</h2>
-        </div>
-
-        <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
-
+    <header>
+        <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
+        <h1 class="mb">the creative aging project</h1>
+        <h2 class="mt">Welcome, {{ session['first_name'] }}!</h2>
+        <nav class="upper flx gap-2 mb">
+            <!-- conditional rendering: -->
+            {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
+                <a href="/course/new">add a course</a>
+            {% endif %}
+            <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+            <a href="/logout">logout</a>
+        </nav>
     </header>
     <!-- HEADER END -->
 
@@ -46,14 +40,14 @@
         <h3 class="mt mb">Here are some of the upcoming courses being offered:</h3>
         <div class="flx wrap gap-3">
             {% for course in all_courses %}
-                <div class="flx col card card-300 gap-2">
+                <div class="flx col card card-small gap-2">
                     <h2 class="italic">
-                        <a href="/course/{{ course.id }}">{{ course.title }}"</a>
+                        <a href="/course/{{ course.id }}">"{{ course.title }}"</a>
                     </h2>
                     with {{ course.creator.first_name }} {{ course.creator.last_name }}
                     <a href="/course/{{ course.id }}">details</a>
                     <a href="/course/{{ course.id }}">
-                        <img class="img-card-300" src="{{ course.img_url }}" alt="photo or graphic representing this course">
+                        <img class="img-card-small" src="{{ course.img_url }}" alt="photo or graphic representing this course">
                     </a>
                 </div>
             {% endfor %}

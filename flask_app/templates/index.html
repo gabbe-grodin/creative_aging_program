@@ -15,6 +15,7 @@
 
     <!-- !  to dos: -->
     <!-- *  create readme -->
+    <!-- !  change 'times' input type to drop-down in add/edit form -->
     <!-- !  hide API keys -->
     <!-- !  format dates and times in view of course -->
     <!-- !  insert binary data into a MySQL table and also read it -->
@@ -44,15 +45,11 @@
 
     <!-- HEADER START -->
 
-    <header class="flx row space-between">
-        <div class="flx col space-between">
-            <h1 class="width-40-percent">the creative aging project</h1>
-            <nav class="upper flx gap-2 mb">
-
-            </nav>
-            <!-- <h2>Welcome, {#{{ session["first_name"] }}#}!</h2> -->
-        </div>
-        <img class="logo" src="./static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
+    <header>
+        <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
+        <h1 class="mb">the creative aging project</h1>
+        <nav class="upper flx gap-2 mb">
+        </nav>
     </header>
     <!-- HEADER END -->
 
@@ -74,7 +71,7 @@
 
 
     <main>
-        <div class="flx row space-between gap-1">
+        <div class="flx row gap-1">
 
 
 
@@ -82,7 +79,7 @@
 
 
 
-        <form action="/user/create" method="post" class="flx col" id="reg">
+        <form action="/user/create" method="post" class="card flx col" id="reg">
             <h2 class="upper mb">become a member!</h2>
             <div>
                 <label for="first_name">First Name: </label>
@@ -131,7 +128,7 @@
 
         <!-- LOGIN FORM -->
 
-        <form action="/login" method="post" class="flx col" id="login">
+        <form action="/login" method="post" class="card flx col" id="login">
             <h2 class="upper mb">sign-in</h2>
             <div class="border_bottom_white">
                 <label for="email">Email: </label>

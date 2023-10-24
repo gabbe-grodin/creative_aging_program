@@ -2,8 +2,7 @@ from flask import render_template, redirect, request, session, flash
 from flask_app.models.course import Course
 from flask_app.models.user import User
 from flask_app import app
-from datetime import datetime
-import time
+
 
 
 
@@ -26,10 +25,13 @@ def create_course():
             "img_url": request.form['img_url'],
             "start_date": request.form['start_date'],
             "end_date": request.form['end_date'],
-            "start_time": request.form['start_time'],
-            "end_time": request.form['end_time'],
+            "start_time_hour": request.form['start_time_hour'],
+            "start_time_min": request.form['start_time_min'],
+            "start_time_ampm": request.form['start_time_ampm'],
+            "end_time_hour": request.form['end_time_hour'],
+            "end_time_min": request.form['end_time_min'],
+            "end_time_ampm": request.form['end_time_ampm'],
             "user_id": session['logged_in_user_id']}
-    print ("* * *    printing ****** : ", session)
     Course.create_course(data)
     return redirect(f"/user/{session['logged_in_user_id']}")
 

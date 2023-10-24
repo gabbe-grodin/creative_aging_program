@@ -2,7 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import render_template, redirect, request, session, flash
 from flask_app import app
 from flask_app.models import user
-import mysql.connector
+
 
 class Course:
     db = 'creative_aging'
@@ -15,8 +15,12 @@ class Course:
         self.img_url = data['img_url']
         self.start_date = data['start_date']
         self.end_date = data['end_date']
-        self.start_time = data['start_time']
-        self.end_time = data['end_time']
+        self.start_time_hour = data['start_time_hour']
+        self.start_time_min = data['start_time_min']
+        self.start_time_ampm = data['start_time_ampm']
+        self.end_time_hour = data['end_time_hour']
+        self.end_time_min = data['end_time_min']
+        self.end_time_ampm = data['end_time_ampm']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -26,13 +30,9 @@ class Course:
     @classmethod
     def create_course(cls, form_data):
         print("------FORM DATA-----", form_data)
-        # course_data = {
-        #     "title": form_data["title"],
-        #     "description": form_data["description"],
-        #     "user_id": form_data["user_id"]}
         # if reference to the user is made here, a hidden input is not necessary in submit form. 
-        query = """INSERT INTO courses (title, description, price, requirements, img_url, start_date, end_date, start_time, end_time, user_id)
-            VALUES (%(title)s, %(description)s, %(price)s, %(requirements)s, %(img_url)s, %(start_date)s, %(end_date)s, %(start_time)s, %(end_time)s, %(user_id)s)"""
+        query = """INSERT INTO courses (title, description, price, requirements, img_url, start_date, end_date, start_time_hour, start_time_min, start_time_ampm, end_time_hour, end_time_min, end_time_ampm, user_id)
+            VALUES (%(title)s, %(description)s, %(price)s, %(requirements)s, %(img_url)s, %(start_date)s, %(end_date)s, %(start_time_hour)s, %(start_time_min)s, %(start_time_ampm)s, %(end_time_hour)s, %(end_time_min)s, %(end_time_ampm)s, %(user_id)s)"""
         result = connectToMySQL(cls.db).query_db(query, form_data)
         print("Create course method in model produced this result: ", result)
         return result
@@ -92,7 +92,7 @@ class Course:
     @classmethod
     def update_course_by_id(cls, data):
         query = """UPDATE courses
-                SET title=%(title)s, description=%(description)s, price=%(price)s, requirements=%(requirements)s, img_url=%(img_url)s, start_date=%(start_date)s, end_date=%(end_date)s, start_time=%(start_time)s, end_time=%(end_time)s
+                SET title=%(title)s, description=%(description)s, price=%(price)s, requirements=%(requirements)s, img_url=%(img_url)s, start_date=%(start_date)s, end_date=%(end_date)s, start_time_hour=%(start_time_hour)s, start_time_min=%(start_time_min)s, start_time_ampm=%(start_time_ampm)s, end_time_hour=%(end_time_hour)s, end_time_min=%(end_time_min)s, end_time_ampm=%(end_time_ampm)s
                 WHERE id = %(id)s"""
         return connectToMySQL(cls.db).query_db(query, data) 
 
@@ -129,10 +129,3 @@ class Course:
             flash("All fields required.")
             is_valid = False
         return is_valid
-
-# for converting images and files into binary (datatype BLOB), install connector by running this in mac terminal: pipenv install mysql-connector-python for the following function to work (also add 'import mysql.connector' up top)...or is all of that redundant because mysql-connector-python is the same as MYSQLConnection? do I add this func to mysqlconnection.py  in config?:
-    @staticmethod
-    def convert_to_binary_data(filename):
-        with open(filename, 'rb') as file:
-            binary_data = file.read()
-        return binary_data

@@ -130,16 +130,17 @@ class User:
                     "img_url": row["img_url"],
                     "start_date": row["start_date"],
                     "end_date": row["end_date"],
-                    "start_time": row["start_time"],
-                    "end_time": row["end_time"],
+                    "start_time_hour": row["start_time_hour"],
+                    "start_time_min": row["start_time_min"],
+                    "start_time_ampm": row["start_time_ampm"],
+                    "end_time_hour": row["end_time_hour"],
+                    "end_time_min": row["end_time_min"],
+                    "end_time_ampm": row["end_time_ampm"],
                     "created_at": row['courses.created_at'],
                     "updated_at": row['courses.updated_at'],
                     "user_id":row['user_id']}
-                # print("------TREEEEEEEEE DATA----------", course_data)
                 courses = this_user.courses.append(course.Course(course_data))
-        # print(this_user)
         return this_user
-
 
     @classmethod
     def user_update(cls, data):

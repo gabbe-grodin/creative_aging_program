@@ -18,21 +18,19 @@
 
     <!-- HEADER START -->
 
-    <header class="flx row space-between">
-        <div class="flx col space-between">
-            <h1 class="width-40-percent">the creative aging project</h1>
-            <nav class="upper flx gap-2 mb">
-                <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
-                {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
-                <a href="/course/new">add a course</a>
-                {% endif %}
-                <a href="/dashboard">view courses</a>
-                <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
-                <a href="/logout">logout</a>
-            </nav>
-            <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
-        </div>
-        <img class="logo" src="/static/assets/scribble_line_skinny_ish_neon_yellow.png" alt="logo is a scribbly knotty ball of lines">
+    <header>
+        <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
+        <h1 class="mb">the creative aging project</h1>
+        <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
+        <nav class="upper flx gap-2 mb">
+            <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
+            {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
+            <a href="/course/new">add a course</a>
+            {% endif %}
+            <a href="/dashboard">view courses</a>
+            <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+            <a href="/logout">logout</a>
+        </nav>
     </header>
     <!-- HEADER END -->
 
@@ -46,10 +44,12 @@
 
             <div class="flx row space-between">
 
-                <h2 class="mt mb italic">{{ course.title }}</h2>
+                <h2 class="italic">{{ course.title }}</h2>
                 <!-- check if this is the creator of this course. if so show: -->
                 {% if session["user_type"] != 'student' %}
-                    <a href="/course/edit/{{ course.id }}" class="mt upper">edit this course</a>
+                    <h2 class="btn">
+                        <a href="/course/edit/{{ course.id }}" class="upper">edit this course</a>
+                    </h2>
                 {% endif %}
             </div>
             <span class="flx row">
@@ -66,7 +66,7 @@
 
                     <div>
                         <!-- <h3 class="flx-1">times: </h3> -->
-                        <p>on {{ course.start_date.strftime("%A") }}s, from {#{{ course.start_time.strftime("%-I:%M.S%p") }}#} to {#{{ course.end_time.strftime("%-I:%M.S%p") }}#}</p>
+                        <p>on {{ course.start_date.strftime("%A") }}s, from {{ course.start_time_hour }}:{{ course.start_time_min }} {{ course.start_time_ampm }} to {{ course.end_time_hour }}:{{ course.end_time_min }} {{ course.end_time_ampm }}</p>
                     </div>
 
                     <div>
