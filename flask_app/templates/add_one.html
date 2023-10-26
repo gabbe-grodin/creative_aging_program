@@ -24,7 +24,7 @@
         <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
         <h1 class="mb">the creative aging project</h1>
         <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
-        <nav class="upper flx gap-2 mb">
+        <nav class="upper flx gap-2">
             <a href="/dashboard">view courses</a>
             <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
             <a href="/logout">logout</a>
@@ -40,7 +40,7 @@
 
         <!-- FORM START -->
 
-        <form class="card" action="/course/create" method="post" id="add">
+        <form class="card" action="/course/create" method="post" id="add" enctype=multipart/form-data>
 
             <h2 class="mt mb">add a new course:</h2>
 
@@ -83,7 +83,7 @@
             </div>
 
             <div class="border_bottom_white mb">
-                <label for="img_url">upload an image for your course page:</label>
+                <label for="img_url">upload an image for your course's page:</label>
                 <input type="file" name="img_url">
             </div>
 
@@ -91,7 +91,6 @@
                 <label class="flx-2" for="start_date">dates: </label>
                 <input class="flx-4" type="date" name="start_date">
 
-                <!-- <label class="flx-2" for="end_date">ends: </label> -->
                 <input class="flx-4" type="date" name="end_date">
             </div>
 

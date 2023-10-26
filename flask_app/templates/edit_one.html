@@ -22,7 +22,7 @@
         <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
         <h1 class="mb">the creative aging project</h1>
         <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
-        <nav class="upper flx gap-2 mb">
+        <nav class="upper flx gap-2">
             <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
             <a href="/course/new">add a course</a>
             <a href="/dashboard">view courses</a>
@@ -41,7 +41,7 @@
 
             <!-- FORM START -->
 
-            <form action="/course/update" method="post" class="card" id="edit">
+            <form action="/course/update" method="post" class="card" id="edit" enctype=multipart/form-data>
 
                 <h2 class="mt mb">edit your course:</h2>
 

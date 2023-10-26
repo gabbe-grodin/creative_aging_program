@@ -46,20 +46,21 @@
             <h3 class="mt mb">Courses created by you:</h3>
             <div class="flx wrap gap-3">
                 {% for course in creator.courses %}
-                    <div class="flx col card card-small gap-2">
-                            <h2 class="italic">{{ course.title }}</h2>
-                            <span><a href="/course/{{ course.id }}">details</a></span>
-                            <span><a href="/delete/{{ course.id }}">delete</a></span>
-                            <span><a href="/course/edit/{{ course.id }}">edit</a></span>
+                    <div class="flx col card card-small space-between">
+                        <h2 class="italic">{{ course.title }}</h2>
+                            <a href="/course/{{ course.id }}"></a>
+                            <!-- <a href="/delete/{#{{ course.id }}#}"><img src="/static/assets/red-x-thick.png" alt="scribbly sketch of a trashcan by gabbe" class="trashcan-sketch"></a> -->
+                        
+                        <img class="img img-card-small" src="/static/assets/uploads/{{ course.img_url }}" alt="photo or graphic representing this course">
                     </div>
                 {% endfor %}
 
                 {% if not creator.courses %}
                     <p>You have not yet created any courses.</p>
                 {% endif %}
-                <button>
-                    <a href="/course/new">add a course</a>
-                </button>
+                
+                <a class="btn" href="/course/new">add a course</a>
+                
             </div>
 
         <!-- IF STUDENT... -->

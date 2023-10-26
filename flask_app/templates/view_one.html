@@ -22,7 +22,7 @@
         <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
         <h1 class="mb">the creative aging project</h1>
         <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
-        <nav class="upper flx gap-2 mb">
+        <nav class="upper flx gap-2">
             <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
             {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
             <a href="/course/new">add a course</a>
@@ -40,69 +40,39 @@
 
     <main>
 
-        <div class="card" id="view_one">
-
-            <div class="flx row space-between">
-
-                <h2 class="italic">{{ course.title }}</h2>
-                <!-- check if this is the creator of this course. if so show: -->
-                {% if session["user_type"] != 'student' %}
-                    <h2 class="btn">
-                        <a href="/course/edit/{{ course.id }}" class="upper">edit this course</a>
-                    </h2>
-                {% endif %}
-            </div>
-            <span class="flx row">
-
-                <h3>with</h3>
-                <p class="ml">{{ course.creator.first_name }} {{ course.creator.last_name }}</p>
-
+        <div class="card flx col gap-1">
+            <h2 class="italic"><span>{{ course.title }}</span></h2>
+            <span>
+                <p>with {{ course.creator.first_name }} {{ course.creator.last_name }}</p>
             </span>
+            <section class="flx row space-between gap-2 mt mb">
+                <div class="flx col gap-1 flx-2">
 
-            <div class="flx row mt mb gap-3">
+                    <p>on {{ course.start_date.strftime("%A") }}s, from {{ course.start_time_hour }}:{{ course.start_time_min }} {{ course.start_time_ampm }} to {{ course.end_time_hour }}:{{ course.end_time_min }} {{ course.end_time_ampm }}</p>
 
-                <section class="flx col flx-1 gap-1">
+                    <p>{{ course.start_date.strftime("%B %d, %Y") }} - {{ course.end_date.strftime("%B %d, %Y") }}</p>
 
+                    <p>{{ course.requirements }}</p>
 
-                    <div>
-                        <!-- <h3 class="flx-1">times: </h3> -->
-                        <p>on {{ course.start_date.strftime("%A") }}s, from {{ course.start_time_hour }}:{{ course.start_time_min }} {{ course.start_time_ampm }} to {{ course.end_time_hour }}:{{ course.end_time_min }} {{ course.end_time_ampm }}</p>
-                    </div>
+                    <p>${{ course.price }}</p>
+                </div>
 
-                    <div>
-                        <!-- <h3 class="flx-1">dates: </h3> -->
-                        <p>{{ course.start_date.strftime("%B %d, %Y") }} - {{ course.end_date.strftime("%B %d, %Y") }}</p>
-                    </div>
+                
+            <!-- check if this is the creator of this course. if so show: -->
+            {% if session["user_type"] != 'student' %}
+                <div class="flx col gap-1 flx-1">
+                        <a href="/course/edit/{{ course.id }}" class="btn">edit this course</a>
+                    
+                        <a href="/delete/{{ course.id }}" class="btn">delete this course</a>
 
-                    <div>
-                        <!-- <h3 class="flx-1">requirements: </h3> -->
-                        <p>{{ course.requirements }}</p>
-                    </div>
-
-                    <div>
-                        <!-- <h3 class="flx-1">description: </h3> -->
-                        <p class="justify line-height-less">{{ course.description }}</p>
-                    </div>
-    
-                    <div>
-                        <!-- <h3 class="flx-1">price: </h3> -->
-                        <p>${{ course.price }}</p>
-                    </div>
-        
-                </section>
-    
-                <section class="flx-1 class-pic">
-
-                    <h3 class="hidden"></h3>
-                    <p>{{ course.img_url }}</p>
-
-                </section>
-
-            </div>
-
+                </div>
+            {% endif %}
+            </section>
+            <p class="justify line-height-less">{{ course.description }}</p>
             
+                <img class="mt mb" src="/static/assets/uploads/{{ course.img_url }}" alt="photo uploaded by teacher representing this class and the activities within it.">
         </div>
-        
+
 
     </main>
 

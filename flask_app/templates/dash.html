@@ -23,7 +23,7 @@
         <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
         <h1 class="mb">the creative aging project</h1>
         <h2 class="mt">Welcome, {{ session['first_name'] }}!</h2>
-        <nav class="upper flx gap-2 mb">
+        <nav class="upper flx gap-2">
             <!-- conditional rendering: -->
             {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
                 <a href="/course/new">add a course</a>
@@ -40,15 +40,12 @@
         <h3 class="mt mb">Here are some of the upcoming courses being offered:</h3>
         <div class="flx wrap gap-3">
             {% for course in all_courses %}
-                <div class="flx col card card-small gap-2">
-                    <h2 class="italic">
-                        <a href="/course/{{ course.id }}">"{{ course.title }}"</a>
-                    </h2>
-                    with {{ course.creator.first_name }} {{ course.creator.last_name }}
-                    <a href="/course/{{ course.id }}">details</a>
-                    <a href="/course/{{ course.id }}">
-                        <img class="img-card-small" src="{{ course.img_url }}" alt="photo or graphic representing this course">
-                    </a>
+                <div class="flx col card card-small space-between">
+                    <h2 class="italic">{{ course.title }}</h2>
+                        <a href="/course/{{ course.id }}"></a>
+                    
+                    <img class="img img-card-small" src="/static/assets/uploads/{{ course.img_url }}" alt="photo or graphic representing this course">
+                   
                 </div>
             {% endfor %}
 
