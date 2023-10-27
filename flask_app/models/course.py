@@ -12,7 +12,7 @@ class Course:
         self.description = data['description']
         self.price = data['price']
         self.requirements = data['requirements']
-        self.img_url = data['img_url']
+        self.course_img = data['course_img']
         self.start_date = data['start_date']
         self.end_date = data['end_date']
         self.start_time_hour = data['start_time_hour']
@@ -31,10 +31,10 @@ class Course:
     def create_course(cls, form_data):
         # print("------FORM DATA-----", form_data)
         # if reference to the user is made here, a hidden input is not necessary in submit form. 
-        query = """INSERT INTO courses (title, description, price, requirements, img_url, start_date, end_date, start_time_hour, start_time_min, start_time_ampm, end_time_hour, end_time_min, end_time_ampm, user_id)
-            VALUES (%(title)s, %(description)s, %(price)s, %(requirements)s, %(img_url)s, %(start_date)s, %(end_date)s, %(start_time_hour)s, %(start_time_min)s, %(start_time_ampm)s, %(end_time_hour)s, %(end_time_min)s, %(end_time_ampm)s, %(user_id)s)"""
+        query = """INSERT INTO courses (title, description, price, requirements, course_img, start_date, end_date, start_time_hour, start_time_min, start_time_ampm, end_time_hour, end_time_min, end_time_ampm, user_id)
+            VALUES (%(title)s, %(description)s, %(price)s, %(requirements)s, %(course_img)s, %(start_date)s, %(end_date)s, %(start_time_hour)s, %(start_time_min)s, %(start_time_ampm)s, %(end_time_hour)s, %(end_time_min)s, %(end_time_ampm)s, %(user_id)s)"""
         result = connectToMySQL(cls.db).query_db(query, form_data)
-        # print("Create course method in model produced this result: ", result)
+        print("Create course method in model produced this result: ", result)
         return result
 
     @classmethod
@@ -92,7 +92,7 @@ class Course:
     @classmethod
     def update_course_by_id(cls, data):
         query = """UPDATE courses
-                SET title=%(title)s, description=%(description)s, price=%(price)s, requirements=%(requirements)s, img_url=%(img_url)s, start_date=%(start_date)s, end_date=%(end_date)s, start_time_hour=%(start_time_hour)s, start_time_min=%(start_time_min)s, start_time_ampm=%(start_time_ampm)s, end_time_hour=%(end_time_hour)s, end_time_min=%(end_time_min)s, end_time_ampm=%(end_time_ampm)s
+                SET title=%(title)s, description=%(description)s, price=%(price)s, requirements=%(requirements)s, course_img=%(course_img)s, start_date=%(start_date)s, end_date=%(end_date)s, start_time_hour=%(start_time_hour)s, start_time_min=%(start_time_min)s, start_time_ampm=%(start_time_ampm)s, end_time_hour=%(end_time_hour)s, end_time_min=%(end_time_min)s, end_time_ampm=%(end_time_ampm)s
                 WHERE id = %(id)s"""
         return connectToMySQL(cls.db).query_db(query, data) 
 

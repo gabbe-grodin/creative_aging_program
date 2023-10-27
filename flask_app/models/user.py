@@ -107,15 +107,16 @@ class User:
         if result:
             one_user = cls(result[0])
             return one_user
-        else:
-            return False
+        return False
 
     @classmethod
     def get_one_user_by_id_with_courses(cls,data):
-        query="""SELECT * FROM users
+        query="""
+            SELECT * 
+            FROM users
             LEFT JOIN courses
             ON users.id = courses.user_id
-            WHERE users.id = %(id)s"""
+            WHERE users.id = %(id)s;"""
         results = connectToMySQL(cls.db).query_db(query, data)
         this_user = cls(results[0]) # here we made a user object
         # print(this_user)
@@ -127,7 +128,7 @@ class User:
                     "description": row["description"],
                     "price": row["price"],
                     "requirements": row["requirements"],
-                    "img_url": row["img_url"],
+                    "course_img": row["course_img"],
                     "start_date": row["start_date"],
                     "end_date": row["end_date"],
                     "start_time_hour": row["start_time_hour"],

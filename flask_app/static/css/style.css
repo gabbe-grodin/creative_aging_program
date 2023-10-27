@@ -123,8 +123,8 @@ header{
     line-height: 4rem;
 }
 form label{
-    /* letter-spacing: normal; */
-    /* line-height: 1rem; */
+    letter-spacing: normal;
+    line-height: inherit;
 }
 .card{
     line-height: 3rem;
@@ -132,9 +132,6 @@ form label{
 }
 h2{
     letter-spacing: .36rem;
-}
-.alert{
-
 }
 .line-height-less{
     line-height: 2rem;
@@ -291,7 +288,9 @@ textarea:focus,
 input:focus {
     caret-color: #0c4303;
 }
-
+p{
+    color: inherit;
+}
 /*******************************************/
 /*! BACKGROUND COLORS
 /*******************************************/
@@ -336,7 +335,9 @@ select {
 .alert{
     background-color: #9b0000;
 }
-
+.user-type-radios{
+    background-color: pink;
+}
 /*******************************************/
 /*! BORDERS
 /*******************************************/
@@ -361,16 +362,28 @@ button:hover,
 .btn:hover {
     border: 2px solid #0c4303;
 }
-/* img{
+img{
     border: 1px solid #0c4303;
     border-radius: 2em;
-} */
+}
+.logo{
+    border: none;
+    border-radius: none;
+}
 .skinny-border{
     border: 1px solid #0c4303;
     border-radius: 2em;
 }
 select{
     border: 2px solid #0c4303;
+}
+.user-type-radios{
+    border-radius: 10px;
+    /* border: 1px solid #0c4303; */
+}
+.user-type-radios::after{
+    border-radius: 10px;
+    /* border: 1px solid #0c4303; */
 }
 /*******************************************/
 /*! LAYOUT
@@ -423,6 +436,61 @@ textarea{
 select{
     padding: 10px;
 }
+section > div {
+    flex: 1;
+    /* padding: 0.5rem; */
+}
+input[type="radio"] {
+    display: none;
+    &:not(:disabled) ~ label {
+      cursor: pointer;
+    }
+    &:disabled ~ label {
+      color: hsla(150, 5%, 75%, 1);
+      border-color: hsla(150, 5%, 75%, 1);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+}
+.user-type-radios label{
+    display: block;
+    height: 100%;
+    text-align: center;
+    /* justify-self: end; */
+}
+label h3{
+    
+}
+input[type="radio"]:checked + label {
+    border-radius: 10px;
+    background: hsla(150, 75%, 50%, 1);
+    color: hsla(215, 0%, 100%, 1);
+    box-shadow: 0px 0px 20px hsla(150, 100%, 50%, 0.75);
+    &::after {
+        color:  #0c4303;
+        font-family: FontAwesome;
+        border: 2px solid hsla(150, 75%, 45%, 1);
+        content: "\f00c";
+        font-size: 24px;
+        position:relative;
+        top: -50px;
+        /* left: 50%; */
+        transform: translateX(-50%);
+        height: 50px;
+        width: 50px;
+        /* line-height: 50px; */
+        text-align: center;
+        border-radius: 50%;
+        background: white;
+        box-shadow: 0px 2px 5px -2px hsla(0, 0%, 0%, 0.25);
+        padding: 5px;
+    }
+  }
+  input[type="radio"]#admin:checked + label {
+    color: white;
+    background: red;
+    border-color: red;
+  }
 .card{
     padding: 50px;
     /* height: 800px; */
@@ -545,11 +613,6 @@ button,
 .btn{
     padding: 15px;
 }
-.alert {
-    padding-left: 15px;
-    width: auto;
-    margin: 0 auto;
-}
 .short-alert {
     width: 50%;
 }
@@ -608,7 +671,12 @@ button,
 section{
     width: inherit;
 }
-
+.alert{
+    text-align: center;
+}
+.user-type-radios label{
+    /* text-align: center; */
+}
 /*******************************************/
 /*! MY FORMS
 /*******************************************/

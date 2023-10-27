@@ -3,7 +3,14 @@ from flask_app.models.course import Course
 from flask_app.models.user import User
 from werkzeug.utils import secure_filename
 from flask_app import app
+# from dotenv import load_dotenv
+# from pathlib import Path
+# from dotenv import ALLOWED_EXTENSIONS
 import os
+
+# load_dotenv()
+# dotenv_path = Path('/.env')
+# load_dotenv(dotenv_path=dotenv_path)
 
 # why are below lines necessary in [app breaks without] both this file and __init__.py?
 UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
@@ -30,28 +37,28 @@ def create_course():
     if request.method == 'POST':
         print('=======   request.files:',request.files)
         # check if the post request has the file part
-        if 'img_url' not in request.files:
+        if 'course_img' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        img_url = request.files['img_url']
-        print("========     img_url is now equal to ",img_url)
+        course_img = request.files['course_img']
+        print("========     course_img is now equal to ",course_img)
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
-        if img_url.filename == '':
+        if course_img.filename == '':
             flash('No selected file')
             return redirect(request.url)
-        if img_url and allowed_file(img_url.filename):
-            filename = secure_filename(img_url.filename)
-            img_url.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        if course_img and allowed_file(course_img.filename):
+            filename = secure_filename(course_img.filename)
+            course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return redirect(url_for('download_file', name=filename))
             #! end block from flask documentation
     session["user_id"] = request.form['logged_in_user_id']
-    # print("****** filename ========== ",filename)
+
     data = {"title": request.form['title'],
             "description": request.form['description'],
             "price": request.form['price'],
             "requirements": request.form['requirements'],
-            "img_url": filename,
+            "course_img": filename,
             "start_date": request.form['start_date'],
             "end_date": request.form['end_date'],
             "start_time_hour": request.form['start_time_hour'],
@@ -61,7 +68,14 @@ def create_course():
             "end_time_min": request.form['end_time_min'],
             "end_time_ampm": request.form['end_time_ampm'],
             "user_id": session['logged_in_user_id']}
+    # data2 = request.form.copy()
+    # data2['logged_in_user_id'] = session['logged_in_user_id']
+    # data2["image_url"] =  request.form["course_img"]
+    # print("data2 data2 data2 data2 at course_img..........",data2["course_img"])
+    # filename = data2["course_img"]
+    # print(("****** data2 ========== ",data2))
     # print("****** filename ========== ",filename)
+    # print("****** session ========== ",session)
     Course.create_course(data)
     return redirect(f"/user/{session['logged_in_user_id']}")
 

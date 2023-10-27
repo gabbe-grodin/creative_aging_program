@@ -11,33 +11,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mirza:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 
-    <!-- !  to dos: -->
-    <!-- *  create readme -->
-    <!-- !  change 'times' input type to drop-down in add/edit form -->
-    <!-- !  hide API keys -->
+    <!-- !  MVP to dos: -->
+    <!-- !  change column name course_img to 'course_img_upload' in courses table -->
     <!-- !  format dates and times in view of course -->
-    <!-- !  insert binary data into a MySQL table and also read it -->
-    <!-- *  installed mysql-connector-python for blob -->
-    <!-- !  add attributes to class of Course: location, max number of registrants -->
-    <!-- !  add attributes to class of User: birthday (compare age to course requirements after adding age minimum) -->
-    <!-- !  add condition so if class is at max capacity, learner may add their name to the waiting list (sorted in by created_at/ first-come-first-serve) -->
-    <!-- *  attribute user_type determines privileges, create/edit v register -->
-    <!-- !  may need to change requirements input type in add course form to checkboxes so multiple can be selected -->
-    <!-- !  add view of one class by id with all registrants (roster) and attendance tracker for teachers -->
-    <!-- *  if results: statement in model after get_all_courses query to prevent crash when no courses yet created -->
-    <!-- *  login-registration with form validations and flash messages -->
-    <!-- *  full crud with restful routing -->
-    <!-- !  logged in user can only edit and delete their own creations (using session) -->
+    <!-- !  pre populate course times drop-downs in edit form -->
+    <!-- !  implement change course image by uploading different file in edit form -->
+    <!-- !  change requirements input type in add course form to checkboxes so multiple can be selected -->
+    <!-- !  change user_type select menu on index.html to button set where one is active, default set to unselected so message flash if none get selected during initial user registration -->
+    <!-- !  implement form validations + flash messages for add/edit course dates, times, price -->
+    <!-- !  protect image urls (see head tag for ref: href="{#{{ url_for('static', filename='css/style.css') }}#}") -->
     <!-- !  check code comments and readability -->
+    <!-- !  design subtle pattern for overall site background -->
     <!-- !  sync styles across templates -->
-    <!-- !  all forms include validations -->
-    <!-- !  each student starts with 3 tokens for the year and they may spend them on any three classes, not repeating the same course more than twice -->
-    <!-- !  html validator -->
-    <!-- !  apis to implement: geolocation to determine where the closest courses are taught; speech-to-text and text-to-speech apis for accessibility; translation api (spanish; chinese; cantonese); bob ross api? -->
     <!-- !  save erd as .mbw -->
-
+    <!-- !  html validator -->
+    
+    <!-- ?  PRODUCT BACKLOG -->
+    <!-- !  implement many-to-many with registrations table -->
+    <!-- !  add attributes to class of User: birthday (compare age to course requirements after adding age minimum) -->
+    <!-- !  add attributes to class of Course: location, max number of registrants -->
+    <!-- !  add condition so if class is at max capacity, learner may add their name to the waiting list (sorted in by created_at/ first-come-first-serve) -->
+    <!-- !  add views, routes, methods of one class by id with all registrants -->
+    <!-- !  if results: statement in model after get_all_registrants query to prevent crash when no students yet registered -->
+    <!-- !  admin privileges for class rosters = view, create, edit, delete registrations of students -->
+    <!-- !  teacher privileges for class rosters = view, registrations of students -->
+    <!-- !  student privileges for class rosters = none -->
+    <!-- !  each student starts with 3 tokens for the year and they may spend them on any three classes, not repeating the same course more than twice -->
+    <!-- !  apis to implement: geolocation to determine where the closest courses are taught; speech-to-text and text-to-speech apis for accessibility; translation api (spanish; chinese; cantonese); bob ross api? -->
+    <!-- !  students can create portfolios of uploaded images (used for social network, able to share publicly, used for juried exhibitions and exhibition selection, virtual exhibitions) -->
+    <!-- !  scroling marquis on reg/login page: Join our creative community. FREE arts courses for Senior Citizens. Never stop learning. -->
 
 <body>
 
@@ -91,13 +97,37 @@
                 <input class="border_bottom_white" type="text" name="last_name">
             </div>
 
-            <div>
+            <!-- <div>
                 <label for="user_type">are you a student, teacher or admin? Please select one: </label>
                 <select name="user_type" id="user_type">
                     <option value="student">student</option>
                     <option value="teacher">teacher</option>
                     <option value="admin">admin</option>
                 </select>
+            </div> -->
+
+            <div>
+                <h3>you are signing up as a</h3>
+                <section class="flx row wrap user-type-radios mt">
+                    <div>
+                        <input type="radio" id="student" name="user_type" value="student" checked>
+                        <label for="student">
+                          <h3>student</h3>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="teacher" name="user_type" value="teacher">
+                        <label for="teacher">
+                          <h3>teacher</h3>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="admin" name="user_type" value="admin">
+                        <label for="admin">
+                          <h3>admin</h3>
+                        </label>
+                    </div>
+                </section>
             </div>
 
             <div>
