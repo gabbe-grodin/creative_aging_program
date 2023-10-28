@@ -8,7 +8,7 @@ temp/
 .env
 
 # ignore uploads
-**/uploads/
+**/uploads
 
 # ignore alternate schemas, leave active schema in root folder
 **/schemas
