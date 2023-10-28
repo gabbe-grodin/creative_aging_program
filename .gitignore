@@ -7,8 +7,8 @@ temp/
 # ignore dotenv
 .env
 
-# ignore uploads
-**/uploads
+# ignore whats inside of uploads but not the folder itself
+**/uploads/
 
 # ignore alternate schemas, leave active schema in root folder
 **/schemas
