@@ -29,7 +29,7 @@ class Course:
 
     @classmethod
     def create_course(cls, form_data):
-        # print("------FORM DATA-----", form_data)
+        print("------FORM DATA-----", form_data)
         # if reference to the user is made here, a hidden input is not necessary in submit form. 
         query = """INSERT INTO courses (title, description, price, requirements, course_img, start_date, end_date, start_time_hour, start_time_min, start_time_ampm, end_time_hour, end_time_min, end_time_ampm, user_id)
             VALUES (%(title)s, %(description)s, %(price)s, %(requirements)s, %(course_img)s, %(start_date)s, %(end_date)s, %(start_time_hour)s, %(start_time_min)s, %(start_time_ampm)s, %(end_time_hour)s, %(end_time_min)s, %(end_time_ampm)s, %(user_id)s)"""

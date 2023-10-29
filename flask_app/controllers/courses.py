@@ -33,9 +33,13 @@ def allowed_file(filename):
 def create_course():
     if not Course.validate_create_course_form(request.form):
         return redirect('/course/new')
-    #! code from flask docs for uploading file: 
     if request.method == 'POST':
         print('=======   request.files:',request.files)
+        requirements = request.form.getlist("requirements")
+        requirements_string = '.'.join(requirements)
+        print('=======   requirements_string:',requirements_string)
+    #! code from flask docs for uploading file: 
+    if request.method == 'POST':
         # check if the post request has the file part
         if 'course_img' not in request.files:
             flash('No file part')
@@ -53,11 +57,16 @@ def create_course():
             # return redirect(url_for('download_file', name=filename))
             #! end block from flask documentation
     session["user_id"] = request.form['logged_in_user_id']
-
+    # requirements = []
+    requirements = request.form.getlist('requirements')
+    # if "No experience necessary." in request.form:
+    #     requirements.append("No experience necessary.")
+    # if "Basic knowledge of the subject." in request.form:
+    #     requirements.append("Basic knowledge of the subject.")
     data = {"title": request.form['title'],
             "description": request.form['description'],
             "price": request.form['price'],
-            "requirements": request.form['requirements'],
+            "requirements": requirements_string,
             "course_img": filename,
             "start_date": request.form['start_date'],
             "end_date": request.form['end_date'],
@@ -68,6 +77,7 @@ def create_course():
             "end_time_min": request.form['end_time_min'],
             "end_time_ampm": request.form['end_time_ampm'],
             "user_id": session['logged_in_user_id']}
+    print("rrrrrrreeeeeeeqqquirements::::::",requirements)
     # data2 = request.form.copy()
     # data2['logged_in_user_id'] = session['logged_in_user_id']
     # data2["image_url"] =  request.form["course_img"]

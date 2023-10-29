@@ -40,29 +40,36 @@
 
     <main>
 
-        <div class="card flx col gap-1">
+        <div class="card flx col gap-2">
             <h2 class="italic"><span>{{ course.title }}</span></h2>
             <span>
                 <p>with {{ course.creator.first_name }} {{ course.creator.last_name }}</p>
             </span>
-            <section class="flx row space-between gap-2 mt mb">
-                <div class="flx col gap-1 flx-2">
+            <section class="flx row space-between gap-3 mt mb">
+                <div class="flx col gap-2 flx-2">
 
                     <p>on {{ course.start_date.strftime("%A") }}s, from {{ course.start_time_hour }}:{{ course.start_time_min }} {{ course.start_time_ampm }} to {{ course.end_time_hour }}:{{ course.end_time_min }} {{ course.end_time_ampm }}</p>
 
                     <p>{{ course.start_date.strftime("%B %d, %Y") }} - {{ course.end_date.strftime("%B %d, %Y") }}</p>
 
-                    <p>{{ course.requirements }}</p>
+                    <p>Requirements for this course:<br>{{ course.requirements }}</p>
 
-                    <p>${{ course.price }}</p>
+                    <div class="flx row gap-1">
+                        <p>Cost:</p>
+                        {% if course.price == 0 %}
+                        <p>FREE</p>
+                        {% else %}
+                        <p>${{ course.price }}</p>
+                        {% endif %}
+                    </div>
+
                 </div>
 
-                
             <!-- check if this is the creator of this course. if so show: -->
             {% if session["user_type"] != 'student' %}
                 <div class="flx col gap-1 flx-1">
                         <a href="/course/edit/{{ course.id }}" class="btn">edit this course</a>
-                    
+
                         <a href="/delete/{{ course.id }}" class="btn">delete this course</a>
 
                 </div>

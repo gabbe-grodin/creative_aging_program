@@ -40,7 +40,7 @@
 
         <!-- FORM START -->
 
-        <form class="card" action="/course/create" method="post" id="add" enctype=multipart/form-data>
+        <form class="card flx col gap-3" action="/course/create" method="post" id="add" enctype=multipart/form-data>
 
             <h2 class="mt mb">add a new course:</h2>
 
@@ -58,46 +58,106 @@
 
             <input type="hidden" name="logged_in_user_id" value="{{ session['logged_in_user_id'] }}">
 
-            <div class="border_bottom_white mb">
-                <label for="title">title: </label>
-                <input type="text" name="title">
+            <div class="flx row">
+                <label class="flx-2" for="title">title: </label>
+                <input class="flx-5 form-input-border" type="text" name="title">
             </div>
 
-            <div class="border_bottom_white mb">
-                <label for="description">description: </label>
-                <textarea class="mb mt" type="text" name="description" rows="4"></textarea>
+            <div class="flx row">
+                <label class="flx-2" for="description">description: </label>
+                <textarea class="flx-5 form-input-border" type="text" name="description" rows="4"></textarea>
             </div>
 
-            <div class="border_bottom_white mb">
-                <label for="price">price: </label>
-                $<input type="number" name="price">
+            <!-- checkboxes -->
+
+            <div class="flx row">
+                <section class="flx-2">
+                    <label>requirements:</label>
+                </section>
+
+                <section class="flx-5">
+                    <label for="requirement-1" class="form-control">
+                        <input type="checkbox"
+                            id="requirement-1"  
+                            name="requirements" 
+                            value="No experience necessary."
+                            unchecked />
+                        No experience necessary.
+                    </label>
+
+                    <label for="requirement-2" class="form-control">
+                        <input type="checkbox" 
+                            id="requirement-2" 
+                            name="requirements" 
+                            value="Basic knowledge of the subject."
+                            unchecked />
+                        Basic knowledge of the subject.
+                    </label>
+
+                    <label for="requirement-3" class="form-control">
+                        <input type="checkbox" 
+                            id="requirement-3" 
+                            name="requirements" 
+                            value="Must have a smartphone."
+                            unchecked />
+                        Must have a smartphone.
+                    </label>
+
+                    <label for="requirement-4" class="form-control">
+                        <input type="checkbox" 
+                            id="requirement-4" 
+                            name="requirements" 
+                            value="Must be at least 60 years old."
+                            unchecked />
+                        Must be at least 60 years old.
+                    </label>
+
+                    <label for="requirement-5" class="form-control">
+                        <input type="checkbox" 
+                            id="requirement-5" 
+                            name="requirements" 
+                            value="Bring your own supplies."
+                            unchecked />
+                        Bring your own supplies.
+                    </label>
+                </section>
             </div>
 
-            <div class="border_bottom_white mb">
-                <label for="requirements">requirements:</label>
-                <select name="requirements" id="requirements">
+
+            <!-- <div class="flx row">
+                <label class="flx-2" for="requirements">requirements:</label>
+                <select class="flx-5" name="requirements" id="requirements">
                     <option value="No experience necessary.">no experience necessary</option>
                     <option value="basic understanding of the subject">basic understanding of the subject</option>
                     <option value="bring your own supplies">bring your own supplies</option>
                 </select>
+            </div> -->
+
+            <div class="flx row space-between">
+                <div class="self-center">
+                    <label for="price">price: $</label>
+                    <input class="form-input-border" id="price" type="number" name="price">
+                </div>
+
+                <div class="self-center">
+                    <label for="actual-btn" id="stylable-uploader" class="btn">upload an image for your course page</label>
+                    <input type="file" name="course_img" id="actual-btn" hidden>
+                </div>
             </div>
 
-            <div class="border_bottom_white mb">
-                <label for="course_img">upload an image for your course's page:</label>
-                <input type="file" name="course_img">
+
+            <div class="flx row gap-3 align-center">
+                <label class="flx-1" for="start_date">dates: </label>
+                <p class="">from</p>
+                <input class="flx-1" type="date" name="start_date" id="start-date">
+                <p class="">to</p>
+                <input class="flx-1" type="date" name="end_date" id="end-date">
             </div>
 
-            <div class="flx row mt">
-                <label class="flx-2" for="start_date">dates: </label>
-                <input class="flx-4" type="date" name="start_date">
-
-                <input class="flx-4" type="date" name="end_date">
-            </div>
-
-            <div class="flx row mt mb">
-                <div class="flx row">
-                    <label class="flx-2" for="start_time">hours: </label>
-                    <span>from</span>
+            <div class="flx row space-between align-center">
+                <!-- <div class="flx row"> -->
+                    <label for="start_time">hours: </label>
+                    <p>from</p>
                     <div class="time_picker">
                         <select name="start_time_hour" id="start_time_hour">
                             <option value="01">01</option>
@@ -112,8 +172,7 @@
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
-                        </select>
-                        :
+                        </select><span>:</span>
                         <select name="start_time_min" id="start_time_min">
                             <option value="00">00</option>
                             <option value="15">15</option>
@@ -125,12 +184,12 @@
                             <option value="PM">PM</option>
                         </select>
                     </div>
-                </div>
-                <span>
+                <!-- </div> -->
+                <p>
                     to
-                </span>
-                <div class="flx row">
-                    <label class="flx-2" for="end_time"></label>
+                </p>
+                <!-- <div class="flx row"> -->
+                    <label for="end_time"></label>
                     <div class="time_picker">
                         <select name="end_time_hour" id="end_time_hour">
                             <option value="01">01</option>
@@ -145,8 +204,7 @@
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
-                        </select>
-                        :
+                        </select><span>:</span>
                         <select name="end_time_min" id="end_time_min">
                             <option value="00">00</option>
                             <option value="15">15</option>
@@ -159,7 +217,7 @@
                         </select>
                     </div>
 
-                </div>
+                <!-- </div> -->
             </div>
 
 

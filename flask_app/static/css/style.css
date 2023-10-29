@@ -128,7 +128,10 @@ form label{
 }
 .card{
     line-height: 3rem;
-    letter-spacing: -.05rem;
+    letter-spacing: normal;
+}
+.btn{
+    
 }
 h2{
     letter-spacing: .36rem;
@@ -221,13 +224,13 @@ p{
     font-family: 'IBM Plex Mono', monospace, sans-serif;
 }
 .anybody {
-  font-family: 'Anybody', cursive;
+    font-family: 'Anybody', cursive;
 }
 .mirza {
-  font-family: 'Mirza', cursive;
+    font-family: 'Mirza', cursive;
 }
 .silkscreen {
-  font-family: 'Silkscreen', cursive;
+    font-family: 'Silkscreen', cursive;
 }
 .italic{
     font-style: italic;
@@ -318,19 +321,19 @@ form div input:active,
 form div input:focus,
 form div input:focus-visible,
 form div input:autofill {
-    background-color: inherit;
+    background-color: white;
     outline: none;
 }
 textarea{
-    background-color: inherit;
+    background-color: white;
 }
 textarea:focus,
 textarea:active{
-    background-color: inherit;
+    background-color: white;
     outline: none;
 }
 select {
-    background-color: inherit;
+    background-color: white;
 }
 .alert{
     background-color: #9b0000;
@@ -341,6 +344,9 @@ select {
 /*******************************************/
 /*! BORDERS
 /*******************************************/
+form{
+    
+}
 form,
 .card {
     border-radius: 2em;
@@ -349,9 +355,13 @@ form,
 input,
 textarea {
     border: none;
+    border-radius: 10px;
 }
 .border_bottom_white {
     border-bottom: 1px solid #0c4303;
+}
+.form-input-border{
+    border: 1px solid #0c4303;
 }
 button,
 .btn {
@@ -422,6 +432,9 @@ form{
     /* gap:2em; */
     /* padding: 55px; */
 }
+input{
+    height: 40px;
+}
 #reg {
     width: 48%;
 }
@@ -434,7 +447,7 @@ textarea{
     /* padding: 25px; */
 }
 select{
-    padding: 10px;
+    /* padding: 10px; */
 }
 section > div {
     flex: 1;
@@ -499,6 +512,9 @@ input[type="radio"]:checked + label {
     width: 48%;
     height: 360px;
 }
+.grid{
+    display: grid;
+}
 .flx {
     display: flex;
 }
@@ -529,6 +545,9 @@ input[type="radio"]:checked + label {
 .space-around{
     justify-content: space-around;
 }
+.vert-align-middle{
+    vertical-align: middle;
+}
 .vert-align-base{
     vertical-align: baseline;
 }
@@ -538,11 +557,20 @@ input[type="radio"]:checked + label {
 .vert-align-top{
     vertical-align:top;
 }
+.align-center{
+    align-items: center;
+}
 .clear-left {
     clear: left;
 }
 .clear-right {
     clear: right;
+}
+.self-center{
+    align-self: center;
+}
+.self-base{
+    align-self: baseline;
 }
 .mt {
     margin-top: 20px;
@@ -573,6 +601,9 @@ input[type="radio"]:checked + label {
 }
 .flx-4 {
     flex: 4;
+}
+.flx-5 {
+    flex: 5;
 }
 .width-25-percent{
     width: 25%;
@@ -627,15 +658,26 @@ button,
 }
 #add input,
 #edit input{
-    height: 25px;
-    width: 690px;
+    /* height: 25px; */
+    /* width: 690px; */
+}
+#stylable-uploader{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
 }
 .time_picker select{
     /* margin: 20px; */
-    padding: 10px;
+    /* padding: 10px; */
 }
 .trashcan-sketch{
     width: 50px;
+}
+#start-date,
+#end-date{
+padding: 10px;
+font-size: larger;
+border: 1px solid #0c4303;
 }
 /*******************************************/
 /*! CARD
@@ -656,14 +698,12 @@ button,
 }
 .card{
     word-wrap: break-word;
-    word-break: break-all;
     -webkit-hyphens:auto;
     -ms-hyphens: auto;
     hyphens: auto;
 }
 .card-small{
     word-wrap: break-word;
-    word-break: break-word;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
@@ -678,12 +718,9 @@ section{
     /* text-align: center; */
 }
 /*******************************************/
-/*! MY FORMS
+/*! FORM COMPONENTS
 /*******************************************/
 
-form{
-    box-shadow: 4px 4px rgb(11, 0, 11);
-}
 input,
 textarea {
     /* vertical-align: bottom; */
@@ -695,6 +732,58 @@ textarea {
 textarea:focus,
 input:focus {
     outline: none;
+}
+#price{
+    width: 100px;
+}
+/*******************************************/
+/*! FORM CHECKBOXES
+/*******************************************/
+.form-control {
+    font-size: 2rem;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 2em auto;
+    gap: 0.5em;
+}
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: #fff;
+    /* Not removed via appearance */
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+.form-control + .form-control {
+    margin-top: 1em;
+}
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    background-color: black;
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
 }
 /*******************************************/
 /*! MY TABLES

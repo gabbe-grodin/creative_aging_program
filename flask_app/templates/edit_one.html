@@ -77,9 +77,12 @@
                 <div class="border_bottom_white mb">
                     <label for="requirements">requirements:</label>
                     <select name="requirements" id="requirements">
-                        <option value="No experience necessary.">no experience necessary</option>
-                        <option value="basic understanding of the subject">basic understanding of the subject</option>
-                        <option value="bring your own supplies">bring your own supplies</option>
+
+                            <option value="No experience necessary." {% if true %} selected {% endif %}>no experience necessary</option>
+                            <option value="basic understanding of the subject" {% if true %} selected {% endif %}>basic understanding of the subject</option>
+                            <option value="bring your own supplies" {% if true %} selected {% endif %}>bring your own supplies</option>
+
+
                     </select>
                 </div>
     
