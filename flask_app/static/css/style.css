@@ -204,9 +204,6 @@ p{
     bottom: 0px;
     left: 0px;
 }
-.card-small:hover{
-    background-color: rgb(199, 255, 142);
-}
 
 /*******************************************/
 /*! ALIGN
@@ -281,6 +278,9 @@ a {
 a:hover {
     color: inherit;
 }
+.card-small:hover{
+    color: #b2d8ff;
+}
 .alert{
     color: #ffffff;
     text-transform: uppercase;
@@ -347,6 +347,9 @@ select {
 .user-type-radios{
     background-color: pink;
 }
+.card-small:hover{
+    background-color: rgb(106, 160, 51);
+}
 /*******************************************/
 /*! BORDERS
 /*******************************************/
@@ -400,6 +403,14 @@ select{
 .user-type-radios::after{
     border-radius: 10px;
     /* border: 1px solid #0c4303; */
+}
+.card{
+    box-shadow: 3px 3px rgb(11, 0, 11);
+}
+.img-card-small{
+    /* border-right: 3px solid black;
+    border-bottom: 3px solid black; */
+    box-shadow: -3px -3px #0b000b;
 }
 /*******************************************/
 /*! LAYOUT
@@ -694,13 +705,6 @@ padding: 10px;
 font-size: larger;
 border: 1px solid #0c4303;
 }
-/*******************************************/
-/*! CARD
-/*******************************************/
-.card{
-    box-shadow: 5px 5px rgb(11, 0, 11);
-}
-
 /*******************************************/
 /*! TEXT FORMATTING
 /*******************************************/
