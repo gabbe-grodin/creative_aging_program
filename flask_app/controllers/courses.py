@@ -37,7 +37,6 @@ def create_course():
     if request.method == 'POST':
         requirements = request.form.getlist("requirements")
         requirements_string = '. '.join(requirements)
-        print('=======   requirements_string:',requirements_string)
     #! code from flask docs for uploading file: 
     if request.method == 'POST':
         # check if the post request has the file part
@@ -45,7 +44,6 @@ def create_course():
             flash('No file part')
             return redirect(request.url)
         course_img = request.files['course_img']
-        print("========     course_img is now equal to ",course_img)
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if course_img.filename == '':
@@ -54,9 +52,7 @@ def create_course():
         if course_img and allowed_file(course_img.filename):
             filename = secure_filename(course_img.filename)
             course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # return redirect(url_for('download_file', name=filename))
             #! end block from flask documentation
-    # is below supposed to be session["logged_in_user_id"] = request.form['logged_in_user_id'] to correspond w hidden input in add_one, and if this is different than the edit form...?
     session["user_id"] = request.form['logged_in_user_id']
     data = {"title": request.form['title'],
             "description": request.form['description'],
@@ -95,7 +91,7 @@ def course_edit(id):
     print("........data2:",data2['requirements'])
     requirements = request.form.get("requirements")
     # data["requirements"] = '.'.split()
-    print("REQUIREMENTS:::::::", requirements)
+    # print("REQUIREMENTS:::::::", requirements)
     course = Course.get_one_course_by_id_with_creator(data)
     # split requirements string:
     return render_template('edit_one.html', course = course)
@@ -109,12 +105,29 @@ def course_update():
     if request.method == 'POST':
         requirements = request.form.getlist("requirements")
         requirements_string = '. '.join(requirements)
+    #! code from flask docs for uploading file: 
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'course_img' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        course_img = request.files['course_img']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if course_img.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if course_img and allowed_file(course_img.filename):
+            filename = secure_filename(course_img.filename)
+            course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            #! end block from flask documentation
+    # session["user_id"] = request.form['logged_in_user_id']
     data = {"id":request.form['id'],
             "title": request.form['title'],
             "description": request.form['description'],
             "price": request.form['price'],
             "requirements": requirements_string,
-            "course_img": request.files['course_img'],
+            "course_img": filename,
             "start_date": request.form['start_date'],
             "end_date": request.form['end_date'],
             "start_time_hour": request.form['start_time_hour'],
