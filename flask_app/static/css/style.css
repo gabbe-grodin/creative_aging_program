@@ -63,7 +63,7 @@ h1 {
     font-size: 2.5rem;
 }
 h2 {
-    font-size: 2.18rem;
+    font-size: 2rem;
 }
 header h2{
     font-size: 3.8rem;
@@ -131,7 +131,7 @@ form label{
     letter-spacing: normal;
 }
 .btn{
-    
+
 }
 h2{
     letter-spacing: .36rem;
@@ -195,8 +195,7 @@ p{
 }
 .card-small {
     position: relative;
-  }
-  
+}
 .card-small a::before {
     content: "";
     position: absolute;
@@ -204,7 +203,10 @@ p{
     right: 0px;
     bottom: 0px;
     left: 0px;
-  }
+}
+.card-small:hover{
+    background-color: rgb(199, 255, 142);
+}
 
 /*******************************************/
 /*! ALIGN
@@ -310,11 +312,15 @@ header{
 }
 form,
 .card{
-    background-color: rgba(255, 228, 232, 0.751);
+    background-color: rgba(255, 228, 232, 0.86);
 }
 button,
 .btn{
-    background-color: rgb(196, 255, 204);
+    background-color: rgb(250, 255, 196);
+}
+button:hover,
+.btn:hover{
+    background-color: rgb(195, 255, 175);
 }
 form div input,
 form div input:active,
@@ -357,7 +363,7 @@ textarea {
     border: none;
     border-radius: 10px;
 }
-.border_bottom_white {
+.border-bottom {
     border-bottom: 1px solid #0c4303;
 }
 .form-input-border{
@@ -413,7 +419,10 @@ header {
     /* align-self: flex-end; */
 }
 .img-card-small{
-    /* width: 250px; */
+    /* max-height:initial; */
+    width: 100%;
+    max-height: 70%;
+    object-fit: cover;
 }
 .class-pic{
 
@@ -434,6 +443,7 @@ form{
 }
 input{
     height: 40px;
+    padding-left: 15px;
 }
 #reg {
     width: 48%;
@@ -444,6 +454,7 @@ input{
 textarea{
     height: inherit;
     width: 100%;
+    padding-left: 15px;
     /* padding: 25px; */
 }
 select{
@@ -469,16 +480,19 @@ input[type="radio"] {
     display: block;
     height: 100%;
     text-align: center;
-    /* justify-self: end; */
+}
+.user-type-radios{
+    align-items: center;
 }
 label h3{
-    
+    align-self: center;
 }
 input[type="radio"]:checked + label {
     border-radius: 10px;
     background: hsla(150, 75%, 50%, 1);
     color: hsla(215, 0%, 100%, 1);
     box-shadow: 0px 0px 20px hsla(150, 100%, 50%, 0.75);
+    align-self: center;
     &::after {
         color:  #0c4303;
         font-family: FontAwesome;
@@ -503,6 +517,7 @@ input[type="radio"]:checked + label {
     color: white;
     background: red;
     border-color: red;
+    align-self: center;
   }
 .card{
     padding: 50px;
@@ -754,6 +769,7 @@ input[type="checkbox"] {
     background-color: #fff;
     /* Not removed via appearance */
     margin: 0;
+    padding-left: 0;
     font: inherit;
     color: currentColor;
     width: 1.15em;

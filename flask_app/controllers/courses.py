@@ -33,10 +33,10 @@ def allowed_file(filename):
 def create_course():
     if not Course.validate_create_course_form(request.form):
         return redirect('/course/new')
+    # this concatenates requests list into a string:
     if request.method == 'POST':
-        print('=======   request.files:',request.files)
         requirements = request.form.getlist("requirements")
-        requirements_string = '.'.join(requirements)
+        requirements_string = '. '.join(requirements)
         print('=======   requirements_string:',requirements_string)
     #! code from flask docs for uploading file: 
     if request.method == 'POST':
@@ -56,13 +56,8 @@ def create_course():
             course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return redirect(url_for('download_file', name=filename))
             #! end block from flask documentation
+    # is below supposed to be session["logged_in_user_id"] = request.form['logged_in_user_id'] to correspond w hidden input in add_one, and if this is different than the edit form...?
     session["user_id"] = request.form['logged_in_user_id']
-    # requirements = []
-    requirements = request.form.getlist('requirements')
-    # if "No experience necessary." in request.form:
-    #     requirements.append("No experience necessary.")
-    # if "Basic knowledge of the subject." in request.form:
-    #     requirements.append("Basic knowledge of the subject.")
     data = {"title": request.form['title'],
             "description": request.form['description'],
             "price": request.form['price'],
@@ -77,20 +72,72 @@ def create_course():
             "end_time_min": request.form['end_time_min'],
             "end_time_ampm": request.form['end_time_ampm'],
             "user_id": session['logged_in_user_id']}
-    print("rrrrrrreeeeeeeqqquirements::::::",requirements)
     # data2 = request.form.copy()
     # data2['logged_in_user_id'] = session['logged_in_user_id']
-    # data2["image_url"] =  request.form["course_img"]
-    # print("data2 data2 data2 data2 at course_img..........",data2["course_img"])
-    # filename = data2["course_img"]
-    # print(("****** data2 ========== ",data2))
-    # print("****** filename ========== ",filename)
-    # print("****** session ========== ",session)
+    # data2["course_img"] = filename
+    # data2["requirements"] = requirements_string
     Course.create_course(data)
     return redirect(f"/user/{session['logged_in_user_id']}")
 
+#! view one
+@app.route('/course/<int:id>')
+def view_one_course_w_creator(id):
+    data = {"id":id}
+    course = Course.get_one_course_by_id_with_creator(data)
+    return render_template('view_one.html', course = course)
 
+#! edit course form
+@app.route('/course/edit/<int:id>')
+def course_edit(id):
+    data = {"id":id}
+    data2 = request.form.copy()
+    data2['requirements'] = request.form.getlist('requirements')
+    print("........data2:",data2['requirements'])
+    requirements = request.form.get("requirements")
+    # data["requirements"] = '.'.split()
+    print("REQUIREMENTS:::::::", requirements)
+    course = Course.get_one_course_by_id_with_creator(data)
+    # split requirements string:
+    return render_template('edit_one.html', course = course)
 
+#! update course post
+@app.route('/course/update', methods=['POST'])
+def course_update():
+    # for keys in request.files.keys():
+    #     print("****************keys", keys)
+    # concatenate requirements before saving to db:
+    if request.method == 'POST':
+        requirements = request.form.getlist("requirements")
+        requirements_string = '. '.join(requirements)
+    data = {"id":request.form['id'],
+            "title": request.form['title'],
+            "description": request.form['description'],
+            "price": request.form['price'],
+            "requirements": requirements_string,
+            "course_img": request.files['course_img'],
+            "start_date": request.form['start_date'],
+            "end_date": request.form['end_date'],
+            "start_time_hour": request.form['start_time_hour'],
+            "start_time_min": request.form['start_time_min'],
+            "start_time_ampm": request.form['start_time_ampm'],
+            "end_time_hour": request.form['end_time_hour'],
+            "end_time_min": request.form['end_time_min'],
+            "end_time_ampm": request.form['end_time_ampm']}
+    if not Course.validate_edit_course_form(data):
+        return redirect(f'/course/edit/{request.form["id"]}')
+    print("before calling update method!!!!!!!!!!!!!!!!!!!")
+    Course.update_course_by_id(data)
+    print("after calling update method!!!!!!!!!!!!!!!!!!!")
+    return redirect(f'/course/{request.form["id"]}')
+
+#! delete
+@app.route('/delete/<int:id>')
+def delete(id):
+    data = {"id":id}
+    Course.delete_this_course_by_id(data)
+    return redirect(f'/user/{session["logged_in_user_id"]}')
+
+#! upload file (move to diff/new controller?)
 # @app.route('/', methods=['GET', 'POST'])
 # def upload_file():
 #     if request.method == 'POST':
@@ -109,34 +156,3 @@ def create_course():
 #             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 #             return redirect(url_for('download_file', name=filename))
 #     return
-
-
-#! view one
-@app.route('/course/<int:id>')
-def view_one_course_w_creator(id):
-    data = {"id":id}
-    course = Course.get_one_course_by_id_with_creator(data)
-    return render_template('view_one.html', course = course)
-
-#! edit course form
-@app.route('/course/edit/<int:id>')
-def course_edit(id):
-    data = {"id":id}
-    course = Course.get_one_course_by_id_with_creator(data)
-    return render_template('edit_one.html', course = course)
-
-#! update course post
-@app.route('/course/update', methods=['POST'])
-def course_update():
-    data = {"id":id}
-    if not Course.validate_edit_course_form(request.form):
-        return redirect(f'/course/edit/{request.form["id"]}')
-    Course.update_course_by_id(request.form)
-    return redirect(f'/course/{request.form["id"]}')
-
-#! delete
-@app.route('/delete/<int:id>')
-def delete(id):
-    data = {"id":id}
-    Course.delete_this_course_by_id(data)
-    return redirect(f'/user/{session["logged_in_user_id"]}')

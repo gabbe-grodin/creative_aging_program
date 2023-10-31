@@ -39,9 +39,9 @@
 
 
 
-            <!-- FORM START -->
+            <!-- EDIT COURSE FORM START -->
 
-            <form action="/course/update" method="post" class="card" id="edit" enctype=multipart/form-data>
+            <form action="/course/update" method="post" class="card flx col gap-3" id="edit" enctype=multipart/form-data>
 
                 <h2 class="mt mb">edit your course:</h2>
 
@@ -57,53 +57,146 @@
                     {% endif %}
                 {% endwith %}
 
+                <!-- the following hidden course id input used to redirect to course's view one -->
                 <input type="hidden" name="id" value="{{ course.id }}">
 
-                <div class="border_bottom_white mb">
-                    <label for="title">title: </label>
-                    <input type="text" name="title" value="{{ course.title }}">
-                </div>
-    
-                <div class="border_bottom_white mb">
-                    <label for="description">description: </label>
-                    <textarea class="mb mt" type="text" name="description" rows="4" value="{{ course.description }}">{{ course.description }}</textarea>
-                </div>
-    
-                <div class="border_bottom_white mb">
-                    <label for="price">price: </label>
-                    $<input type="number" name="price" value="{{ course.price }}">
-                </div>
-    
-                <div class="border_bottom_white mb">
-                    <label for="requirements">requirements:</label>
-                    <select name="requirements" id="requirements">
-
-                            <option value="No experience necessary." {% if true %} selected {% endif %}>no experience necessary</option>
-                            <option value="basic understanding of the subject" {% if true %} selected {% endif %}>basic understanding of the subject</option>
-                            <option value="bring your own supplies" {% if true %} selected {% endif %}>bring your own supplies</option>
-
-
-                    </select>
-                </div>
-    
-                <div class="border_bottom_white mb">
-                    <label for="course_img">upload a different image for your course page:</label>
-                    <input type="file" name="course_img" value="{{ course.course_img }}">
+                <div class="flx row">
+                    <label class="flx-2" for="title">title: </label>
+                    <input class="flx-5 border-bottom" type="text" name="title" value="{{ course.title }}">
                 </div>
 
-                <div class="flx row mt">
-                    <label class="flx-2" for="start_date">starts: </label>
-                    <input class="flx-4" type="date" name="start_date"  value="{{ course.start_date }}">
+                <div class="flx row">
+                    <label class="flx-2" for="description">description: </label>
+                    <textarea class="flx-5 border-bottom" type="text" name="description" rows="4" value="{{ course.description }}">{{ course.description }}</textarea>
                 </div>
 
-                <div class="flx row mt">
-                    <label class="flx-2" for="end_date">ends: </label>
-                    <input class="flx-4" type="date" name="end_date" value="{{ course.end_date }}">
+                <!-- checkboxes -->
+
+                <div class="flx row">
+                    <section class="flx-2">
+                        <label>requirements:</label>
+                    </section>
+
+                    <section class="flx-5">
+                        <label for="requirement-1" class="form-control">
+                            {% if "experience" in course.requirements %}
+                            <input type="checkbox"
+                                id="requirement-1"  
+                                name="requirements" 
+                                value="No experience necessary" 
+                                checked/>
+                            {% else %}
+                            <input type="checkbox"
+                                id="requirement-1"  
+                                name="requirements" 
+                                value="No experience necessary" 
+                                unchecked/>
+                            {% endif %}
+                            No experience necessary.
+                        </label>
+
+                        <label for="requirement-2" class="form-control">
+                            {% if "knowledge" in course.requirements %}
+                            <input type="checkbox" 
+                                id="requirement-2" 
+                                name="requirements" 
+                                value="Basic knowledge of the subject"
+                                checked />
+                            {% else %}
+                            <input type="checkbox" 
+                                id="requirement-2" 
+                                name="requirements" 
+                                value="Basic knowledge of the subject"
+                                unchecked />
+                            {% endif %}
+                            Basic knowledge of the subject.
+                        </label>
+
+                        <label for="requirement-3" class="form-control">
+                            {% if "smartphone" in course.requirements %}
+                            <input type="checkbox" 
+                                id="requirement-3" 
+                                name="requirements" 
+                                value="Must have a smartphone"
+                                checked />
+                            {% else %}
+                            <input type="checkbox" 
+                                id="requirement-3" 
+                                name="requirements" 
+                                value="Must have a smartphone"
+                                unchecked />
+                            {% endif %}
+                            Must have a smartphone.
+                        </label>
+
+                        <label for="requirement-4" class="form-control">
+                            {% if "60" in course.requirements %}
+                            <input type="checkbox" 
+                                id="requirement-4" 
+                                name="requirements" 
+                                value="Must be at least 60 years old"
+                                checked />
+                            {% else %}
+                            <input type="checkbox" 
+                                id="requirement-4" 
+                                name="requirements" 
+                                value="Must be at least 60 years old"
+                                unchecked />
+                            {% endif %}
+                            Must be at least 60 years old.
+                        </label>
+
+                        <label for="requirement-5" class="form-control">
+                            {% if "supplies" in course.requirements %}
+                            <input type="checkbox" 
+                                id="requirement-5" 
+                                name="requirements" 
+                                value="Bring your own supplies"
+                                checked />
+                            {% else %}
+                            <input type="checkbox" 
+                                id="requirement-5" 
+                                name="requirements" 
+                                value="Bring your own supplies"
+                                unchecked />
+                            {% endif %}
+                            Bring your own supplies.
+                        </label>
+                    </section>
                 </div>
 
-                <div class="flx row mt mb">
+                <!-- end checkboxes -->
+
+                <div class="flx row space-between">
+                    <div class="self-center">
+                        <label for="price">price: $</label>
+                        <input class="border-bottom" id="price" type="number" name="price" value="{{ course.price }}">
+                    </div>
+
+                    <div class="self-center">
+                        <p> photo for course page:</p>
+                    </div>
+
+                    <div class="self-center">
+                        <label for="actual-btn" id="stylable-uploader" class="btn">photo upload</label>
+                        <input type="file" name="course_img" id="actual-btn" value="{{ course.course_img }}" hidden>
+                    </div>
+                </div>
+
+                <!-- datepickers -->
+
+                <div class="flx row space-between align-center">
+                    <label for="start_date">start date: </label>
+                    <input class="border-bottom" type="date" name="start_date" id="start-date" value="{{ course.start_date }}">
+                    <label for="end_date">end date:</label>
+                    <input class="border-bottom" type="date" name="end_date" id="end-date" value="{{ course.end_date }}">
+                </div>
+
+                <!-- timepickers -->
+
+                <div class="flx row space-between align-center">
+                    <label for="start_time">start time: </label>
                     <div class="flx row">
-                        <label class="flx-2" for="start_time">hours: </label>
                         <select name="start_time_hour" id="start_time_hour">
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -117,8 +210,7 @@
                             <option value="10">10</option>
                             <option value="11">11</option>
                             <option value="12">12</option>
-                        </select>
-                        :
+                        </select><span>:</span>                        
                         <select name="start_time_min" id="start_time_min">
                             <option value="00">00</option>
                             <option value="15">15</option>
@@ -130,8 +222,8 @@
                             <option value="PM">PM</option>
                         </select>
                     </div>
+                    <label for="end_time">end time:</label>
                     <div class="flx row">
-                        <label class="flx-2" for="end_time"></label>
                         <select name="end_time_hour" id="end_time_hour">
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -146,7 +238,7 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                         </select>
-                        :
+                        <span>:</span>
                         <select name="end_time_min" id="end_time_min">
                             <option value="00">00</option>
                             <option value="15">15</option>

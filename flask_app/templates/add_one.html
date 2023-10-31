@@ -38,9 +38,9 @@
 
 
 
-        <!-- FORM START -->
+        <!-- ADD COURSE FORM START -->
 
-        <form class="card flx col gap-3" action="/course/create" method="post" id="add" enctype=multipart/form-data>
+        <form action="/course/create" method="post" class="card flx col gap-3" id="add" enctype=multipart/form-data>
 
             <h2 class="mt mb">add a new course:</h2>
 
@@ -55,17 +55,19 @@
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-
-            <input type="hidden" name="logged_in_user_id" value="{{ session['logged_in_user_id'] }}">
+            
+            <!-- should below value be session['user_id']? -->
+            <!-- <input type="hidden" name="logged_in_user_id" value="{{ session['logged_in_user_id'] }}"> -->
+            <input type="text" name="logged_in_user_id" value="{{ session['logged_in_user_id'] }}">
 
             <div class="flx row">
                 <label class="flx-2" for="title">title: </label>
-                <input class="flx-5 form-input-border" type="text" name="title">
+                <input class="flx-5 border-bottom" type="text" name="title">
             </div>
 
             <div class="flx row">
                 <label class="flx-2" for="description">description: </label>
-                <textarea class="flx-5 form-input-border" type="text" name="description" rows="4"></textarea>
+                <textarea class="flx-5 border-bottom" type="text" name="description" rows="4"></textarea>
             </div>
 
             <!-- checkboxes -->
@@ -80,7 +82,7 @@
                         <input type="checkbox"
                             id="requirement-1"  
                             name="requirements" 
-                            value="No experience necessary."
+                            value="No experience necessary"
                             unchecked />
                         No experience necessary.
                     </label>
@@ -89,7 +91,7 @@
                         <input type="checkbox" 
                             id="requirement-2" 
                             name="requirements" 
-                            value="Basic knowledge of the subject."
+                            value="Basic knowledge of the subject"
                             unchecked />
                         Basic knowledge of the subject.
                     </label>
@@ -98,7 +100,7 @@
                         <input type="checkbox" 
                             id="requirement-3" 
                             name="requirements" 
-                            value="Must have a smartphone."
+                            value="Must have a smartphone"
                             unchecked />
                         Must have a smartphone.
                     </label>
@@ -107,7 +109,7 @@
                         <input type="checkbox" 
                             id="requirement-4" 
                             name="requirements" 
-                            value="Must be at least 60 years old."
+                            value="Must be at least 60 years old"
                             unchecked />
                         Must be at least 60 years old.
                     </label>
@@ -116,27 +118,19 @@
                         <input type="checkbox" 
                             id="requirement-5" 
                             name="requirements" 
-                            value="Bring your own supplies."
+                            value="Bring your own supplies"
                             unchecked />
                         Bring your own supplies.
                     </label>
                 </section>
             </div>
 
-
-            <!-- <div class="flx row">
-                <label class="flx-2" for="requirements">requirements:</label>
-                <select class="flx-5" name="requirements" id="requirements">
-                    <option value="No experience necessary.">no experience necessary</option>
-                    <option value="basic understanding of the subject">basic understanding of the subject</option>
-                    <option value="bring your own supplies">bring your own supplies</option>
-                </select>
-            </div> -->
+            <!-- end checkboxes -->
 
             <div class="flx row space-between">
                 <div class="self-center">
                     <label for="price">price: $</label>
-                    <input class="form-input-border" id="price" type="number" name="price">
+                    <input class="border-bottom" id="price" type="number" name="price">
                 </div>
 
                 <div class="self-center">
@@ -145,87 +139,78 @@
                 </div>
             </div>
 
-
-            <div class="flx row gap-3 align-center">
-                <label class="flx-1" for="start_date">dates: </label>
-                <p class="">from</p>
-                <input class="flx-1" type="date" name="start_date" id="start-date">
-                <p class="">to</p>
-                <input class="flx-1" type="date" name="end_date" id="end-date">
-            </div>
+            <!-- datepicker -->
 
             <div class="flx row space-between align-center">
-                <!-- <div class="flx row"> -->
-                    <label for="start_time">hours: </label>
-                    <p>from</p>
-                    <div class="time_picker">
-                        <select name="start_time_hour" id="start_time_hour">
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select><span>:</span>
-                        <select name="start_time_min" id="start_time_min">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                        </select>
-                        <select name="start_time_ampm" id="start_time_ampm">
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
-                        </select>
-                    </div>
-                <!-- </div> -->
-                <p>
-                    to
-                </p>
-                <!-- <div class="flx row"> -->
-                    <label for="end_time"></label>
-                    <div class="time_picker">
-                        <select name="end_time_hour" id="end_time_hour">
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select><span>:</span>
-                        <select name="end_time_min" id="end_time_min">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                        </select>
-                        <select name="end_time_ampm" id="end_time_ampm">
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
-                        </select>
-                    </div>
-
-                <!-- </div> -->
+                <label for="start_date">start date: </label>
+                <input class="border-bottom" type="date" name="start_date" id="start-date">
+                <label for="end_date">end date:</label>
+                <input class="border-bottom" type="date" name="end_date" id="end-date">
             </div>
 
+            <!-- timepicker -->
+
+            <div class="flx row space-between align-center">
+                <label for="start_time">start time: </label>
+                <div class="flx row">
+                    <select name="start_time_hour" id="start_time_hour">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select><span>:</span>
+                    <select name="start_time_min" id="start_time_min">
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                    <select name="start_time_ampm" id="start_time_ampm">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+                <label for="end_time">end time:</label>
+                <div class="flx row">
+                    <select name="end_time_hour" id="end_time_hour">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select><span>:</span>
+                    <select name="end_time_min" id="end_time_min">
+                        <option value="00">00</option>
+                        <option value="15">15</option>
+                        <option value="30">30</option>
+                        <option value="45">45</option>
+                    </select>
+                    <select name="end_time_ampm" id="end_time_ampm">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                </div>
+            </div>
 
             <div>
                 <button type="submit" class="mt">add course</button>
             </div>  
         </form>
-
         <!-- FORM END -->
 
 

@@ -43,7 +43,7 @@ class Course:
             LEFT JOIN users
             ON courses.user_id = users.id;"""
         results = connectToMySQL(cls.db).query_db(query)
-        print("REEEEEEEZZZZZZZULTZZZ:", results)
+        # print("REEEEEEEZZZZZZZULTZZZ:", results)
         if results: # assure loading dash won't crash app on first load before any courses are created:
             course_creator_list = []
             for row in results:
@@ -60,7 +60,7 @@ class Course:
                 }
                 one_course.creator = user.User(creator_data)
                 course_creator_list.append(one_course)
-            print("******* FROM THE MODEL - courses with their creator list: ", one_course)
+            # print("******* FROM THE MODEL - courses with their creator list: ", course_creator_list)
             return course_creator_list
         return results
 
@@ -91,9 +91,11 @@ class Course:
 
     @classmethod
     def update_course_by_id(cls, data):
+        print("before query------------")
         query = """UPDATE courses
                 SET title=%(title)s, description=%(description)s, price=%(price)s, requirements=%(requirements)s, course_img=%(course_img)s, start_date=%(start_date)s, end_date=%(end_date)s, start_time_hour=%(start_time_hour)s, start_time_min=%(start_time_min)s, start_time_ampm=%(start_time_ampm)s, end_time_hour=%(end_time_hour)s, end_time_min=%(end_time_min)s, end_time_ampm=%(end_time_ampm)s
                 WHERE id = %(id)s"""
+        print("after query--------------")
         return connectToMySQL(cls.db).query_db(query, data) 
 
     @classmethod
