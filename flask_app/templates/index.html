@@ -11,26 +11,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mirza:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-    
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 
     <!-- !  MVP to dos: -->
-    <!-- *  implemented edit form course times prefill -->
     <!-- !  fix user_type radio formatting -->
     <!-- !  implement user_type default set to unselected so message flash if none get selected during initial user registration -->
     <!-- !  implement form validations + flash messages for add/edit course dates, times, price -->
-    <!-- !  if no image selected for course update, keep same -->
+    <!-- !  if no image selected for course update, keep same file -->
     <!-- !  protect image urls (see head tag for ref: href="{#{{ url_for('static', filename='css/style.css') }}#}") per Aaron's advice -->
-    <!-- !  check code comments and readability -->
-    <!-- !  implement background color and border thickness and cast shadow shift on small card hover -->
+    <!-- !  check code comments and readability/ delete print statements -->
+    <!-- !  implement background pattern and border thickness and cast shadow shift on small card hover -->
     <!-- !  design subtle pattern for overall site background -->
     <!-- !  sync styles across templates -->
     <!-- !  save erd as .mbw -->
     <!-- !  html validator -->
-    
+
     <!-- ?  PRODUCT BACKLOG -->
     <!-- !  implement many-to-many with registrations table -->
+    <!-- !  continued modularization with a tools.py file containing methods for non class specific work such as file uploads -->
     <!-- !  add attributes to class of User: birthday (compare age to course requirements after adding age minimum) -->
     <!-- !  add attributes to class of Course: location, max number of registrants -->
     <!-- !  add condition so if class is at max capacity, learner may add their name to the waiting list (sorted in by created_at/ first-come-first-serve) -->
@@ -80,101 +79,101 @@
 
 
 
-        <!-- REGISTRATION FORM -->
+            <!-- REGISTRATION FORM -->
 
 
 
-        <form action="/user/create" method="post" class="card flx col gap-1" id="reg">
-            <h2 class="upper mb text-center italic">become a member!</h2>
-            <div>
-                <label for="first_name">First Name: </label>
-                <input class="border-bottom" type="text" name="first_name">
-            </div>
+            <form action="/user/create" method="post" class="card flx col gap-1" id="reg">
+                <h2 class="upper mb text-center italic">become a member!</h2>
+                <div>
+                    <label for="first_name">First Name: </label>
+                    <input class="border-bottom" type="text" name="first_name">
+                </div>
 
-            <div>
-                <label for="last_name">Last Name: </label>
-                <input class="border-bottom" type="text" name="last_name">
-            </div>
+                <div>
+                    <label for="last_name">Last Name: </label>
+                    <input class="border-bottom" type="text" name="last_name">
+                </div>
 
-            <!-- <div>
-                <label for="user_type">are you a student, teacher or admin? Please select one: </label>
-                <select name="user_type" id="user_type">
-                    <option value="student">student</option>
-                    <option value="teacher">teacher</option>
-                    <option value="admin">admin</option>
-                </select>
-            </div> -->
+                <!-- <div>
+                    <label for="user_type">are you a student, teacher or admin? Please select one: </label>
+                    <select name="user_type" id="user_type">
+                        <option value="student">student</option>
+                        <option value="teacher">teacher</option>
+                        <option value="admin">admin</option>
+                    </select>
+                </div> -->
 
-            <div>
-                <h3>you are signing up as a</h3>
-                <section class="flx row wrap user-type-radios mt align-center">
-                    <div>
-                        <input type="radio" id="student" name="user_type" value="student" checked>
-                        <label for="student">
-                          <h3>student</h3>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="teacher" name="user_type" value="teacher">
-                        <label for="teacher">
-                          <h3>teacher</h3>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="admin" name="user_type" value="admin">
-                        <label for="admin">
-                          <h3>admin</h3>
-                        </label>
-                    </div>
-                </section>
-            </div>
+                <div>
+                    <h3>you are signing up as a</h3>
+                    <section class="flx row wrap user-type-radios align-center">
+                        <div>
+                            <input type="radio" id="student" name="user_type" value="student" checked>
+                            <label for="student">
+                            <h3>student</h3>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="teacher" name="user_type" value="teacher">
+                            <label for="teacher">
+                            <h3>teacher</h3>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="admin" name="user_type" value="admin">
+                            <label for="admin">
+                            <h3>admin</h3>
+                            </label>
+                        </div>
+                    </section>
+                </div>
 
-            <div>
-                <label for="email">Email: </label>
-                <input class="border-bottom" type="text" name="email">
-            </div>
-
-
-            <div>
-                <label for="password">Create password: </label>
-                <input class="border-bottom" type="text" name="password">
-            </div>
-
-            <div>
-                <label for="confirm_password">Confirm password: </label>
-                <input class="border-bottom" type="text" name="confirm_password">
-            </div>
-
-            <div>
-                <button type="submit">
-                    create account
-                </button>
-            </div>
-        </form>
-        <!-- FORM END REGISTRATION-->
+                <div>
+                    <label for="email">Email: </label>
+                    <input class="border-bottom" type="text" name="email">
+                </div>
 
 
+                <div>
+                    <label for="password">Create password: </label>
+                    <input class="border-bottom" type="text" name="password">
+                </div>
 
-        <!-- LOGIN FORM -->
+                <div>
+                    <label for="confirm_password">Confirm password: </label>
+                    <input class="border-bottom" type="text" name="confirm_password">
+                </div>
 
-        <form action="/login" method="post" class="card flx col gap-1 justify-center" id="login">
-            <span class="text-center mb">or</span>
-            <h2 class="upper mb text-center italic">sign-in</h2>
-            <div>
-                <label for="email">Email: </label>
-                <input class="border-bottom" type="text" name="email">
-            </div>
+                <div>
+                    <button type="submit" class="mt">
+                        create account
+                    </button>
+                </div>
+            </form>
+            <!-- FORM END REGISTRATION-->
 
-            <div>
-                <label for="password">Password: </label>
-                <input class="border-bottom" type="text" name="password">
-            </div>
 
-            <div>
-                <button type="submit">login</button>
-            </div>
-        </form>
-        <!-- FORM LOGIN END -->
+
+            <!-- LOGIN FORM -->
+
+            <form action="/login" method="post" class="card flx col gap-1 justify-center" id="login">
+                <span class="text-center mb">or</span>
+                <h2 class="upper mb text-center italic">sign-in</h2>
+                <div>
+                    <label for="email">Email: </label>
+                    <input class="border-bottom" type="text" name="email">
+                </div>
+
+                <div>
+                    <label for="password">Password: </label>
+                    <input class="border-bottom" type="text" name="password">
+                </div>
+
+                <div>
+                    <button type="submit" class="mt">login</button>
+                </div>
+            </form>
+            <!-- FORM LOGIN END -->
 
         </div>    
     </main>
