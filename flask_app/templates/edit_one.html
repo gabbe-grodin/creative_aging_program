@@ -198,56 +198,56 @@
                     <label for="start_time">start time: </label>
                     <div class="flx row">
                         <select name="start_time_hour" id="start_time_hour">
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select><span>:</span>                        
+                            <option value="01" {% if course.start_time_hour == 1 %} selected="selected" {% endif %}>01</option>
+                            <option value="02" {% if course.start_time_hour == 2 %} selected="selected" {% endif %}>02</option>
+                            <option value="03" {% if course.start_time_hour == 3 %} selected="selected" {% endif %}>03</option>
+                            <option value="04" {% if course.start_time_hour == 4 %} selected="selected" {% endif %}>04</option>
+                            <option value="05" {% if course.start_time_hour == 5 %} selected="selected" {% endif %}>05</option>
+                            <option value="06" {% if course.start_time_hour == 6 %} selected="selected" {% endif %}>06</option>
+                            <option value="07" {% if course.start_time_hour == 7 %} selected="selected" {% endif %}>07</option>
+                            <option value="08" {% if course.start_time_hour == 8 %} selected="selected" {% endif %}>08</option>
+                            <option value="09" {% if course.start_time_hour == 9 %} selected="selected" {% endif %}>09</option>
+                            <option value="10" {% if course.start_time_hour == 10 %} selected="selected" {% endif %}>10</option>
+                            <option value="11" {% if course.start_time_hour == 11 %} selected="selected" {% endif %}>11</option>
+                            <option value="12" {% if course.start_time_hour == 12 %} selected="selected" {% endif %}>12</option>
+                        </select><span>:</span>
                         <select name="start_time_min" id="start_time_min">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
+                            <option value="00" {% if course.start_time_min == 0 %} selected="selected" {% endif %}>00</option>
+                            <option value="15" {% if course.start_time_min == 15 %} selected="selected" {% endif %}>15</option>
+                            <option value="30" {% if course.start_time_min == 30 %} selected="selected" {% endif %}>30</option>
+                            <option value="45" {% if course.start_time_min == 45 %} selected="selected" {% endif %}>45</option>
                         </select>
                         <select name="start_time_ampm" id="start_time_ampm">
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
+                            <option value="AM" {% if course.start_time_ampm == "AM" %} selected="selected" {% endif %}>AM</option>
+                            <option value="PM" {% if course.start_time_ampm == "PM" %} selected="selected" {% endif %}>PM</option>
                         </select>
                     </div>
                     <label for="end_time">end time:</label>
                     <div class="flx row">
                         <select name="end_time_hour" id="end_time_hour">
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
+                            <option value="01" {% if course.end_time_hour == 1 %} selected="selected" {% endif %}>01</option>
+                            <option value="02" {% if course.end_time_hour == 2 %} selected="selected" {% endif %}>02</option>
+                            <option value="03" {% if course.end_time_hour == 3 %} selected="selected" {% endif %}>03</option>
+                            <option value="04" {% if course.end_time_hour == 4 %} selected="selected" {% endif %}>04</option>
+                            <option value="05" {% if course.end_time_hour == 5 %} selected="selected" {% endif %}>05</option>
+                            <option value="06" {% if course.end_time_hour == 6 %} selected="selected" {% endif %}>06</option>
+                            <option value="07" {% if course.end_time_hour == 7 %} selected="selected" {% endif %}>07</option>
+                            <option value="08" {% if course.end_time_hour == 8 %} selected="selected" {% endif %}>08</option>
+                            <option value="09" {% if course.end_time_hour == 9 %} selected="selected" {% endif %}>09</option>
+                            <option value="10" {% if course.end_time_hour == 10 %} selected="selected" {% endif %}>10</option>
+                            <option value="11" {% if course.end_time_hour == 11 %} selected="selected" {% endif %}>11</option>
+                            <option value="12" {% if course.end_time_hour == 12 %} selected="selected" {% endif %}>12</option>
                         </select>
                         <span>:</span>
                         <select name="end_time_min" id="end_time_min">
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
+                            <option value="00" {% if course.end_time_min == 0 %} selected="selected" {% endif %}>00</option>
+                            <option value="15" {% if course.end_time_min == 15 %} selected="selected" {% endif %}>15</option>
+                            <option value="30" {% if course.end_time_min == 30 %} selected="selected" {% endif %}>30</option>
+                            <option value="45" {% if course.end_time_min == 45 %} selected="selected" {% endif %}>45</option>
                         </select>
                         <select name="end_time_ampm" id="end_time_ampm">
-                            <option value="AM">AM</option>
-                            <option value="PM">PM</option>
+                            <option value="AM" {% if course.end_time_ampm == "AM" %} selected="selected" {% endif %}>AM</option>
+                            <option value="PM" {% if course.end_time_ampm == "PM" %} selected="selected" {% endif %}>PM</option>
                         </select>
                     </div>
                 </div>
