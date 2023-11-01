@@ -41,7 +41,8 @@ class Course:
     def get_all_courses_with_creator(cls):
         query = """SELECT * FROM courses
             LEFT JOIN users
-            ON courses.user_id = users.id;"""
+            ON courses.user_id = users.id
+            ORDER BY courses.created_at DESC;"""
         results = connectToMySQL(cls.db).query_db(query)
         # print("REEEEEEEZZZZZZZULTZZZ:", results)
         if results: # assure loading dash won't crash app on first load before any courses are created:
@@ -110,11 +111,14 @@ class Course:
         if len(form_data['title']) > 0 and len(form_data['title']) <= 3:
             flash("title must be at least 4 characters.")
             is_valid = False
-        if len(form_data['description']) > 500:
-            flash("description must not exceed 500 characters.")
+        if len(form_data['description']) > 700:
+            flash("description must not exceed 700 characters.")
             is_valid = False
         if len(form_data['title']) <= 0 or len(form_data['description']) <= 0 or len(form_data['price']) <= 0:
             flash("All fields required.")
+            is_valid = False
+        if len(form_data['start_date']) <= 0 or len(form_data['end_date']) <= 0:
+            flash("Dates need to be set.")
             is_valid = False
         return is_valid
 
