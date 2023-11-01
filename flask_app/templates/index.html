@@ -15,8 +15,8 @@
 </head>
 
     <!-- !  MVP to dos: -->
-    <!-- !  fix user_type radio formatting -->
-    <!-- !  implement user_type default set to unselected so message flash if none get selected during initial user registration -->
+    <!-- *  fixed user_type radio formatting -->
+    <!-- *  set user_type to unselected so message flash if none get selected during initial user registration -->
     <!-- !  implement form validations + flash messages for add/edit course dates, times, price -->
     <!-- !  if no image selected for course update, keep same file -->
     <!-- !  protect image urls (see head tag for ref: href="{#{{ url_for('static', filename='css/style.css') }}#}") per Aaron's advice -->
@@ -64,11 +64,11 @@
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            {% for message in messages %}
-            <div class="flx col alert gap-1">
-                <p>{{ message }}</p>
+            <div class="flx alert col gap-1 mb">
+                {% for message in messages %}
+                        <p>{{ message }}</p>
+                {% endfor %}
             </div>
-            {% endfor %}
         {% endif %}
     {% endwith %}
 
@@ -95,22 +95,13 @@
                     <input class="border-bottom" type="text" name="last_name">
                 </div>
 
-                <!-- <div>
-                    <label for="user_type">are you a student, teacher or admin? Please select one: </label>
-                    <select name="user_type" id="user_type">
-                        <option value="student">student</option>
-                        <option value="teacher">teacher</option>
-                        <option value="admin">admin</option>
-                    </select>
-                </div> -->
-
                 <div>
-                    <h3>you are signing up as a</h3>
-                    <section class="flx row wrap user-type-radios align-center">
+                    <h3>Signing up as a:</h3>
+                    <section class="user-type-radios align-center">
                         <div>
-                            <input type="radio" id="student" name="user_type" value="student" checked>
+                            <input type="radio" id="student"  name="user_type" value="student">
                             <label for="student">
-                            <h3>student</h3>
+                            <h3 class="">student</h3>
                             </label>
                         </div>
                         <div>

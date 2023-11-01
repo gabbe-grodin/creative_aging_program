@@ -48,14 +48,14 @@
 
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                    {% for message in messages %}
-                    <div class="flx col alert gap-2">
-                        <p class="alert">{{ message }}</p>
+                    <div class="flx alert col gap-1 mb">
+                        {% for message in messages %}
+                                <p>{{ message }}</p>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 {% endif %}
             {% endwith %}
-            
+
             <!-- should below value be session['user_id']? -->
             <!-- <input type="hidden" name="logged_in_user_id" value="{{ session['logged_in_user_id'] }}"> -->
             <input type="hidden" name="logged_in_user_id" value="{{ session['logged_in_user_id'] }}">

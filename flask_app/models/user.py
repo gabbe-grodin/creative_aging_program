@@ -34,7 +34,7 @@ class User:
 
     @staticmethod
     def validate_registration_form(form_data):
-        print("FORMMMMMMM DATAAAAA....", form_data)
+        # print("FORMMMMMMM DATAAAAA....", form_data)
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
         is_valid = True
         if len(form_data['first_name']) > 0 and len(form_data['first_name']) <= 1:
@@ -45,6 +45,9 @@ class User:
             is_valid = False
         if len(form_data['last_name']) > 0 and len(form_data['last_name']) <= 1:
             flash("Last name must be at least 2 characters.")
+            is_valid = False
+        if 'user_type' not in form_data:
+            flash("Must state your role with the project.")
             is_valid = False
         if len(form_data['last_name']) <= 0:
             flash("Cannot leave last name field blank.")
