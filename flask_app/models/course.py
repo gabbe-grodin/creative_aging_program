@@ -124,8 +124,8 @@ class Course:
         if len(form_data['title']) > 0 and len(form_data['title']) <= 3:
             flash("title must be at least 4 characters.")
             is_valid = False
-        if len(form_data['description']) > 500:
-            flash("description must not exceed 500 characters.")
+        if len(form_data['description']) > 700:
+            flash("description must not exceed 700 characters.")
             is_valid = False
         if len(form_data['title']) <= 0 or len(form_data['description']) <= 0 or len(form_data['price']) <= 0:
             flash("All fields required.")

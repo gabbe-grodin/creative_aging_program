@@ -42,13 +42,13 @@ def create_course():
         # check if the post request has the file part
         if 'course_img' not in request.files:
             flash('No file part')
-            return redirect(request.url)
+            return redirect('/course/new')
         course_img = request.files['course_img']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if course_img.filename == '':
             flash('No selected file')
-            return redirect(request.url)
+            return redirect('/course/new')
         if course_img and allowed_file(course_img.filename):
             filename = secure_filename(course_img.filename)
             course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -80,27 +80,21 @@ def create_course():
 def view_one_course_w_creator(id):
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
+    # data["requirements"] = '.'.split()
     return render_template('view_one.html', course = course)
 
 #! edit course form
 @app.route('/course/edit/<int:id>')
 def course_edit(id):
     data = {"id":id}
-    data2 = request.form.copy()
-    data2['requirements'] = request.form.getlist('requirements')
-    print("........data2:",data2['requirements'])
-    requirements = request.form.get("requirements")
-    # data["requirements"] = '.'.split()
-    # print("REQUIREMENTS:::::::", requirements)
     course = Course.get_one_course_by_id_with_creator(data)
-    # split requirements string:
     return render_template('edit_one.html', course = course)
 
 #! update course post
 @app.route('/course/update', methods=['POST'])
 def course_update():
-    # for keys in request.files.keys():
-    #     print("****************keys", keys)
+    for keys in request.files.keys():
+        print("****************keys", keys)
     # concatenate requirements before saving to db:
     if request.method == 'POST':
         requirements = request.form.getlist("requirements")
@@ -110,18 +104,17 @@ def course_update():
         # check if the post request has the file part
         if 'course_img' not in request.files:
             flash('No file part')
-            return redirect(request.url)
+            # return redirect(request.url)
+            return redirect(f'/course/edit/{request.form["id"]}')
         course_img = request.files['course_img']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
         if course_img.filename == '':
             flash('No selected file')
-            return redirect(request.url)
+            # return redirect(request.url)
+            return redirect(f'/course/edit/{request.form["id"]}')
         if course_img and allowed_file(course_img.filename):
             filename = secure_filename(course_img.filename)
             course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             #! end block from flask documentation
-    # session["user_id"] = request.form['logged_in_user_id']
     data = {"id":request.form['id'],
             "title": request.form['title'],
             "description": request.form['description'],
@@ -138,9 +131,7 @@ def course_update():
             "end_time_ampm": request.form['end_time_ampm']}
     if not Course.validate_edit_course_form(data):
         return redirect(f'/course/edit/{request.form["id"]}')
-    print("before calling update method!!!!!!!!!!!!!!!!!!!")
     Course.update_course_by_id(data)
-    print("after calling update method!!!!!!!!!!!!!!!!!!!")
     return redirect(f'/course/{request.form["id"]}')
 
 #! delete
