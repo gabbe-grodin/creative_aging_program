@@ -15,18 +15,18 @@
 </head>
 
     <!-- !  MVP to dos: -->
-    <!-- *  implement form validations + flash messages for add/edit course dates and price; set default time to 2 hr class starting at 9:30am -->
-    <!-- *  set course catalogue query to descend by created_at -->
+    <!-- *  fixed moving buttons by removing 1px of border on button hovers, sheesh! -->
+    <!-- !  change permissions for teacher to only edit ot delete their own courses, but admin can do any -->
+    <!-- !  split requirements string so can be styled -->
     <!-- !  if no image selected for course update, keep same file -->
     <!-- !  protect image urls (see head tag for ref: href="{#{{ url_for('static', filename='css/style.css') }}#}") per Aaron's advice -->
     <!-- !  check code comments and readability/ delete print statements -->
-    <!-- !  implement background pattern and border thickness and cast shadow shift on small card hover -->
-    <!-- !  design subtle pattern for overall site background -->
     <!-- !  sync styles across templates -->
     <!-- !  save erd as .mbw -->
     <!-- !  html validator -->
 
     <!-- ?  PRODUCT BACKLOG -->
+    <!-- !  handle file uploads if too large -->
     <!-- !  implement many-to-many with registrations table -->
     <!-- !  continued modularization with a tools.py file containing methods for non class specific work such as file uploads -->
     <!-- !  add attributes to class of User: birthday (compare age to course requirements after adding age minimum) -->
@@ -37,6 +37,8 @@
     <!-- !  admin privileges for class rosters = view, create, edit, delete registrations of students -->
     <!-- !  teacher privileges for class rosters = view, registrations of students -->
     <!-- !  student privileges for class rosters = none -->
+    <!-- !  add image thumbnail and or file upload status to forms -->
+    <!-- !  dry up code. do Aaron's suggestion: replace huge data dicts with session["user_id"] = request.form['logged_in_user_id'] then copy data dict w data2 = request.form.copy(), next line data2['logged_in_user_id'] = session['logged_in_user_id'], then create_course(data2). -->
     <!-- !  each student starts with 3 tokens for the year and they may spend them on any three classes, not repeating the same course more than twice -->
     <!-- !  apis to implement: geolocation to determine where the closest courses are taught; speech-to-text and text-to-speech apis for accessibility; translation api (spanish; chinese; cantonese); bob ross api? -->
     <!-- !  students can create portfolios of uploaded images (used for social network, able to share publicly, used for juried exhibitions and exhibition selection, virtual exhibitions) -->
