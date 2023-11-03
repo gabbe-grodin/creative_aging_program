@@ -20,7 +20,7 @@
 
 
     <header>
-        <img class="logo" src="/static/assets/scribble_line_dark_green.png" alt="logo is a scribbly knotty ball of lines">
+        <img class="logo" src="/static/assets/scribbly-logo-black.png" alt="logo is a scribbly knotty ball of lines">
         <h1 class="mb">the creative aging project</h1>
         <h2 class="mt">Welcome, {{ session['first_name'] }}!</h2>
         <nav class="upper flx gap-2">
@@ -44,7 +44,6 @@
                     <h2 class="italic">{{ course.title }}</h2>
                         <a href="/course/{{ course.id }}"></a>
                     <img class="mt img-card-small" src="/static/assets/uploads/{{ course.course_img }}" alt="photo or graphic representing this course">
-                   
                 </div>
             {% endfor %}
 

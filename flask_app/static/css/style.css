@@ -58,8 +58,7 @@ body {
     font-size: 1.8rem;
 }
 h1 {
-    /* font-size: 4.18rem; */
-    font-size: 2.5rem;
+    font-size: 2.8rem;
 }
 h2 {
     font-size: 2rem;
@@ -97,7 +96,6 @@ button{
 /*******************************************/
 /*! TYPOGRAPHY SPACING (LINE, WORD, LETTER)
 /*******************************************/
-
 body {
 	line-height: 1.8rem;
     letter-spacing: .34rem;
@@ -132,6 +130,9 @@ nav a:-webkit-any-link{
 body*{
     font-weight:400;
 }
+header{
+    font-weight: 600;
+}
 .alert{
     font-weight: 600;
 }
@@ -139,17 +140,23 @@ h1{
     font-weight: 700;
 }
 h2{
-    font-weight: 300;
+    font-weight: 700;
 }
 h3{
     font-weight: 600;
+}
+nav a{
+    font-weight: 500;
+}
+nav a:hover{
+    font-weight: 700;
 }
 span{
     font-weight: 600;
 }
 button,
 .btn{
-    font-weight: 600;
+    font-weight: 700;
 }
 label{
     font-weight: 600;
@@ -197,7 +204,39 @@ p{
 .left{
     text-align: left;
 }
-
+/*******************************************/
+/*! COLOR
+/*******************************************/
+.orange{
+    color: #ff8800;
+}
+.black{
+    color: #261b1b;
+}
+.grey{
+    color: #7b7676;
+}
+.light-grey{
+    color: #bab1b1;
+}
+.very-light-grey{
+    color: #f1e4e4;
+}
+.red{
+    color: #e25a5a;
+}
+.light-red{
+    color: #ffb4b4;
+}
+.yellow{
+    color: #edd643;
+}
+.blue{
+    color: #3877ff;
+}
+.light-blue{
+    color: #c6deff;
+}
 /*******************************************/
 /*! FONT-FAMILIES, COLORS & STYLES
 /*******************************************/
@@ -219,25 +258,29 @@ p{
 .upper{
     text-transform: uppercase;
 }
-body * {
+body  {
     font-family: 'IBM Plex Mono', monospace;
-    color: #0c4303;
+    color: #261b1b;
 }
 form{
-    color: inherit;
+    /* color: inherit; */
 }
 label{
-    color: inherit;
+    /* color: inherit; */
 }
 input{
-    color: inherit;
+    /* color: inherit; */
 }
 textarea{
     font-family: inherit;
 }
 button,
 .btn{
-    color: inherit;
+    color: #261b1b;
+}
+button:hover,
+.btn:hover{
+    color: #261b1b;
 }
 a:-webkit-any-link{
     text-decoration: none;
@@ -264,7 +307,7 @@ a:hover {
     color: inherit;
 }
 .card-small:hover{
-    color: #b2d8ff;
+    /* color: #b2d8ff; */
 }
 .alert{
     color: #ffffff;
@@ -276,42 +319,50 @@ button,
 }
 textarea:focus,
 input:focus {
-    caret-color: #0c4303;
+    caret-color: #261b1b;
 }
 p{
-    color: inherit;
+    /* color: inherit; */
 }
 /*******************************************/
 /*! BACKGROUND COLORS
 /*******************************************/
 
 body{
-    background-color: #aad7ff;
-    background-image: url(/static/assets/scribble_line_logo_skinny_light_pink.png);
-    background-image: url(/static/assets/pale-blue-grid-wider.png);
+    background-image: linear-gradient(to bottom left,  rgb(118, 210, 173), rgb(129, 216, 203)20%, rgb(131, 220, 240), rgb(161, 216, 248)80%);
+    /* background-position: right bottom, left top; */
+    /* background-repeat: no-repeat, repeat; */
+    /* background-image: url(/static/assets/pale-blue-grid-wider.png); */
     background-attachment: fixed;
+    /* background-image: linear-gradient(to bottom right,  pink, rgb(212, 212, 255)80%); */
+    background-size:cover;
+    /* background-image: linear-gradient(to bottom right,rgba(228, 255, 237, 0.709), rgba(185, 232, 255, 0.701)80%),url(/static/assets/scribble_logo_white.png),linear-gradient( rgba(188, 217, 255, 0.537), rgba(172, 205, 255, 0.603)); */
+    
+    /* background-image: linear-gradient(0.70turn,rgba(170, 208, 255, 0)30%, rgb(237, 214, 67)30%),url(/static/assets/20190826_110130.jpg); */
+    /* background-color: #c6deff; */
+    
 }
 form,
 .card{
-    background-color: #ffe0dc;
+    background-color: #ffe2c5;
 }
 .card-small:hover{
-    background-color: #fff3ef;
+    background-color: #9fc7ff;
 }
 button,
 .btn{
-    background-color: rgb(239, 255, 59);
+    background-color: #00e1e1b7;
 }
 button:hover,
 .btn:hover{
-    background-color: rgb(250, 255, 221);
+    background-color:#c6deff;
 }
 form div input,
 form div input:active,
 form div input:focus,
 form div input:focus-visible,
 form div input:autofill {
-    background-color: white;
+    background-color: #ffffff;
     outline: none;
 }
 textarea{
@@ -326,21 +377,18 @@ select {
     background-color: white;
 }
 .alert{
-    background-color: #9b0000;
+    background-color: #ff8800;
 }
 .user-type-radios{
-    background-color: rgb(255, 149, 149);
+    background-color: #f1e4e4;
 }
 /*******************************************/
 /*! BORDERS
 /*******************************************/
-form{
-    
-}
 form,
 .card {
     border-radius: 2em;
-    border: 1px solid #0c4303;
+    border: 1px solid #261b1b;
 }
 input,
 textarea {
@@ -348,18 +396,18 @@ textarea {
     border-radius: 10px;
 }
 .border-bottom {
-    border-bottom: 1px solid #0c4303;
+    border-bottom: 1px solid #261b1b;
 }
 .form-input-border{
-    border: 1px solid #0c4303;
+    border: 1px solid #261b1b;
 }
 button,
 .btn {
     border-radius: 30px;
-    border: 1px solid #0c4303
+    border: 1px solid #261b1b
 }
 img{
-    border: 1px solid #0c4303;
+    border: 1px solid #261b1b;
     border-radius: 2em;
 }
 .logo{
@@ -367,11 +415,11 @@ img{
     border-radius: none;
 }
 .skinny-border{
-    border: 1px solid #0c4303;
+    border: 1px solid #261b1b;
     border-radius: 2em;
 }
 select{
-    border: 2px solid #0c4303;
+    border: 2px solid #261b1b;
 }
 .user-type-radios{
     border-radius: 10px;
@@ -389,17 +437,23 @@ select{
     border-bottom: 3px solid black; */
     box-shadow: -3px -3px #0b000b;
 }
+.card img{
+    /* border-right: 3px solid black;
+    border-bottom: 3px solid black; */
+    box-shadow: -3px -3px #0b000b;
+}
 .alert{
-    border-radius: 30px;
+    /* border-radius: 30px; */
 }
 /*******************************************/
 /*! LAYOUT
 /*******************************************/
 
 body {
-    width: 825px;
+    width: 900px;
     margin: 0 auto;
     box-sizing: border-box;
+    /* margin-left: 10%; */
 }
 header {
     padding: 30px 0;
@@ -440,7 +494,7 @@ section{
     width: 100%;
 }
 .card{
-    padding: 50px;
+    padding: 40px;
     /* height: 800px; */
 }
 .card-small{
@@ -715,15 +769,18 @@ input[type="checkbox"]:focus {
 /*! USER_TYPE RADIOS
 /*******************************************/
 section > div {
+    /* color: #bab1b1; */
     flex: 1;
 }
 input[type="radio"] {
+    color: #7b7676;
     display: none;
     &:not(:disabled) ~ label {
       cursor: pointer;
+      color: #bab1b1;
     }
     &:disabled ~ label {
-      color: hsla(150, 5%, 75%, 1);
+      /* color: hsla(150, 5%, 75%, 1); */
       border-color: hsla(150, 5%, 75%, 1);
       box-shadow: none;
       cursor: not-allowed;
@@ -740,18 +797,19 @@ input[type="radio"] {
 }
 .user-type-radios label:hover{
     background-color: #e9fff8;
+    color: #261b1b;
     border-radius: 10px;
-    border-bottom: 1px solid #0c4303;
+    border-bottom: 1px solid #261b1b;
 }
 input[type="radio"]:checked + label {
     border-radius: 10px;
-    border-bottom: 1px solid #0c4303;
+    border-bottom: 1px solid #261b1b;
     background: #ffffff;
-    color: hsla(215, 0%, 100%, 1);
+    color: #261b1b;
     padding: 0;
     box-sizing: border-box;
     &::after {
-        color:  #0c4303;
+        color:  #261b1b;
         font-family: FontAwesome;
         /* border: 2px solid hsla(150, 75%, 45%, 1); */
         content: "\f00c";
@@ -819,7 +877,7 @@ tr:hover {
 button{
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 }
 .btn{
     box-sizing: border-box;
