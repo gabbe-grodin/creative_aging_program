@@ -344,10 +344,10 @@ body{
 }
 form,
 .card{
-    background-color: #ffe2c5;
+    background-color: #ffe2c5b8;
 }
 .card-small:hover{
-    background-color: #9fc7ff;
+    background-color: #ffe2c5;
 }
 button,
 .btn{
