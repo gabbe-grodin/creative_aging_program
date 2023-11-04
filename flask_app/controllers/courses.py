@@ -1,22 +1,13 @@
 from flask import render_template, redirect, request, session, flash, url_for
 from flask_app.models.course import Course
 from flask_app.models.user import User
+from flask_app.models.registration import Registration
 from werkzeug.utils import secure_filename
 from flask_app import app
-# from dotenv import load_dotenv
-# from pathlib import Path
-# from dotenv import ALLOWED_EXTENSIONS
 import os
 
-# load_dotenv()
-# dotenv_path = Path('/.env')
-# load_dotenv(dotenv_path=dotenv_path)
-
-# why are below lines necessary in [app breaks without] both this file and __init__.py?
 UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
 ALLOWED_EXTENSIONS = os.getenv("ALLOWED_EXTENSIONS")
-
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #! add form
 @app.route('/course/new')

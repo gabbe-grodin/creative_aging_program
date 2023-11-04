@@ -35,9 +35,6 @@
     <!-- HEADER END -->
 
 
-
-
-
     <main>
 
         <div class="card flx col gap-2">
@@ -73,12 +70,15 @@
                         <a href="/course/edit/{{ course.id }}" class="btn">edit this course</a>
 
                         <a href="/delete/{{ course.id }}" class="btn">delete this course</a>
-
+                </div>
+            {% else %}
+                <div class="flx col gap-1 flx-1">
+                    <a href="/registration/create/{{ course.id }}" class="btn reg-btn">register for this course</a>
                 </div>
             {% endif %}
             </section>
             <p class="justify line-height-less">{{ course.description }}</p>
-            
+
                 <img class="mt mb" src="/static/assets/uploads/{{ course.course_img }}" alt="photo uploaded by teacher representing this class and the activities within it.">
         </div>
 

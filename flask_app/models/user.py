@@ -2,7 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import render_template, redirect, request, session, flash
 from flask_bcrypt import Bcrypt
 from flask_app import app
-from flask_app.models import course
+from flask_app.models import course, registration
 bcrypt = Bcrypt(app)
 import re
 
@@ -17,7 +17,8 @@ class User:
         self.password=data['password']
         self.created_at=data['created_at']
         self.updated_at=data['updated_at']
-        self.courses = []
+        self.courses = [] # created
+        self.registrations = [] # student sign-ups
 
     @classmethod
     def create_user(cls,data):
