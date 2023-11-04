@@ -80,10 +80,12 @@ def logout():
 
 #! edit account form
 #! call validation method
+@app.route('/user/<int:logged_in_user_id>/edit')
 def account_edit(id):
     data = {"id":id}
     account = User.get_one_user_by_id(data)
     return render_template('edit_account.html', account = account)
+
 
 # #! update account post
 # @app.route('/user/update', methods=['POST'])

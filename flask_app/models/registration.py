@@ -4,10 +4,12 @@ from flask_app import app
 from flask_app.models import user, course
 
 class Registration:
-    db = 'creative aging'
+    db = 'creative_aging'
     def __init__(self, data):
         self.user_id = data['user_id']
         self.course_id = data['course_id']
+        self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
 
     @classmethod
     def user_registers_for_course(cls,data):

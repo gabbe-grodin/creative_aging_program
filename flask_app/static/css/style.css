@@ -468,6 +468,7 @@ main{
 }
 input{
     box-sizing: border-box;
+    width: 100%;
     height: 40px;
     padding-left: 15px;
 }
@@ -887,6 +888,7 @@ button:hover,
     box-shadow: 1px 1px #0b000b;
 }
 .reg-btn{
+    background-color: #53e5678b;
     display: flex;
     width: 200px;
     height: 200px;

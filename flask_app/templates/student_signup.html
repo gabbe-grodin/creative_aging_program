@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>creative aging</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100;0,200;0,300;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mirza:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <!-- HEADER START -->
+
+    <header>
+        <img class="logo" src="/static/assets/scribbly-logo-black.png" alt="logo is a scribbly knotty ball of lines">
+        <h1 class="mb">the creative aging project</h1>
+        <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
+        <nav class="upper flx gap-2">
+            <!-- condition to determine if user_type is teacher or admin, thus showing ability to create course: -->
+            {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
+            <a href="/course/new">add a course</a>
+            {% endif %}
+            <a href="/dashboard">view courses</a>
+            <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+            <a href="/logout">logout</a>
+        </nav>
+    </header>
+    <!-- HEADER END -->
+
+
+<!-- FLASH VALIDATION MESSAGES-->
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="flx alert col gap-1 mb">
+        {% for message in messages %}
+                <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endwith %}
+
+
+
+<main>
+
+
+
+    <!-- STUDENT SIGNUP FORM -->
+
+
+
+    <form action="/sign_up" method="post" class="card flx col gap-1">
+        <h2 class="upper mb text-center italic">sign up for this class:</h2>
+
+
+        <div>
+            <label for="phone">please provide the teacher best phone number to contact you: </label>
+            <input class="border-bottom" type="text" name="phone">
+        </div>
+
+        <div>
+            <button type="submit" class="mt">
+                register for this class
+            </button>
+        </div>
+    </form>
+    <!-- FORM END -->
+
+</body>
+</html>

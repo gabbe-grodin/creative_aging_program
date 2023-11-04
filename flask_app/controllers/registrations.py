@@ -7,9 +7,15 @@ from werkzeug.utils import secure_filename
 import os
 
 
-# create
-@app.route('/registration/create/<int:id>', methods=['POST'])
+# form
+@app.route('/registration/new/<int:id>')
+def user_course_signup_form(id):
+    return render_template('student_signup.html')
+
+# create course reg/ student signs up for a class
+@app.route('/sign_up', methods=['POST'])
 def user_registers_for_course(id):
+    print("routing success !!!!!!!!!!!!----------")
     # print("id----------",id)
     # print("session----------",session)
     data = {
@@ -17,14 +23,3 @@ def user_registers_for_course(id):
         "course_id": id}
     registration.Registration.user_registers_for_course(data)
     return redirect(f'/course/{data["id"]}')
-
-
-
-# @app.route('/author/add/favorite', methods=['POST'])
-# def make_association_from_one_author_page():
-#     data = {
-#         "author_id": request.form['author'], # comes from name in form
-#         "book_id": request.form['book']}
-#     print("*************DATA***********",data)
-#     author.Author.add_a_favorite(data)
-#     return redirect(f"/author/{request.form['author']}")
