@@ -120,7 +120,8 @@ class User:
             FROM users
             LEFT JOIN courses
             ON users.id = courses.user_id
-            WHERE users.id = %(id)s;"""
+            WHERE users.id = %(id)s
+            ORDER BY courses.created_at DESC;"""
         results = connectToMySQL(cls.db).query_db(query, data)
         this_user = cls(results[0]) # here we made a user object
         # print(this_user)

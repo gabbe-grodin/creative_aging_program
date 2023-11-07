@@ -63,11 +63,11 @@ def dashboard():
 #! user account
 @app.route('/user/<int:logged_in_user_id>')
 def user_account(logged_in_user_id):
-    data = {"id": session['logged_in_user_id']}
     # protect route if user not logged in:
     if 'logged_in_user_id' not in session:
         flash("Please log in.")
         return redirect('/')
+    data = {"id": session['logged_in_user_id']}
     # user = User.get_one_user_by_id(data)
     creator = User.get_one_user_by_id_with_courses(data)
     return render_template("account.html", creator=creator)
@@ -82,6 +82,9 @@ def logout():
 #! call validation method
 @app.route('/user/<int:logged_in_user_id>/edit')
 def account_edit(id):
+    if 'logged_in_user_id' not in session:
+        flash("Please log in.")
+        return redirect('/')
     data = {"id":id}
     account = User.get_one_user_by_id(data)
     return render_template('edit_account.html', account = account)

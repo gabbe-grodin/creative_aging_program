@@ -12,6 +12,10 @@ ALLOWED_EXTENSIONS = os.getenv("ALLOWED_EXTENSIONS")
 #! add form
 @app.route('/course/new')
 def add_course_form():
+    if 'logged_in_user_id' not in session:
+        return redirect('/')
+    if session['user_type'] == 'student':
+        return redirect('/')
     return render_template('add_one.html')
 
 #! the following code is from https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/
@@ -22,6 +26,8 @@ def allowed_file(filename):
 #! create course
 @app.route('/course/create', methods=['POST'])
 def create_course():
+    if 'logged_in_user_id' not in session:
+        return redirect('/')
     if not Course.validate_create_course_form(request.form):
         return redirect('/course/new')
     # this concatenates requests list into a string:
@@ -69,6 +75,8 @@ def create_course():
 #! view one
 @app.route('/course/<int:id>')
 def view_one_course_w_creator(id):
+    if 'logged_in_user_id' not in session:
+        return redirect('/')
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
     # data["requirements"] = '.'.split()
@@ -77,6 +85,8 @@ def view_one_course_w_creator(id):
 #! edit course form
 @app.route('/course/edit/<int:id>')
 def course_edit(id):
+    if session['user_type'] == 'student':
+        return redirect('/')
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
     return render_template('edit_one.html', course = course)
