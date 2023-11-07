@@ -118,7 +118,7 @@ h2{
     letter-spacing: .36rem;
 }
 .line-height-less{
-    line-height: 2rem;
+    line-height: 2.3rem;
 }
 nav a:-webkit-any-link{
     letter-spacing: normal;
@@ -329,13 +329,15 @@ p{
 /*******************************************/
 
 body{
-    background-image: linear-gradient(to bottom left,  rgb(118, 210, 173), rgb(129, 216, 203)20%, rgb(131, 220, 240), rgb(161, 216, 248)80%);
+    /* background-image: linear-gradient(to bottom left,  rgb(118, 210, 173), rgb(129, 216, 203)20%, rgb(131, 220, 240), rgb(161, 216, 248)80%); */
+    background: #ceebff url("/static/assets/very-pale-blue-grid-sml.png");
     background-attachment: fixed;
     background-size:cover;
 }
 form,
 .card{
-    background-color: #ffe2c5b8;
+    /* background-color: #CDE2F4; */
+    background-color: #eef7ff;
 }
 .card-small:hover{
     background-color: #ffe2c5;
@@ -346,7 +348,7 @@ button,
 }
 button:hover,
 .btn:hover{
-    background-color:#c6deff;
+    background-color:#e5ffc6;
 }
 form div input,
 form div input:active,
@@ -387,7 +389,7 @@ textarea {
     border-radius: 10px;
 }
 .border-bottom {
-    border-bottom: 1px solid #261b1b;
+    border-bottom: 2px solid #261b1b;
 }
 .form-input-border{
     border: 1px solid #261b1b;
@@ -765,11 +767,11 @@ section > div {
     flex: 1;
 }
 input[type="radio"] {
-    color: #7b7676;
+    /* color: #7b7676; */
     display: none;
     &:not(:disabled) ~ label {
       cursor: pointer;
-      color: #bab1b1;
+      /* color: #bab1b1; */
     }
     &:disabled ~ label {
       /* color: hsla(150, 5%, 75%, 1); */
@@ -777,6 +779,15 @@ input[type="radio"] {
       box-shadow: none;
       cursor: not-allowed;
     }
+    &:disabled ~ label:hover {
+        color: rgb(50, 37, 41);
+        border-color: hsla(150, 5%, 75%, 1);
+        box-shadow: none;
+        cursor: not-allowed;
+      }
+}
+input[type="radio"]:hover {
+    color: #2a2626;
 }
 .user-type-radios label{
     display: block;
