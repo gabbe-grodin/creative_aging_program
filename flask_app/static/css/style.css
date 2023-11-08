@@ -280,7 +280,8 @@ button,
 }
 button:hover,
 .btn:hover{
-    color: #261b1b;
+    /* color: #261b1b; */
+    color: white;
 }
 a:-webkit-any-link{
     text-decoration: none;
@@ -307,7 +308,9 @@ a:hover {
     color: inherit;
 }
 .card-small:hover{
+    color: white;
     /* color: #b2d8ff; */
+    /* background-color: #3877ff; */
 }
 .alert{
     color: #ffffff;
@@ -340,15 +343,17 @@ form,
     background-color: #eef7ff;
 }
 .card-small:hover{
-    background-color: #ffe2c5;
+    /* background-color: #ffe2c5; */
+    background-color: #009fae;
 }
 button,
 .btn{
-    background-color: #00e1e1b7;
+    background-color: #b5f6ff;
 }
 button:hover,
 .btn:hover{
-    background-color:#e5ffc6;
+    /* background-color:#e5ffc6; */
+    background-color: #009fae;
 }
 form div input,
 form div input:active,

@@ -140,7 +140,7 @@ def course_update():
 def delete(id):
     data = {"id":id}
     Course.delete_this_course_by_id(data)
-    return redirect(f'/user/{session["logged_in_user_id"]}')
+    return redirect('/dashboard')
 
 #! upload file (move to diff/new controller?)
 # @app.route('/', methods=['GET', 'POST'])
