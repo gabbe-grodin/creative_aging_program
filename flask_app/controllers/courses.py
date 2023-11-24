@@ -79,8 +79,10 @@ def view_one_course_w_creator(id):
         return redirect('/')
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
+    user = session['logged_in_user_id']
+    
     # data["requirements"] = '.'.split()
-    return render_template('view_one.html', course = course)
+    return render_template('view_one.html', course = course, user = user)
 
 #! edit course form
 @app.route('/course/edit/<int:id>')
@@ -94,8 +96,8 @@ def course_edit(id):
 #! update course post
 @app.route('/course/update', methods=['POST'])
 def course_update():
-    for keys in request.files.keys():
-        print("****************keys", keys)
+    # for keys in request.files.keys():
+    #     print("****************keys", keys)
     # concatenate requirements before saving to db:
     if request.method == 'POST':
         requirements = request.form.getlist("requirements")
@@ -103,18 +105,19 @@ def course_update():
     #! code from flask docs for uploading file: 
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'course_img' not in request.files:
-            flash('No file part')
-            # return redirect(request.url)
-            return redirect(f'/course/edit/{request.form["id"]}')
+        # if 'course_img' not in request.files:
+        #     flash('No file part')
+        #     # return redirect(request.url)
+        #     return redirect(f'/course/edit/{request.form["id"]}')
         course_img = request.files['course_img']
-        if course_img.filename == '':
-            flash('No selected file')
-            # return redirect(request.url)
-            return redirect(f'/course/edit/{request.form["id"]}')
+        # if course_img.filename == '':
+        #     flash('No selected file')
+        #     # return redirect(request.url)
+        #     return redirect(f'/course/edit/{request.form["id"]}')
         if course_img and allowed_file(course_img.filename):
             filename = secure_filename(course_img.filename)
             course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # course.add_file_to_course_by_id(request.form["course_img"])
             #! end block from flask documentation
     data = {"id":request.form['id'],
             "title": request.form['title'],

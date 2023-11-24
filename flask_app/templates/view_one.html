@@ -73,7 +73,7 @@
                 </div>
                 {% elif session["user_type"] == 'student' %}
                 <div class="flx col gap-1 flx-1">
-                    <a href="/registration/new/{{ course.id }}" class="btn reg-btn">register for this course</a>
+                    <a href="/registration/new/{{ session['logged_in_user_id'] }}/{{ course.id }}" class="btn reg-btn">register for this course</a>
                 </div>
                 {% elif session['logged_in_user_id'] == course.user_id %}
                     <div class="flx col gap-1 flx-1">

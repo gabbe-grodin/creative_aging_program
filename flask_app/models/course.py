@@ -93,11 +93,45 @@ class Course:
 
     @classmethod
     def update_course_by_id(cls, data):
-        print("before query------------")
-        query = """UPDATE courses
-                SET title=%(title)s, description=%(description)s, price=%(price)s, requirements=%(requirements)s, course_img=%(course_img)s, start_date=%(start_date)s, end_date=%(end_date)s, start_time_hour=%(start_time_hour)s, start_time_min=%(start_time_min)s, start_time_ampm=%(start_time_ampm)s, end_time_hour=%(end_time_hour)s, end_time_min=%(end_time_min)s, end_time_ampm=%(end_time_ampm)s
-                WHERE id = %(id)s"""
-        print("after query--------------")
+        # Aaron suggested to resolve update issue by creating two queries, one for filename and one for the rest of the data
+        if 'course_img' in data:
+            query = """
+                UPDATE courses
+                SET 
+                    title=%(title)s, 
+                    description=%(description)s, 
+                    price=%(price)s, 
+                    requirements=%(requirements)s, 
+                    course_img=%(course_img)s, 
+                    start_date=%(start_date)s, 
+                    end_date=%(end_date)s, 
+                    start_time_hour=%(start_time_hour)s, 
+                    start_time_min=%(start_time_min)s, 
+                    start_time_ampm=%(start_time_ampm)s, 
+                    end_time_hour=%(end_time_hour)s, 
+                    end_time_min=%(end_time_min)s, 
+                    end_time_ampm=%(end_time_ampm)s
+                WHERE id = %(id)s;"""
+        else:
+            query = """
+                UPDATE courses
+                SET 
+                    title=%(title)s, 
+                    description=%(description)s, 
+                    price=%(price)s, 
+                    requirements=%(requirements)s,
+                    start_date=%(start_date)s, 
+                    end_date=%(end_date)s, 
+                    start_time_hour=%(start_time_hour)s, 
+                    start_time_min=%(start_time_min)s, 
+                    start_time_ampm=%(start_time_ampm)s, 
+                    end_time_hour=%(end_time_hour)s, 
+                    end_time_min=%(end_time_min)s, 
+                    end_time_ampm=%(end_time_ampm)s
+                WHERE id = %(id)s;"""
+        # or...
+        # if filename in data:
+        #     add_file_to_course_by_id(data)
         return connectToMySQL(cls.db).query_db(query, data) 
 
     @classmethod
