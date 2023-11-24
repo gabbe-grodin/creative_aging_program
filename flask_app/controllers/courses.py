@@ -1,26 +1,21 @@
 from flask import render_template, redirect, request, session, flash, url_for
 from flask_app.models.course import Course
 from flask_app.models.user import User
+from flask_app.models.registration import Registration
 from werkzeug.utils import secure_filename
 from flask_app import app
-# from dotenv import load_dotenv
-# from pathlib import Path
-# from dotenv import ALLOWED_EXTENSIONS
 import os
 
-# load_dotenv()
-# dotenv_path = Path('/.env')
-# load_dotenv(dotenv_path=dotenv_path)
-
-# why are below lines necessary in [app breaks without] both this file and __init__.py?
 UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
 ALLOWED_EXTENSIONS = os.getenv("ALLOWED_EXTENSIONS")
-
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #! add form
 @app.route('/course/new')
 def add_course_form():
+    if 'logged_in_user_id' not in session:
+        return redirect('/')
+    if session['user_type'] == 'student':
+        return redirect('/')
     return render_template('add_one.html')
 
 #! the following code is from https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/
@@ -31,6 +26,8 @@ def allowed_file(filename):
 #! create course
 @app.route('/course/create', methods=['POST'])
 def create_course():
+    if 'logged_in_user_id' not in session:
+        return redirect('/')
     if not Course.validate_create_course_form(request.form):
         return redirect('/course/new')
     # this concatenates requests list into a string:
@@ -78,14 +75,20 @@ def create_course():
 #! view one
 @app.route('/course/<int:id>')
 def view_one_course_w_creator(id):
+    if 'logged_in_user_id' not in session:
+        return redirect('/')
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
+    user = session['logged_in_user_id']
+    
     # data["requirements"] = '.'.split()
-    return render_template('view_one.html', course = course)
+    return render_template('view_one.html', course = course, user = user)
 
 #! edit course form
 @app.route('/course/edit/<int:id>')
 def course_edit(id):
+    if session['user_type'] == 'student':
+        return redirect('/')
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
     return render_template('edit_one.html', course = course)
@@ -93,8 +96,8 @@ def course_edit(id):
 #! update course post
 @app.route('/course/update', methods=['POST'])
 def course_update():
-    for keys in request.files.keys():
-        print("****************keys", keys)
+    # for keys in request.files.keys():
+    #     print("****************keys", keys)
     # concatenate requirements before saving to db:
     if request.method == 'POST':
         requirements = request.form.getlist("requirements")
@@ -102,18 +105,19 @@ def course_update():
     #! code from flask docs for uploading file: 
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'course_img' not in request.files:
-            flash('No file part')
-            # return redirect(request.url)
-            return redirect(f'/course/edit/{request.form["id"]}')
+        # if 'course_img' not in request.files:
+        #     flash('No file part')
+        #     # return redirect(request.url)
+        #     return redirect(f'/course/edit/{request.form["id"]}')
         course_img = request.files['course_img']
-        if course_img.filename == '':
-            flash('No selected file')
-            # return redirect(request.url)
-            return redirect(f'/course/edit/{request.form["id"]}')
+        # if course_img.filename == '':
+        #     flash('No selected file')
+        #     # return redirect(request.url)
+        #     return redirect(f'/course/edit/{request.form["id"]}')
         if course_img and allowed_file(course_img.filename):
             filename = secure_filename(course_img.filename)
             course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # course.add_file_to_course_by_id(request.form["course_img"])
             #! end block from flask documentation
     data = {"id":request.form['id'],
             "title": request.form['title'],
@@ -139,7 +143,7 @@ def course_update():
 def delete(id):
     data = {"id":id}
     Course.delete_this_course_by_id(data)
-    return redirect(f'/user/{session["logged_in_user_id"]}')
+    return redirect('/dashboard')
 
 #! upload file (move to diff/new controller?)
 # @app.route('/', methods=['GET', 'POST'])

@@ -15,8 +15,6 @@
 </head>
 
     <!-- !  MVP to dos: -->
-    <!-- *  fixed moving buttons by removing 1px of border on button hovers, sheesh! -->
-    <!-- !  change permissions for teacher to only edit ot delete their own courses, but admin can do any -->
     <!-- !  split requirements string so can be styled -->
     <!-- !  if no image selected for course update, keep same file -->
     <!-- !  protect image urls (see head tag for ref: href="{#{{ url_for('static', filename='css/style.css') }}#}") per Aaron's advice -->
@@ -26,7 +24,9 @@
     <!-- !  html validator -->
 
     <!-- ?  PRODUCT BACKLOG -->
+    <!-- !  add course dates to small cards on dash. if class passed, remove from dash. -->
     <!-- !  handle file uploads if too large -->
+    <!-- *  modularize for adding registrations table (many to many) -->
     <!-- !  implement many-to-many with registrations table -->
     <!-- !  continued modularization with a tools.py file containing methods for non class specific work such as file uploads -->
     <!-- !  add attributes to class of User: birthday (compare age to course requirements after adding age minimum) -->
@@ -43,6 +43,11 @@
     <!-- !  apis to implement: geolocation to determine where the closest courses are taught; speech-to-text and text-to-speech apis for accessibility; translation api (spanish; chinese; cantonese); bob ross api? -->
     <!-- !  students can create portfolios of uploaded images (used for social network, able to share publicly, used for juried exhibitions and exhibition selection, virtual exhibitions) -->
     <!-- !  scrolling marquis on reg/login page: Join our creative community. FREE arts courses for Senior Citizens. Never stop learning. -->
+    <!-- !  create admin dashboard (loaded w metrics) -->
+    <!-- !  create teacher dashboard (loaded w metrics) -->
+    <!-- !  create student dashboard (loaded w metrics and artwork they can share where each artwork is created with a form they have to enter media, date created, price, story) -->
+    <!-- !  learn how to make the headers/ footers completely dynamic so only need to change in one place -->
+    <!-- !  convert everything to svg -->
 
 <body>
 
@@ -128,12 +133,12 @@
 
                 <div>
                     <label for="password">Create password: </label>
-                    <input class="border-bottom" type="text" name="password">
+                    <input class="border-bottom" type="password" name="password">
                 </div>
 
                 <div>
                     <label for="confirm_password">Confirm password: </label>
-                    <input class="border-bottom" type="text" name="confirm_password">
+                    <input class="border-bottom" type="password" name="confirm_password">
                 </div>
 
                 <div>
@@ -158,7 +163,7 @@
 
                 <div>
                     <label for="password">Password: </label>
-                    <input class="border-bottom" type="text" name="password">
+                    <input class="border-bottom" type="password" name="password">
                 </div>
 
                 <div>

@@ -118,7 +118,7 @@ h2{
     letter-spacing: .36rem;
 }
 .line-height-less{
-    line-height: 2rem;
+    line-height: 2.3rem;
 }
 nav a:-webkit-any-link{
     letter-spacing: normal;
@@ -280,7 +280,8 @@ button,
 }
 button:hover,
 .btn:hover{
-    color: #261b1b;
+    /* color: #261b1b; */
+    color: white;
 }
 a:-webkit-any-link{
     text-decoration: none;
@@ -307,7 +308,9 @@ a:hover {
     color: inherit;
 }
 .card-small:hover{
+    color: white;
     /* color: #b2d8ff; */
+    /* background-color: #3877ff; */
 }
 .alert{
     color: #ffffff;
@@ -329,33 +332,28 @@ p{
 /*******************************************/
 
 body{
-    background-image: linear-gradient(to bottom left,  rgb(118, 210, 173), rgb(129, 216, 203)20%, rgb(131, 220, 240), rgb(161, 216, 248)80%);
-    /* background-position: right bottom, left top; */
-    /* background-repeat: no-repeat, repeat; */
-    /* background-image: url(/static/assets/pale-blue-grid-wider.png); */
+    /* background-image: linear-gradient(to bottom left,  rgb(118, 210, 173), rgb(129, 216, 203)20%, rgb(131, 220, 240), rgb(161, 216, 248)80%); */
+    background: #ceebff url("/static/assets/very-pale-blue-grid-sml.png");
     background-attachment: fixed;
-    /* background-image: linear-gradient(to bottom right,  pink, rgb(212, 212, 255)80%); */
     background-size:cover;
-    /* background-image: linear-gradient(to bottom right,rgba(228, 255, 237, 0.709), rgba(185, 232, 255, 0.701)80%),url(/static/assets/scribble_logo_white.png),linear-gradient( rgba(188, 217, 255, 0.537), rgba(172, 205, 255, 0.603)); */
-    
-    /* background-image: linear-gradient(0.70turn,rgba(170, 208, 255, 0)30%, rgb(237, 214, 67)30%),url(/static/assets/20190826_110130.jpg); */
-    /* background-color: #c6deff; */
-    
 }
 form,
 .card{
-    background-color: #ffe2c5b8;
+    /* background-color: #CDE2F4; */
+    background-color: #eef7ff;
 }
 .card-small:hover{
-    background-color: #ffe2c5;
+    /* background-color: #ffe2c5; */
+    background-color: #009fae;
 }
 button,
 .btn{
-    background-color: #00e1e1b7;
+    background-color: #b5f6ff;
 }
 button:hover,
 .btn:hover{
-    background-color:#c6deff;
+    /* background-color:#e5ffc6; */
+    background-color: #009fae;
 }
 form div input,
 form div input:active,
@@ -396,7 +394,7 @@ textarea {
     border-radius: 10px;
 }
 .border-bottom {
-    border-bottom: 1px solid #261b1b;
+    border-bottom: 2px solid #261b1b;
 }
 .form-input-border{
     border: 1px solid #261b1b;
@@ -477,6 +475,7 @@ main{
 }
 input{
     box-sizing: border-box;
+    width: 100%;
     height: 40px;
     padding-left: 15px;
 }
@@ -773,11 +772,11 @@ section > div {
     flex: 1;
 }
 input[type="radio"] {
-    color: #7b7676;
+    /* color: #7b7676; */
     display: none;
     &:not(:disabled) ~ label {
       cursor: pointer;
-      color: #bab1b1;
+      /* color: #bab1b1; */
     }
     &:disabled ~ label {
       /* color: hsla(150, 5%, 75%, 1); */
@@ -785,6 +784,15 @@ input[type="radio"] {
       box-shadow: none;
       cursor: not-allowed;
     }
+    &:disabled ~ label:hover {
+        color: rgb(50, 37, 41);
+        border-color: hsla(150, 5%, 75%, 1);
+        box-shadow: none;
+        cursor: not-allowed;
+      }
+}
+input[type="radio"]:hover {
+    color: #2a2626;
 }
 .user-type-radios label{
     display: block;
@@ -894,4 +902,13 @@ button,
 button:hover,
 .btn:hover{
     box-shadow: 1px 1px #0b000b;
+}
+.reg-btn{
+    background-color: #53e5678b;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    align-self: center;
+    justify-content: center;
 }

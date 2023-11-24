@@ -35,9 +35,6 @@
     <!-- HEADER END -->
 
 
-
-
-
     <main>
 
         <div class="card flx col gap-2">
@@ -68,17 +65,24 @@
                 </div>
 
             <!-- check if this is the creator of this course. if so show: -->
-            {% if session["user_type"] != 'student' %}
+            {% if session["user_type"] == 'admin' %}
                 <div class="flx col gap-1 flx-1">
                         <a href="/course/edit/{{ course.id }}" class="btn">edit this course</a>
 
                         <a href="/delete/{{ course.id }}" class="btn">delete this course</a>
-
                 </div>
+                {% elif session["user_type"] == 'student' %}
+                <div class="flx col gap-1 flx-1">
+                    <a href="/registration/new/{{ session['logged_in_user_id'] }}/{{ course.id }}" class="btn reg-btn">register for this course</a>
+                </div>
+                {% elif session['logged_in_user_id'] == course.user_id %}
+                    <div class="flx col gap-1 flx-1">
+                        <a href="/course/edit/{{ course.id }}" class="btn">edit this course</a>
+                    </div>
             {% endif %}
             </section>
-            <p class="justify line-height-less">{{ course.description }}</p>
-            
+            <h2 class="line-height-less ml mr">{{ course.description }}</h2>
+
                 <img class="mt mb" src="/static/assets/uploads/{{ course.course_img }}" alt="photo uploaded by teacher representing this class and the activities within it.">
         </div>
 
