@@ -21,3 +21,7 @@ class Registration:
         result = connectToMySQL(cls.db).query_db(query, data)
         print("RRRRRRREEEEEEEEEEEESSSSSUUUULLLLT:",result)
         return result
+
+    # get one student with registrations sorted descending created_at
+
+    # get one teacher with their courses
