@@ -15,9 +15,10 @@ class Registration:
     def user_registers_for_course(cls,data):
         print("DDDAAAATTTAAAA:::::", data)
         query = """
-            INSERT INTO registrations
-            (user_id, course_id)
-            VALUES (%(user_id)s, %(course_id)s);"""
+                    INSERT INTO registrations
+                    (user_id, course_id)
+                    VALUES (%(user_id)s, %(course_id)s);
+                """
         result = connectToMySQL(cls.db).query_db(query, data)
         print("RRRRRRREEEEEEEEEEEESSSSSUUUULLLLT:",result)
         return result

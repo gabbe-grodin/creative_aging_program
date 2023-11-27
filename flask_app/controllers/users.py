@@ -69,8 +69,9 @@ def user_account(logged_in_user_id):
         return redirect('/')
     data = {"id": session['logged_in_user_id']}
     # user = User.get_one_user_by_id(data)
-    creator = User.get_one_user_by_id_with_courses(data)
-    return render_template("account.html", creator=creator)
+    student = User.get_one_student_by_id_w_all_their_registrations(data)
+    creator = User.get_one_teacher_by_id_with_their_courses(data)
+    return render_template("account.html", creator=creator, student=student)
 
 #! logout
 @app.route('/logout')

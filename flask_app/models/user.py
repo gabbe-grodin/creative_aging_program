@@ -22,17 +22,19 @@ class User:
 
     @classmethod
     def create_user(cls,data):
-        query="""
-            INSERT INTO users (first_name, last_name, user_type, email, password)
-            VALUES (%(first_name)s, %(last_name)s, %(user_type)s, %(email)s, %(password)s);"""
+        query=  """
+                    INSERT INTO users (first_name, last_name, user_type, email, password)
+                    VALUES (%(first_name)s, %(last_name)s, %(user_type)s, %(email)s, %(password)s);
+                """
         results = connectToMySQL(cls.db).query_db(query, data)
         return results
 
     @classmethod
     def get_all_users(cls):
         query = """
-            SELECT * 
-            FROM users;"""
+                    SELECT * 
+                    FROM users;
+                """
         all_users =  connectToMySQL(cls.db).query_db(query)
         return all_users
 
@@ -93,10 +95,12 @@ class User:
     @classmethod
     def get_one_user_by_email(cls, email):
         print("EMAIL:", email)
-        query = """SELECT * FROM users
-            WHERE email = %(email)s"""
+        query = """
+                    SELECT * FROM users
+                    WHERE email = %(email)s;
+                """
         result = connectToMySQL(cls.db).query_db(query, email)
-        print("RESULT OF QUERY TO CHECK IF EMAIL EXISTS ALREADY: ", result)
+        # print("RESULT OF QUERY TO CHECK IF EMAIL EXISTS ALREADY: ", result)
         if result: # if email (result) exists
             one_user = cls(result[0]) # create class instantiate of user and return
             return one_user
@@ -106,8 +110,10 @@ class User:
 
     @classmethod
     def get_one_user_by_id(cls, id):
-        query = """SELECT * FROM users
-            WHERE id = %(id)s"""
+        query = """
+                    SELECT * FROM users
+                    WHERE id = %(id)s;
+                """
         data = {"id": id}
         result=connectToMySQL(cls.db).query_db(query, data)
         if result:
@@ -116,14 +122,51 @@ class User:
         return False
 
     @classmethod
-    def get_one_user_by_id_with_courses(cls,data):
-        query="""
-            SELECT * 
-            FROM users
-            LEFT JOIN courses
-            ON users.id = courses.user_id
-            WHERE users.id = %(id)s
-            ORDER BY courses.created_at DESC;"""
+    def get_one_teacher_by_id_with_their_courses(cls,data):
+        query=  """
+                    SELECT * 
+                    FROM users
+                    LEFT JOIN courses
+                    ON users.id = courses.user_id
+                    WHERE users.id = %(id)s
+                    ORDER BY courses.created_at DESC;
+                """
+        results = connectToMySQL(cls.db).query_db(query, data)
+        this_user = cls(results[0]) # here we made a user object
+        # print(this_user)
+        for row in results:
+            if row['courses.id'] != None: # This conditional prevents users without any courses from creating a null instance of a course and printing 'None'
+                course_data = {
+                    "id": row["courses.id"],
+                    "title": row["title"],
+                    "description": row["description"],
+                    "price": row["price"],
+                    "requirements": row["requirements"],
+                    "course_img": row["course_img"],
+                    "start_date": row["start_date"],
+                    "end_date": row["end_date"],
+                    "start_time_hour": row["start_time_hour"],
+                    "start_time_min": row["start_time_min"],
+                    "start_time_ampm": row["start_time_ampm"],
+                    "end_time_hour": row["end_time_hour"],
+                    "end_time_min": row["end_time_min"],
+                    "end_time_ampm": row["end_time_ampm"],
+                    "created_at": row['courses.created_at'],
+                    "updated_at": row['courses.updated_at'],
+                    "user_id":row['user_id']}
+                courses = this_user.courses.append(course.Course(course_data))
+        return this_user
+
+    @classmethod
+    def get_one_student_by_id_w_all_their_registrations(cls,data):
+        query=  """
+                    SELECT * 
+                    FROM users
+                    LEFT JOIN registrations
+                    ON users.id = registrations.user_id
+                    WHERE users.id = %(id)s
+                    ORDER BY registrations.created_at DESC;
+                """
         results = connectToMySQL(cls.db).query_db(query, data)
         this_user = cls(results[0]) # here we made a user object
         # print(this_user)
@@ -153,14 +196,20 @@ class User:
     @classmethod
     def user_update(cls, data):
         query = """
-                UPDATE users
-                SET first_name=%(first_name)s, last_name=%(last_name)s, email=%(email)s
-                WHERE id = %(logged_in_user_id)s;"""
+                    UPDATE users
+                    SET first_name=%(first_name)s,
+                    last_name=%(last_name)s,
+                    email=%(email)s
+                    WHERE id = %(logged_in_user_id)s;
+                """
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def delete_user(cls, data):
-        query = """DELETE FROM users WHERE id = %(id)s"""
+        query = """
+                    DELETE FROM users 
+                    WHERE id = %(id)s
+                """
         return connectToMySQL(cls.db).query_db(query, data)
 
     @staticmethod

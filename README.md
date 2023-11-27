@@ -2,6 +2,9 @@
    <h1>A Creative Aging Project</h1>
 </div>
 
+![Alt text](/../repository-open-graph.png?raw=true "screenshot")
+
+
 This repo contains the code for a full-stack web application connecting senior citizens to venues where they can study art (ideally for free).
 
 ## Goals/ ideals for this project:
