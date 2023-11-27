@@ -67,17 +67,17 @@
         {% else %}
             <h3 class="mt mb">Completed Courses:</h3>
             <div class="flx wrap gap-3">
-                {#{% for course in registrant.courses %}#}
+                {% for course in student.courses %}
                     <!-- <div class="flx col card card-small gap-2"> -->
                             <!-- <span>{#{{ course.title }}#}</span>
                             <span>{#{{ course.start_date }} - {{ course.end_date }}#}</span>
                             <span><a href="/course/{#{{ course.id }}#}">details</a></span> -->
                     <!-- </div> -->
-                {#{% endfor %}#}
+                {% endfor %}
 
-                {#{% if not registrant.courses %}#}
+                {% if not student.courses %}
                     <p>You have not yet registered for any courses.</p>
-                {#{% endif %}#}
+                {% endif %}
                 <button>
                     <a href="/dashboard">register for a course</a>
                 </button>
