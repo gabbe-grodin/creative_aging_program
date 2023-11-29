@@ -26,7 +26,11 @@
         <h2 class="mt">Welcome, {{ session["first_name"] }}!</h2>
         <nav class="upper flx gap-2">
             <a href="/dashboard">view courses</a>
-            <a href="/user/{{ session['logged_in_user_id'] }}">my courses</a>
+            {% if session["user_type"] == 'teacher' or session["user_type"] == 'admin' %}
+            <a href="/teacher/{{ session['logged_in_user_id'] }}">my courses</a>
+            {% elif session["user_type"] == 'student' %}
+            <a href="/student/{{ session['logged_in_user_id'] }}">my courses</a>
+            {% endif %}
             <a href="/logout">logout</a>
         </nav>
     </header>

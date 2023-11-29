@@ -164,14 +164,14 @@ class User:
                     FROM users
                     LEFT JOIN registrations
                     ON users.id = registrations.user_id
-                    WHERE users.id = %(id)s
-                    ORDER BY registrations.created_at DESC;
+                    WHERE users.id = %(id)s;
                 """
         results = connectToMySQL(cls.db).query_db(query, data)
+        print("-----RRRRREEEEZZZZZUUUULLLTSS----",results)
         this_user = cls(results[0]) # here we made a user object
         # print(this_user)
         for row in results:
-            if row['courses.id'] != None: # This conditional prevents users without any courses from creating a null instance of a course and printing 'None'
+            if row['courses.id'] != None: # This conditional prevents users without any registrations from creating a null instance of a course and printing 'None'
                 course_data = {
                     "id": row["courses.id"],
                     "title": row["title"],
