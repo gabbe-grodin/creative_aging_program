@@ -452,6 +452,7 @@ select{
 
 body {
     width: 1000px;
+    height: 2000px;
     margin: 0 auto;
     box-sizing: border-box;
 }
