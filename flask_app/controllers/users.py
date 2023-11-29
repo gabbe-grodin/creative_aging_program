@@ -60,18 +60,27 @@ def dashboard():
     all_courses = Course.get_all_courses_with_creator()
     return render_template("dash.html", all_courses=all_courses)
 
-#! user account
-@app.route('/user/<int:logged_in_user_id>')
-def user_account(logged_in_user_id):
+#! teacher courses
+@app.route('/teacher/<int:logged_in_user_id>')
+def teacher_account(logged_in_user_id):
     # protect route if user not logged in:
     if 'logged_in_user_id' not in session:
         flash("Please log in.")
         return redirect('/')
     data = {"id": session['logged_in_user_id']}
-    # user = User.get_one_user_by_id(data)
-    student = User.get_one_student_by_id_w_all_their_registrations(data)
     creator = User.get_one_teacher_by_id_with_their_courses(data)
-    return render_template("account.html", creator=creator, student=student)
+    return render_template("account.html", creator=creator)
+
+#! student courses
+@app.route('/student/<int:logged_in_user_id>')
+def student_account(logged_in_user_id):
+    # protect route if user not logged in:
+    if 'logged_in_user_id' not in session:
+        flash("Please log in.")
+        return redirect('/')
+    data = {"id": session['logged_in_user_id']}
+    student = User.get_one_student_by_id_w_all_their_registrations(data)
+    return render_template("account.html", student=student)
 
 #! logout
 @app.route('/logout')
