@@ -280,7 +280,6 @@ button,
 }
 button:hover,
 .btn:hover{
-    /* color: #261b1b; */
     color: white;
 }
 a:-webkit-any-link{
@@ -344,16 +343,18 @@ form,
 }
 .card-small:hover{
     /* background-color: #ffe2c5; */
-    background-color: #009fae;
+    background-color: #0068ae;
+    /* background-color: #009fae; */
 }
 button,
 .btn{
-    background-color: #b5f6ff;
+    background-color: #53e5678b;
+    /* background-color: #b5f6ff; */
 }
 button:hover,
 .btn:hover{
     /* background-color:#e5ffc6; */
-    background-color: #009fae;
+    background-color: #0068ae;
 }
 form div input,
 form div input:active,
@@ -387,8 +388,8 @@ form,
 .card {
     border-radius: 2em;
     /* border: 1px solid #261b1b; */
-    border-top: 1px solid #9dedff; 
-    border-left: 1px solid #9dedff;
+    /* border-top: 1px solid #9dedff;  */
+    /* border-left: 1px solid #9dedff; */
 }
 input,
 textarea {
@@ -407,8 +408,8 @@ button,
     border: 1px solid #261b1b
 }
 img{
-    border: 1px solid #261b1b;
-    border-radius: 2em;
+    /* border: 1px solid #261b1b; */
+    border-radius: 1em;
 }
 .logo{
     border: none;
@@ -430,17 +431,17 @@ select{
     /* border: 1px solid #0c4303; */
 }
 .card{
-    box-shadow: 3px 3px rgb(11, 0, 11);
+    box-shadow: 5px 5px rgb(11, 0, 11);
 }
 .img-card-small{
     /* border-right: 3px solid black;
     border-bottom: 3px solid black; */
-    box-shadow: -3px -3px #0b000b;
+    /* box-shadow: -3px -3px #0b000b; */
 }
 .card img{
     /* border-right: 3px solid black;
     border-bottom: 3px solid black; */
-    box-shadow: -3px -3px #0b000b;
+    /* box-shadow: -3px -3px #0b000b; */
 }
 .alert{
     /* border-radius: 30px; */
@@ -492,9 +493,10 @@ section{
     width: 100%;
 }
 .card{
-    padding: 30px;
+    padding: 55px;
 }
 .card-small{
+    padding: 30px;
     width: 48%;
     height: 360px;
 }
@@ -590,6 +592,9 @@ section{
 }
 .flx-5 {
     flex: 5;
+}
+.width-500{
+    width: 500px;
 }
 .width-25-percent{
     width: 25%;
@@ -767,7 +772,7 @@ input[type="checkbox"]:focus {
 /*******************************************/
 section > div {
     /* color: #bab1b1; */
-    flex: 1;
+    /* flex: 1; */
 }
 input[type="radio"] {
     /* color: #7b7676; */
@@ -817,21 +822,14 @@ input[type="radio"]:checked + label {
     &::after {
         color:  #261b1b;
         font-family: FontAwesome;
-        /* border: 2px solid hsla(150, 75%, 45%, 1); */
         content: "\f00c";
         font-size: 24px;
         position:relative;
         top: -50px;
         left: 50%;
-        /* transform: translateX(-50%); */
-        /* height: 50px; */
-        /* width: 50px; */
         line-height: 50px;
         text-align: center;
         border-radius: 50%;
-        /* background: white; */
-        /* box-shadow: 0px 2px 5px -2px hsla(0, 0%, 0%, 0.25); */
-        /* padding: 5px; */
     }
 }
 input[type="radio"]#admin:checked + label {
@@ -881,16 +879,18 @@ tr:hover {
 /*! MY BUTTONS
 /*******************************************/
 button,
-.btn,
-.reg-btn{
+.btn{
     box-sizing: border-box;
     width: 100%;
-    /* height: 100%; */
+    vertical-align: middle;
+}
+.reg-btn{
+    box-sizing: border-box;
 }
 button,
 .btn{
     font-family: inherit;
-    /* text-align: center; */
+    text-align: center;
     cursor: pointer;
     transition: 0.5s;
     box-shadow: 5px 5px #0b000b;
@@ -904,7 +904,9 @@ button:hover,
     display: flex;
     width: 200px;
     height: 200px;
+    align-items: center;
     text-align: center;
     align-content: center;
+    vertical-align: middle;
     border-radius: 50%;
 }
