@@ -60,7 +60,7 @@ def dashboard():
     all_courses = Course.get_all_courses_with_creator()
     return render_template("dash.html", all_courses=all_courses)
 
-#! teacher courses
+#! view of teacher courses created
 @app.route('/teacher/<int:logged_in_user_id>')
 def teacher_account(logged_in_user_id):
     # protect route if user not logged in:
@@ -71,7 +71,7 @@ def teacher_account(logged_in_user_id):
     creator = User.get_one_teacher_by_id_with_their_courses(data)
     return render_template("account.html", creator=creator)
 
-#! student courses
+#! view of student registrations
 @app.route('/student/<int:logged_in_user_id>')
 def student_account(logged_in_user_id):
     # protect route if user not logged in:

@@ -157,41 +157,46 @@ class User:
                 courses = this_user.courses.append(course.Course(course_data))
         return this_user
 
+
+
+
     @classmethod
     def get_one_student_by_id_w_all_their_registrations(cls,data):
         query=  """
                     SELECT * 
-                    FROM users
-                    LEFT JOIN registrations
-                    ON users.id = registrations.user_id
-                    WHERE users.id = %(id)s;
+                    FROM courses
+                    JOIN registrations
+                    ON courses.id = registrations.course_id
+                    WHERE registrations.user_id = %(id)s;
                 """
         results = connectToMySQL(cls.db).query_db(query, data)
         print("-----RRRRREEEEZZZZZUUUULLLTSS----",results)
-        this_user = cls(results[0]) # here we made a user object
+        # this_user = cls(results[0]) # here we made a user object
         # print(this_user)
+        courses = []
         for row in results:
-            if row['courses.id'] != None: # This conditional prevents users without any registrations from creating a null instance of a course and printing 'None'
-                course_data = {
-                    "id": row["courses.id"],
-                    "title": row["title"],
-                    "description": row["description"],
-                    "price": row["price"],
-                    "requirements": row["requirements"],
-                    "course_img": row["course_img"],
-                    "start_date": row["start_date"],
-                    "end_date": row["end_date"],
-                    "start_time_hour": row["start_time_hour"],
-                    "start_time_min": row["start_time_min"],
-                    "start_time_ampm": row["start_time_ampm"],
-                    "end_time_hour": row["end_time_hour"],
-                    "end_time_min": row["end_time_min"],
-                    "end_time_ampm": row["end_time_ampm"],
-                    "created_at": row['courses.created_at'],
-                    "updated_at": row['courses.updated_at'],
-                    "user_id":row['user_id']}
-                courses = this_user.courses.append(course.Course(course_data))
-        return this_user
+            if row['course_id'] != None: # This conditional prevents users without any registrations from creating a null instance of a course and printing 'None'
+                # course_data = {
+                #     "id": row["course_id"],
+                #     "title": row["title"],
+                #     "description": row["description"],
+                #     "price": row["price"],
+                #     "requirements": row["requirements"],
+                #     "course_img": row["course_img"],
+                #     "start_date": row["start_date"],
+                #     "end_date": row["end_date"],
+                #     "start_time_hour": row["start_time_hour"],
+                #     "start_time_min": row["start_time_min"],
+                #     "start_time_ampm": row["start_time_ampm"],
+                #     "end_time_hour": row["end_time_hour"],
+                #     "end_time_min": row["end_time_min"],
+                #     "end_time_ampm": row["end_time_ampm"],
+                #     "created_at": row['courses.created_at'],
+                #     "updated_at": row['courses.updated_at'],
+                #     "user_id":row['user_id']}
+                # courses = this_user.courses.append(course.Course(row))
+                courses.append(course.Course(row))
+        return courses
 
     @classmethod
     def user_update(cls, data):
