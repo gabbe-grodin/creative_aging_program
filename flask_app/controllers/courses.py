@@ -26,8 +26,7 @@ def allowed_file(filename):
 #! create course
 @app.route('/course/create', methods=['POST'])
 def create_course():
-    if 'logged_in_user_id' not in session:
-        return redirect('/')
+    if 'logged_in_user_id' not in session: return redirect('/')
     if not Course.validate_create_course_form(request.form):
         return redirect('/course/new')
     # this concatenates requests list into a string:
@@ -75,8 +74,7 @@ def create_course():
 #! view one
 @app.route('/course/<int:id>')
 def view_one_course_w_creator(id):
-    if 'logged_in_user_id' not in session:
-        return redirect('/')
+    if 'logged_in_user_id' not in session: return redirect('/')
     data = {"id":id}
     course = Course.get_one_course_by_id_with_creator(data)
     user = session['logged_in_user_id']
@@ -87,6 +85,7 @@ def view_one_course_w_creator(id):
 #! edit course form
 @app.route('/course/edit/<int:id>')
 def course_edit(id):
+    if 'logged_in_user_id' not in session: return redirect('/')
     if session['user_type'] == 'student':
         return redirect('/')
     data = {"id":id}
@@ -96,29 +95,16 @@ def course_edit(id):
 #! update course post
 @app.route('/course/update', methods=['POST'])
 def course_update():
-    # for keys in request.files.keys():
-    #     print("****************keys", keys)
     # concatenate requirements before saving to db:
-    if request.method == 'POST':
-        requirements = request.form.getlist("requirements")
-        requirements_string = '. '.join(requirements)
+    requirements = request.form.getlist("requirements")
+    requirements_string = '. '.join(requirements)
     #! code from flask docs for uploading file: 
-    if request.method == 'POST':
-        # check if the post request has the file part
-        # if 'course_img' not in request.files:
-        #     flash('No file part')
-        #     # return redirect(request.url)
-        #     return redirect(f'/course/edit/{request.form["id"]}')
-        course_img = request.files['course_img']
-        # if course_img.filename == '':
-        #     flash('No selected file')
-        #     # return redirect(request.url)
-        #     return redirect(f'/course/edit/{request.form["id"]}')
-        if course_img and allowed_file(course_img.filename):
-            filename = secure_filename(course_img.filename)
-            course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            # course.add_file_to_course_by_id(request.form["course_img"])
-            #! end block from flask documentation
+    course_img = request.files['course_img']
+    if course_img and allowed_file(course_img.filename):
+        filename = secure_filename(course_img.filename)
+        course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        # course.add_file_to_course_by_id(request.form["course_img"])
+        #! end block from flask documentation
     data = {"id":request.form['id'],
             "title": request.form['title'],
             "description": request.form['description'],
