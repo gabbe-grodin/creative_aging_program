@@ -1,7 +1,11 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import render_template, redirect, request, session, flash
+from flask import render_template, redirect, request, session, flash, url_for
 from flask_app import app
 from flask_app.models import user, registration
+from werkzeug.utils import secure_filename
+import os
+UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
+ALLOWED_EXTENSIONS = os.getenv("ALLOWED_EXTENSIONS")
 
 
 class Course:
@@ -32,6 +36,8 @@ class Course:
     def create_course(cls, form_data):
         # print("------FORM DATA-----", form_data)
         # if reference to the user is made here, a hidden input is not necessary in submit form. 
+        if not cls.validate_create_course_form(form_data, files): return False
+        form_data = cls.parse_course_data(form_data, files)
         query = """
                     INSERT INTO courses 
                         (title, 
@@ -126,9 +132,10 @@ class Course:
             return False
 
     @classmethod
-    def update_course_by_id(cls, data):
-        # Aaron suggested to resolve update issue by creating two queries, one for filename and one for the rest of the data
-        if 'course_img' in data:
+    def update_course_by_id(cls, form_data, files='not needed'):
+        if not cls.validate_create_course_form(form_data, files): return False
+        form_data = cls.parse_course_data(form_data, files)
+        if 'course_img' in files:
             query = """
                         UPDATE courses
                         SET 
@@ -165,10 +172,7 @@ class Course:
                             end_time_ampm=%(end_time_ampm)s
                         WHERE id = %(id)s;
                     """
-        # or...
-        # if filename in data:
-        #     add_file_to_course_by_id(data)
-        return connectToMySQL(cls.db).query_db(query, data) 
+        return connectToMySQL(cls.db).query_db(query, form_data) 
 
     @classmethod
     def delete_this_course_by_id(cls, data):
@@ -179,8 +183,10 @@ class Course:
         return connectToMySQL(cls.db).query_db(query, data)
 
     @staticmethod
-    def validate_create_course_form(form_data):
+    def validate_create_course_form(form_data, files):
         is_valid = True
+        # print('_______>', form_data)
+        # print('files ------->', files)
         if len(form_data['title']) > 0 and len(form_data['title']) <= 3:
             flash("title must be at least 4 characters.")
             is_valid = False
@@ -193,18 +199,33 @@ class Course:
         if len(form_data['start_date']) <= 0 or len(form_data['end_date']) <= 0:
             flash("Dates need to be set.")
             is_valid = False
+        if 'course_img' not in files:
+            flash('No file part')
+            is_valid = False
+        if files != 'not needed':
+            if files['course_img'].filename == '':
+                flash('No selected file')
+                is_valid = False
+            if not (files['course_img'] and Course.allowed_file(files['course_img'].filename)):
+                flash('File type not allowed')
+                is_valid = False
         return is_valid
 
     @staticmethod
-    def validate_edit_course_form(form_data):
-        is_valid = True
-        if len(form_data['title']) > 0 and len(form_data['title']) <= 3:
-            flash("title must be at least 4 characters.")
-            is_valid = False
-        if len(form_data['description']) > 700:
-            flash("description must not exceed 700 characters.")
-            is_valid = False
-        if len(form_data['title']) <= 0 or len(form_data['description']) <= 0 or len(form_data['price']) <= 0:
-            flash("All fields required.")
-            is_valid = False
-        return is_valid
+    def parse_course_data(data, files):
+        data =  data.copy()
+        requirements = request.form.getlist("requirements")
+        requirements_string = '. '.join(requirements)
+        data['requirements'] = requirements_string
+        data['user_id'] = session['logged_in_user_id']
+        if files!= 'not needed':
+            if files['course_img'] and Course.allowed_file(files['course_img'].filename):
+                filename = secure_filename(files['course_img'].filename)
+                files['course_img'].save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            data['course_img'] = filename
+        return data
+
+    @staticmethod
+    def allowed_file(filename):
+        return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
