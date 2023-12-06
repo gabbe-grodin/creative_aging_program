@@ -76,7 +76,7 @@ class User:
             flash("Passwords do not match.")
             is_valid = False
         return is_valid
-    
+
     @staticmethod
     def login_user(data):
         this_user = User.get_one_user_by_email(data['email'])
@@ -156,9 +156,6 @@ class User:
                     "user_id":row['user_id']}
                 courses = this_user.courses.append(course.Course(course_data))
         return this_user
-
-
-
 
     @classmethod
     def get_one_student_by_id_w_all_their_registrations(cls,data):
