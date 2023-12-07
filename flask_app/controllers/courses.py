@@ -50,34 +50,12 @@ def course_edit(id):
 #! update course post
 @app.route('/course/update', methods=['POST'])
 def course_update():
-    # concatenate requirements before saving to db:
-    requirements = request.form.getlist("requirements")
-    requirements_string = '. '.join(requirements)
-    #! code from flask docs for uploading file: 
-    course_img = request.files['course_img']
-    if course_img and allowed_file(course_img.filename):
-        filename = secure_filename(course_img.filename)
-        course_img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        # course.add_file_to_course_by_id(request.form["course_img"])
-        #! end block from flask documentation
-    data = {"id":request.form['id'],
-            "title": request.form['title'],
-            "description": request.form['description'],
-            "price": request.form['price'],
-            "requirements": requirements_string,
-            "course_img": filename,
-            "start_date": request.form['start_date'],
-            "end_date": request.form['end_date'],
-            "start_time_hour": request.form['start_time_hour'],
-            "start_time_min": request.form['start_time_min'],
-            "start_time_ampm": request.form['start_time_ampm'],
-            "end_time_hour": request.form['end_time_hour'],
-            "end_time_min": request.form['end_time_min'],
-            "end_time_ampm": request.form['end_time_ampm']}
-    if not Course.validate_edit_course_form(data):
-        return redirect(f'/course/edit/{request.form["id"]}')
-    Course.update_course_by_id(data)
-    return redirect(f'/course/{request.form["id"]}')
+    if session['user_type' == 'student']: return redirect('/')
+    if request.files: files = request.files
+    else: files = 'not needed'
+    if Course.update_course_by_id(request.form, files):
+        return redirect(f'/course/{request.form["id"]}')
+    return redirect(f'/course/edit/{request.form["id"]}')
 
 #! delete
 @app.route('/delete/<int:id>')
