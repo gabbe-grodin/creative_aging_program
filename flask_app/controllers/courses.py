@@ -44,8 +44,7 @@ def course_edit(id):
     if 'logged_in_user_id' not in session: return redirect('/')
     if session['user_type'] == 'student':
         return redirect('/')
-    data = {"id":id}
-    course = Course.get_one_course_by_id_with_creator(data)
+    course = Course.get_one_course_by_id_with_creator(id)
     return render_template('edit_one.html', course = course)
 
 #! update course post
